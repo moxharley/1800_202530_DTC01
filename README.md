@@ -59,6 +59,7 @@ elmo-hikes/
 
 
 ## Contributors
+- **Young Ji Sim** - BCIT CST Student started from Fall 2025, exploring possibilities. Fun fact: First time Malatang was in Australia, still think it was the best Mala, ever.
 - **Harlan** - BCIT CST Student with a passion for game design and other nerdy stuff.
 - **Teammate Name** - BCIT CST Student, Frontend enthusiast with a knack for creative design. Fun fact: Has a collection of over 50 houseplants.
 

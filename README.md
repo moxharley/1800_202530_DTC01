@@ -60,6 +60,7 @@ elmo-hikes/
 
 ## Contributors
 - Malcolm McQueen - BCIT CST Student with a really cute dog.
+- **Harlan** - BCIT CST Student with a passion for game design and other nerdy stuff.
 - **Teammate Name** - BCIT CST Student, Frontend enthusiast with a knack for creative design. Fun fact: Has a collection of over 50 houseplants.
 
 ---

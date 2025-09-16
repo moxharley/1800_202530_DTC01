@@ -59,6 +59,7 @@ elmo-hikes/
 
 
 ## Contributors
+- Jasmine - BCIT CST Student with a passion for outdoor adventures and user-friendly applications.
 - **Malcolm McQueen** - BCIT CST Student with a really cute dog.
 - **Young Ji Sim** - BCIT CST Student started from Fall 2025, exploring possibilities. Fun fact: First time Malatang was in Australia, still think it was the best Mala, ever.
 - **Harlan** - BCIT CST Student with a passion for game design and other nerdy stuff.

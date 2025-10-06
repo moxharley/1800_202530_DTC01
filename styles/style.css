@@ -39,3 +39,27 @@
     color: #f2e8cf;
     text-decoration: none;
 }
+
+#body-info {
+    margin-top: 20px;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+#body-info h1 {
+    color: #386641;
+    text-decoration: none;
+}
+
+#body-info p {
+    color: #386641;
+    text-decoration: none;
+}
+
+#light-mode {
+    background-color: #f2e8cf;
+}
+
+#dark-mode {
+    background-color: #386641;
+}

@@ -1,1 +1,41 @@
+* {
+    margin: 0;
+    padding: 0;
+}
 
+#navbar {
+    display: flex;
+    background-color: #386641;
+    justify-content: space-between;
+}
+
+#navbar-logo {
+    width: 100px;
+    height: 100px;
+}
+
+#navbar-links {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#navbar-item {
+    margin: 0px 50px;
+}
+
+#navbar-item a {
+    color: #f2e8cf;
+    text-decoration: none;
+}
+
+#login-link {
+    display: flex;
+    align-items: center;
+    margin: 0px 50px;
+}
+
+#login-link a {
+    color: #f2e8cf;
+    text-decoration: none;
+}

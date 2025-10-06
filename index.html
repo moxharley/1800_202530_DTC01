@@ -12,37 +12,43 @@
     <!-- Other libraries go here -->
 
     <!-- Link to styles of your own -->
-    <link rel="stylesheet" href="./styles/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- <link rel="stylesheet" href="./styles/style.css"> -->
 </head>
 
-<body id="light-mode">
-    <nav id="navbar">
-        <div>
-            <img id="navbar-logo" src="./images/placeholder_logo.png" />
+<body class="bg-[#f2e8cf]">
+    <nav class="flex bg-[#386641] md:justify-between w-full px-10 fixed bottom-0 md:static md:top-0">
+        <div class="invisible md:visible">
+            <img class="w-25 h-25" src="./images/placeholder_logo.png" />
         </div>
-        <div id="navbar-links">
-            <div id="navbar-item">
-                <a href="#">Recycle</a>
+        <div class="flex justify-around">
+            <div class="mx-4 my-10">
+                <a class="text-[#f2e8cf]" href="#">Recycle</a>
             </div>
-            <div id="navbar-item">
-                <a href="#">Map</a>
+            <div class="mx-4 my-10">
+                <a class="text-[#f2e8cf]" href="#">Map</a>
             </div>
-            <div id="navbar-item">
-                <a href="#">Leaderboard</a>
+            <div class="mx-4 my-10">
+                <a class="text-[#f2e8cf]" href="#">Leaderboard</a>
             </div>
-            <div id="navbar-item">
-                <a href="#">FAQ</a>
+            <div class="mx-4 my-10">
+                <a class="text-[#f2e8cf]" href="#">FAQ</a>
             </div>
         </div>
-        <div id="login-link">
-            <a href="#">Login</a>
+        <div class="flex items-center my-10 mx-4 invisible md:visible">
+            <a class="text-[#f2e8cf]" href="#">Login</a>
         </div>
     </nav>
 
-    <div id="body-info">
-        <h1>What is Green Scouts?</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum enim, quo, quia soluta ut distinctio adipisci ducimus ipsa vitae quae laudantium nobis ab laborum voluptas! Provident ipsam facere rem recusandae non! Qui esse vitae ratione illo quidem nulla. Doloribus, dolorum suscipit debitis quos tempore labore!</p>
+    <div class="mt-20 mx-16">
+        <h1 class="text-[#386642] text-3xl font-bold">What is Green Scouts?</h1>
+        <p class="text-[#386642]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum enim, quo, quia soluta ut distinctio adipisci ducimus ipsa vitae quae laudantium nobis ab laborum voluptas! Provident ipsam facere rem recusandae non! Qui esse vitae ratione illo quidem nulla. Doloribus, dolorum suscipit debitis quos tempore labore!</p>
     </div>
+
+    <section class="mt-20 mx-16">
+        <h2 class="text-[#386642] text-3xl font-bold">Find a recycling depot</h2>
+        <div style="border: 1px solid black; padding: 20vh; text-align: center; margin-top: 20px">map placeholder</div>
+    </section>
     <!------------------------------>
     <!-- Your HTML Layout go here -->
     <!------------------------------>

@@ -14,29 +14,45 @@
 </head>
 
 <body>
-    <main>
-        <div>
-            map placeholder
+    <main class="flex flex-col justify-center">
+        <div class="flex justify-center">
+            <div class="flex justify-center border border-[#386641] p-2">
+                map placeholder
+            </div>
         </div>
-        <div>
-            <form>
-                <input type="checkbox" name="bottles_and_cans" />
-                <label for="bottles_and_cans">Bottles/Cans</label>
-
-                <input type="checkbox" name="paper_and_cardboard" />
-                <label for="paper_and_cardboard">Paper/Cardboard</label>
-
-                <input type="checkbox" name="electronics" />
-                <label for="electronics">Electronics</label>
-
-                <input type="checkbox" name="hard_plastic" />
-                <label for="hard_plastic">Hard Plastic</label>
-
-                <input type="checkbox" name="soft_plastic" />
-                <label for="soft_plastic">Soft Plastic</label>
-
-                <input type="checkbox" name="scrap_metal" />
-                <label for="scrap_metal">Scrap Metal</label>
+        <div class="flex flex-col items-center">
+            <form class="flex flex-col border border-[#386641] items-center p-2">
+                <h1 class="font-semibold pb-2">Filters</h1>
+                <div class="flex flex-row">
+                    <div class="flex flex-col">
+                        <div class="flex">
+                            <input type="checkbox" name="bottles_and_cans" />
+                            <label for="bottles_and_cans">Bottles/Cans</label>
+                        </div>
+                        <div class="flex">
+                            <input type="checkbox" name="paper_and_cardboard" />
+                            <label for="paper_and_cardboard">Paper/Cardboard</label>
+                        </div>
+                        <div class="flex">
+                            <input type="checkbox" name="electronics" />
+                            <label for="electronics">Electronics</label>
+                        </div>
+                    </div>
+                    <div class="flex flex-col">
+                        <div class="flex">
+                            <input type="checkbox" name="hard_plastic" />
+                            <label for="hard_plastic">Hard Plastic</label>
+                        </div>
+                        <div class="flex">
+                            <input type="checkbox" name="soft_plastic" />
+                            <label for="soft_plastic">Soft Plastic</label>
+                        </div>
+                        <div class="flex">
+                            <input type="checkbox" name="scrap_metal" />
+                            <label for="scrap_metal">Scrap Metal</label>
+                        </div>
+                    </div>
+                </div>
             </form>
         </div>
     </main>

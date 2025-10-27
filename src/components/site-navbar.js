@@ -16,22 +16,25 @@ class SiteNavbar extends HTMLElement {
             <!-- Navbar: single source of truth -->
             <nav class="flex justify-between w-full md:bg-[#386641] md:px-10 text-[#f2e8cf]">
               <div class="shrink-0 px-10 py-5">
-                <img class="shrink-0 w-[60px] h-[60px]" src="./images/placeholder_logo.png" />
+                <a href="/index.html"><img class="shrink-0 w-[60px] h-[60px]" src="/images/placeholder_logo.png" /></a>
               </div>
               <div class="flex bg-[#386641] justify-around w-full fixed z-10 bottom-0 md:static md:top-0 md:px-20">
                 <div class="mx-4 my-10">
-                  <a href="#">Recycle</a>
+                  <a href="/src/pages/recycleInfo.html">Recycle</a>
                 </div>
                 <div class="mx-4 my-10">
-                  <a href="#">Map</a>
+                  <a href="/src/pages/map.html">Map</a>
                 </div>
                 <div class="mx-4 my-10">
-                  <a href="#">FAQ</a>
+                  <a href="/src/pages/faq.html">FAQ</a>
                 </div>
               </div>
               <div class="flex mx-5 my-8 md:my-10 md:mx-0">
                 <div class="text-[#386641] md:text-[#f2e8cf] my-auto align-middle mr-2">
-                  <a href="#">Leaderboard</a>
+                  <a href="/src/pages/recyclingForm.html">Log</a>
+                </div>
+                <div class="text-[#386641] md:text-[#f2e8cf] my-auto align-middle mr-2">
+                  <a href="/src/pages/leaderboard.html">Leaderboard</a>
                 </div>
                 <div class="flex bg-[#386641] items-center rounded-full w-18">
                   <a class="w-full text-center text-[#f2e8cf]" href="#">Login</a>

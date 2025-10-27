@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>My BCIT Project</title>
+    <meta name="comp1800 template" content="My 1800 App" />
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Other libraries go here -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Link to styles of your own -->
+    <!-- <link rel="stylesheet" href="./styles/style.css"> -->
+    <!-- Web Components for shared navbar and footer layout -->
+    <script type="module" src="/src/components/site-navbar.js"></script>
+    <script type="module" src="/src/components/site-footer.js"></script>
+    <style>
+      /* 
+        color-code
+        #386641 - Dark Green
+        #6a994e - Medium Green
+        #a7c957 - Light Green
+        #f2e8cf - Off-White
+        #bc4749 - Red 
+      */
+    </style>
+  </head>
+  <body class="bg-[#f2e8cf]">
+    <!------------------------------>
+    <!-- Your HTML Layout go here -->
+    <header>
+      <site-navbar></site-navbar>
+    </header>
+    <!------------------------------>
+    <!-- Stuff for body goes here -->
+    <main class="mx-16 text-[#386642]">
+      <h1 class="text-center text-3xl font-bold">FAQ</h1>
+    </main>
+    <site-footer></site-footer>
+    <!---------------------------------------------->
+    <!-- Your own JavaScript functions go here    -->
+    <!---------------------------------------------->
+
+    <!-- Link to scripts of your own -->
+    <!-- <script type="module" src="./src/main.js"></script> -->
+  </body>
+</html>

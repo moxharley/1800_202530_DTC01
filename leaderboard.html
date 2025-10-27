@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>My BCIT Project</title>
+    <meta name="comp1800 template" content="My 1800 App" />
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Other libraries go here -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Link to styles of your own -->
+    <!-- <link rel="stylesheet" href="./styles/style.css"> -->
+    <!-- Web Components for shared navbar and footer layout -->
+    <script type="module" src="/src/components/site-navbar.js"></script>
+    <script type="module" src="/src/components/site-footer.js"></script>
+    <style>
+      /* 
+        color-code
+        #386641 - Dark Green
+        #6a994e - Medium Green
+        #a7c957 - Light Green
+        #f2e8cf - Off-White
+        #bc4749 - Red 
+      */
+    </style>
+  </head>
+  <body class="bg-[#f2e8cf]">
+    <!------------------------------>
+    <!-- Your HTML Layout go here -->
+    <header>
+      <site-navbar></site-navbar>
+    </header>
+    <!------------------------------>
+    <!-- Stuff for body goes here -->
+    <main class="mx-16 text-[#386642]">
+      <section class="mt-10">
+        <h1 class="mb-15 text-3xl font-bold text-center">Leaderboard</h1>
+        <sectoin class="relative -z-10 flex text-center">
+          <div
+            class="basis-1/3 rounded-t-lg pb-10 translate-y-7 bg-[#6a994e] text-[#f2e8cf] items-center flex flex-col justify-between"
+          >
+            <div class="my-4 text-3xl font-bold">2</div>
+            <div
+              class="mb-4 w-[80px] h-[80px] rounded-full bg-[#f2e8cf] text-[#6a994e]"
+            >
+              User Avatar
+            </div>
+            <div>
+              <div class="md:text-xl">User Name</div>
+              <div class="text-sm">Earned Exp</div>
+            </div>
+          </div>
+          <div
+            class="basis-1/3 rounded-t-lg pb-10 bg-[#386641] text-[#f2e8cf] items-center flex flex-col justify-between"
+          >
+            <div class="my-4 text-3xl font-bold">1</div>
+            <div
+              class="mb-4 w-[80px] h-[80px] rounded-full bg-[#f2e8cf] text-[#386641]"
+            >
+              User Avatar
+            </div>
+            <div class="md:text-xl">User Name</div>
+            <div class="text-sm">Earned Exp</div>
+          </div>
+          <div
+            class="basis-1/3 rounded-t-lg pb-10 translate-y-7 bg-[#a7c957] items-center flex flex-col justify-between"
+          >
+            <div class="my-4 text-3xl font-bold text-[#6a994e]">3</div>
+            <div
+              class="mb-4 w-[80px] h-[80px] rounded-full bg-[#f2e8cf] text-[#a7c957]"
+            >
+              User Avatar
+            </div>
+            <div class="md:text-xl">User Name</div>
+            <div class="text-sm">Earned Exp</div>
+          </div>
+        </sectoin>
+        <section class="bg-[#f2e8cf] pt-8">
+          <div class="bg-[#386641] rounded-lg text-[#f2e8cf] py-2 space-y-2">
+            <div class="flex justify-between items-center px-3 py-1">
+              <div class="basis-1/8 text-center">4</div>
+              <div class="flex basis-6/8 items-center">
+                <div
+                  class="bg-[#f2e8cf] text-[#386641] text-xs w-[40px] h-[40px] rounded-full mx-2"
+                >
+                  Avatar
+                </div>
+                <div class="">User Name</div>
+              </div>
+              <div class="basis-1/8 text-right">Exp</div>
+            </div>
+            <hr />
+            <div class="flex justify-between items-center px-3 py-1">
+              <div class="basis-1/8 text-center">5</div>
+              <div class="flex basis-6/8 items-center">
+                <div
+                  class="bg-[#f2e8cf] text-[#386641] text-xs w-[40px] h-[40px] rounded-full mx-2"
+                >
+                  Avatar
+                </div>
+                <div class="">User Name</div>
+              </div>
+              <div class="basis-1/8 text-right">Exp</div>
+            </div>
+            <hr />
+            <div class="flex justify-between items-center px-3 py-1">
+              <div class="basis-1/8 text-center">6</div>
+              <div class="flex basis-6/8 items-center">
+                <div
+                  class="bg-[#f2e8cf] text-[#386641] text-xs w-[40px] h-[40px] rounded-full mx-2"
+                >
+                  Avatar
+                </div>
+                <div class="">User Name</div>
+              </div>
+              <div class="basis-1/8 text-right">Exp</div>
+            </div>
+            <hr />
+            <div class="flex justify-between items-center px-3 py-1">
+              <div class="basis-1/8 text-center">7</div>
+              <div class="flex basis-6/8 items-center">
+                <div
+                  class="bg-[#f2e8cf] text-[#386641] text-xs w-[40px] h-[40px] rounded-full mx-2"
+                >
+                  Avatar
+                </div>
+                <div class="">User Name</div>
+              </div>
+              <div class="basis-1/8 text-right">Exp</div>
+            </div>
+            <hr />
+            <div class="flex justify-between items-center px-3 py-1">
+              <div class="basis-1/8 text-center">8</div>
+              <div class="flex basis-6/8 items-center">
+                <div
+                  class="bg-[#f2e8cf] text-[#386641] text-xs w-[40px] h-[40px] rounded-full mx-2"
+                >
+                  Avatar
+                </div>
+                <div class="">User Name</div>
+              </div>
+              <div class="basis-1/8 text-right">Exp</div>
+            </div>
+            <hr />
+            <div class="flex justify-between items-center px-3 py-1">
+              <div class="basis-1/8 text-center">9</div>
+              <div class="flex basis-6/8 items-center">
+                <div
+                  class="bg-[#f2e8cf] text-[#386641] text-xs w-[40px] h-[40px] rounded-full mx-2"
+                >
+                  Avatar
+                </div>
+                <div class="">User Name</div>
+              </div>
+              <div class="basis-1/8 text-right">Exp</div>
+            </div>
+            <hr />
+            <div class="flex justify-between items-center px-3 py-1">
+              <div class="basis-1/8 text-center">10</div>
+              <div class="flex basis-6/8 items-center">
+                <div
+                  class="bg-[#f2e8cf] text-[#386641] text-xs w-[40px] h-[40px] rounded-full mx-2"
+                >
+                  Avatar
+                </div>
+                <div class="">User Name</div>
+              </div>
+              <div class="basis-1/8 text-right">Exp</div>
+            </div>
+          </div>
+        </section>
+      </section>
+    </main>
+    <site-footer></site-footer>
+    <!---------------------------------------------->
+    <!-- Your own JavaScript functions go here    -->
+    <!---------------------------------------------->
+
+    <!-- Link to scripts of your own -->
+    <!-- <script type="module" src="./src/main.js"></script> -->
+  </body>
+</html>

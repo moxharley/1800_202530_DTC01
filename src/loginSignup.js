@@ -2,6 +2,7 @@ import {
     loginUser,
     signupUser,
     authErrorMessage,
+    googleSignIn,
 } from "./authentication.js"
 
 function initAuthUI() {
@@ -13,6 +14,7 @@ function initAuthUI() {
     const toLoginBtn = document.getElementById('toLogin');
     const loginForm = document.getElementById('loginForm');
     const signupForm = document.getElementById('signupForm');
+    const googleSignInBtn = document.getElementById('googleSignInBtn');
     const redirectUrl = 'profile.html';
 
     // --- Helper Functions ---
@@ -105,6 +107,11 @@ function initAuthUI() {
             setSubmitDisabled(signupForm, false);
         }
     });
+
+    googleSignInBtn?.addEventListener("click", (e) => {
+        e.preventDefault();
+        googleSignIn();
+    })
 }
 
 // --- Initialize UI on DOMContentLoaded ---

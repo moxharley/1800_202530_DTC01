@@ -25,12 +25,18 @@
     <!-- Login -->
     <div id="loginView" class="mx-6 md:mx-16 text-[#386642] flex flex-col items-center">
         <h2 class="text-3xl md:text-4xl font-bold my-8">Welcome back!</h2>
-        <form id="loginForm" novalidate>
+        <form id="loginForm" class="text-center" novalidate>
             <input class="bg-[#a7c957] rounded-lg px-4 py-2 mb-2 w-full" type="email" id="loginEmail" name="email" placeholder="Email" required>
             <input class="bg-[#a7c957] rounded-lg px-4 py-2 mb-2 w-full" type="password" id="loginPassword" name="password" placeholder="Password" required>
             <button class="w-full bg-[#386641] py-2 rounded-lg mt-6 text-[#f2e8cf] cursor-default hover:cursor-pointer" type="submit">Login</button>
+            <div class="mt-2">Don't have an account? <a class="text-[#6a994e]" id="toSignup" href="#">Sign up.</a></div>
+            <div class="my-2">or</div>
+            <button id="googleSignInBtn"
+            class="mt-3 text-[#386641] border border-[#386641] rounded-lg py-2 px-4 flex items-center justify-center gap-2 w-full hover:bg-[#a7c957] hover:cursor-pointer">
+            <img src="https://www.svgrepo.com/show/355037/google.svg" class="w-5 h-5" alt="Google icon" />
+            Continue with Google
+        </button>
         </form>
-        <div class="mt-2">Don't have an account? <a class="text-[#6a994e]" id="toSignup" href="#">Sign up.</a></div>
     </div>
 
     <!-- Signup -->

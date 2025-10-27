@@ -1,5 +1,7 @@
 import { auth } from "/src/firebaseConfig.js";
 import {
+    GoogleAuthProvider,
+    signInWithPopup,
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
     updateProfile,
@@ -118,4 +120,23 @@ export function authErrorMessage(error) {
     };
 
     return map[code] || "Something went wrong. Please try again.";
+}
+
+// -------------------------------------------------------------
+// googleSignIn()
+// -------------------------------------------------------------
+// Enables user to sign in with Google account via pop-up
+export async function googleSignIn() {
+    const provider = new GoogleAuthProvider();
+    
+    try {
+        const result = await signInWithPopup(auth, provider);
+        const user = result.user;
+
+        console.log("Google user:", user.displayName, user.email)
+        window.location.href = "/profile.html"
+    } catch (error) {
+        console.error("Google sign-in failed:", error);
+        alert("Google sign-in failed. Please try again.")
+    }
 }

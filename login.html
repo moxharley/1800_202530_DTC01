@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>My BCIT Project</title>
+    <meta name="comp1800 template" content="My 1800 App" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script type="module" src="/src/components/site-navbar.js"></script>
+    <script type="module" src="/src/components/site-footer.js"></script>
+    <!-- color-code
+        #386641 - Dark Green
+        #6a994e - Medium Green
+        #a7c957 - Light Green
+        #f2e8cf - Off-White
+        #bc4749 - Red  -->
+</head>
+
+<body class="bg-[#f2e8cf]">
+    <header class="flex items-center px-16 py-6 gap-4 bg-[#386641]">
+        <img class="w-18 h-18" src="./images/placeholder_logo.png">
+        <h1 class="text-4xl font-semibold text-[#f2e8cf]">Green Scouts</h1>
+    </header>
+
+    <main class="mx-6 md:mx-16 text-[#386642] flex flex-col items-center">
+        <h2 class="text-3xl md:text-4xl font-bold my-8">Welcome back!</h2>
+        <input class="bg-[#a7c957] rounded-lg px-4 py-2 mb-2 w-full md:w-1/2" type="text" name="username" placeholder="Username or email">
+        <input class="bg-[#a7c957] rounded-lg px-4 py-2 mb-2 w-full md:w-1/2" type="text" name="password" placeholder="Password">
+        <button class="w-full md:w-1/2 bg-[#386641] py-2 rounded-lg mt-6 text-[#f2e8cf]">Login</button>
+        <div class="mt-2">Don't have an account? <a class="text-[#6a994e]">Sign up.</a></div>
+    </main>
+    <site-footer></site-footer>
+    <!---------------------------------------------->
+    <!-- Your own JavaScript functions go here    -->
+    <!---------------------------------------------->
+
+    <!-- Link to scripts of your own -->
+    <!-- <script type="module" src="./src/main.js"></script> -->
+</body>
+
+</html>

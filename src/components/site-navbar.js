@@ -34,7 +34,7 @@ class SiteNavbar extends HTMLElement {
                   <a href="#">Leaderboard</a>
                 </div>
                 <div class="flex bg-[#386641] items-center rounded-full w-18">
-                  <a class="w-full text-center text-[#f2e8cf] md:text-[#f2e8cf]" href="#">Login</a>
+                  <a class="w-full text-center text-[#f2e8cf]" href="#">Login</a>
                 </div>
               </div>
             </nav>

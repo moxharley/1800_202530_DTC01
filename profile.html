@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>My BCIT Project</title>
+    <meta name="comp1800 template" content="My 1800 App" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script type="module" src="/src/components/site-navbar.js"></script>
+    <script type="module" src="/src/components/site-footer.js"></script>
+        <!-- color-code
+        #386641 - Dark Green
+        #6a994e - Medium Green
+        #a7c957 - Light Green
+        #f2e8cf - Off-White
+        #bc4749 - Red  -->
+</head>
+
+<body class="bg-[#f2e8cf]">
+    <header>
+        <site-navbar></site-navbar>
+    </header>
+    
+    <main class="mx-6 md:mx-16 text-[#386642]">
+        <section class="mt-10 mb-10 flex flex-col items-center md:flex-row md:gap-6">
+            <img class="w-40 h-40 rounded-full object-cover mb-6" src="./images/AM01.jpg" alt="user profile picture">
+            <div class="flex flex-col items-center md:items-start">
+                <h1 class="font-semibold text-3xl mb-2">User Name</h1>
+                <p>Short profile description written by the user for the profile page.</p>
+            </div>
+        </section>
+        <section class="flex flex-col items-center md:items-start">
+            <h2 class="font-bold text-4xl mb-6">Achievements</h2>
+            <div class="flex gap-2 mb-6"><img class="w-11 h-11" src="./images/AM01.jpg" alt=""><img class="w-11 h-11"
+                    src="./images/AM01.jpg" alt=""><img class="w-11 h-11" src="./images/AM01.jpg" alt=""><img class="w-11 h-11"
+                    src="./images/AM01.jpg" alt=""><img class="w-11 h-11" src="./images/AM01.jpg" alt=""><img class="w-11 h-11"
+                    src="./images/AM01.jpg" alt=""><img class="w-11 h-11" src="./images/AM01.jpg" alt=""></div>
+        </section>
+    </main>
+    <site-footer></site-footer>
+    <!---------------------------------------------->
+    <!-- Your own JavaScript functions go here    -->
+    <!---------------------------------------------->
+
+    <!-- Link to scripts of your own -->
+    <!-- <script type="module" src="./src/main.js"></script> -->
+</body>
+
+</html>

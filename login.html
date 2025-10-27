@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>My BCIT Project</title>
+    <title>Green Scouts</title>
     <meta name="comp1800 template" content="My 1800 App" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,11 +19,6 @@
 
 <body class="bg-[#f2e8cf]">
     <site-navbar></site-navbar>
-<!--     
-    <header class="flex items-center px-16 py-6 gap-4 bg-[#386641]">
-        <img class="w-18 h-18" src="./images/placeholder_logo.png">
-        <h1 class="text-4xl font-semibold text-[#f2e8cf]">Green Scouts</h1>
-    </header> -->
     
     <main>
         <div id="authAlert" class="alert alert-danger d-none" role="alert"></div>
@@ -39,7 +34,7 @@
     </div>
 
     <!-- Signup -->
-    <div id="signupView" class="mx-6 md:mx-16 text-[#386642] flex flex-col items-center">
+    <div id="signupView" class="mx-6 md:mx-16 text-[#386642] flex flex-col items-center hidden">
         <h3 class="text-3xl md:text-4xl font-bold my-8">Sign Up</h3>
         <form id="signupForm" novalidate>
             <input class="bg-[#a7c957] rounded-lg px-4 py-2 mb-2 w-full" type="text" id="signupName" placeholder="First and Last Name" aria-label="Full name" required />

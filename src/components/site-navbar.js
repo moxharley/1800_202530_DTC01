@@ -14,11 +14,11 @@ class SiteNavbar extends HTMLElement {
   renderNavbar() {
     this.innerHTML = `
             <!-- Navbar: single source of truth -->
-            <navclass="flex justify-between w-full md:bg-[#386641] md:px-10 text-[#f2e8cf]">
+            <nav class="flex justify-between w-full md:bg-[#386641] md:px-10 text-[#f2e8cf]">
               <div class="shrink-0 px-10 py-5">
                 <img class="shrink-0 w-[60px] h-[60px]" src="./images/placeholder_logo.png" />
               </div>
-              <div class="flex bg-[#386641] justify-around w-full fixed bottom-0 md:static md:top-0 md:px-30">
+              <div class="flex bg-[#386641] justify-around w-full fixed z-10 bottom-0 md:static md:top-0 md:px-30">
               <div class="mx-4 my-10">
                 <a href="#">Recycle</a>
               </div>
@@ -34,7 +34,7 @@ class SiteNavbar extends HTMLElement {
                   <a href="#">Leaderboard</a>
                 </div>
                 <div class="flex bg-[#386641] items-center rounded-full w-18">
-                  <a class="w-full text-center text-[#f2e8cf] md:text-[#f2e8cf]" href="#">Login</a>
+                  <a class="w-full text-center text-[#f2e8cf]" href="#">Login</a>
                 </div>
               </div>
             </nav>

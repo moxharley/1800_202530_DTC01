@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>My BCIT Project</title>
+    <meta name="comp1800 template" content="My 1800 App" />
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Other libraries go here -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <!-- Link to styles of your own -->
+    <!-- <link rel="stylesheet" href="./styles/style.css"> -->
+    <!-- Web Components for shared navbar and footer layout -->
+    <script type="module" src="/src/components/site-navbar.js"></script>
+    <script type="module" src="/src/components/site-footer.js"></script>
+    <style>
+      /* 
+        color-code
+        #386641 - Dark Green
+        #6a994e - Medium Green
+        #a7c957 - Light Green
+        #f2e8cf - Off-White
+        #bc4749 - Red 
+      */
+    </style>
+  </head>
+  <body class="bg-[#f2e8cf]">
+    <!------------------------------>
+    <!-- Your HTML Layout go here -->
+    <header>
+      <site-navbar></site-navbar>
+    </header>
+    <!------------------------------>
+    <!-- Stuff for body goes here -->
+    <main class="mx-16 text-[#386642]">
+      <section class="md:mt-20 mt-10">
+        <div class="border-2 p-8 md:px-20 md:pt-20 rounded-xl">
+          <h1
+            class="w-fit -mt-13 md:-mt-26 px-2 bg-[#f2e8cf] mb-5 text-3xl font-bold"
+          >
+            What I Recycled
+          </h1>
+          <div>
+            <form action="" class="pt-8 space-y-7">
+              <fieldset>
+                <legend
+                  class="w-full bg-[#386642] text-[#f2e8cf] rounded px-5 py-2 flex justify-between hover:cursor-pointer"
+                >
+                  Paper
+                  <div>
+                    <i class="fa fa-angle-down"></i>
+                  </div>
+                </legend>
+                <div
+                  class="-translate-y-2 border-2 rounded border-[#386642] p-2 pt-3 flex flex-wrap space-x-2 space-y-2"
+                >
+                  <div>
+                    <input type="checkbox" name="Office Paper" />
+                    <label for="Office Paper">Office Paper</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" name="Cardboard" />
+                    <label for="Cardboard">Cardboard</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" name="Newspapers/Flyers" />
+                    <label for="Newspapers/Flyers">Newspapers/Flyers</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" name="Magazines" />
+                    <label for="Magazines">Magazines</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" name="Paper Bags" />
+                    <label for="Paper Bags">Paper Bags</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" name="Other" />
+                    <label for="Other">Other</label>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset>
+                <legend
+                  class="w-full bg-[#386642] text-[#f2e8cf] rounded px-5 py-2 flex justify-between hover:cursor-pointer"
+                >
+                  Glass
+                  <div>
+                    <i class="fa fa-angle-down"></i>
+                  </div>
+                </legend>
+                <div
+                  class="-translate-y-2 border-2 rounded border-[#386642] p-2 pt-3 flex flex-wrap space-x-2 space-y-2"
+                >
+                  <div>
+                    <input type="checkbox" name="Glass Bottles" />
+                    <label for="Glass Bottles">Glass Bottles</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" name="Glass Jars" />
+                    <label for="Glass Jars">Glass Jars</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" name="Broken Glass" />
+                    <label for="Broken Glass">Broken Glass</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" name="Ceramics" />
+                    <label for="Ceramics">Ceramics</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" name="Other" />
+                    <label for="Other">Other</label>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset>
+                <legend
+                  class="w-full bg-[#386642] text-[#f2e8cf] rounded px-5 py-2 flex justify-between hover:cursor-pointer"
+                >
+                  Electronics
+                  <div>
+                    <i class="fa fa-angle-down"></i>
+                  </div>
+                </legend>
+                <div
+                  class="-translate-y-2 border-2 rounded border-[#386642] p-2 pt-3 flex flex-wrap space-x-2 space-y-2"
+                >
+                  <div>
+                    <input type="checkbox" name="Lightbulbs" />
+                    <label for="Lightbulbs">Lightbulbs</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" name="Computer Parts" />
+                    <label for="Computer Parts">Computer Parts</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" name="Computer Parts" />
+                    <label for="Computer Parts">Computer Parts</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" name="TV Parts" />
+                    <label for="TV Parts">TV Parts</label>
+                  </div>
+
+                  <div>
+                    <input type="checkbox" name="Other" />
+                    <label for="Other">Other</label>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset>
+                <legend
+                  class="w-full bg-[#386642] text-[#f2e8cf] rounded px-5 py-2 flex justify-between hover:cursor-pointer"
+                >
+                  Plastic
+                  <div>
+                    <i class="fa fa-angle-down"></i>
+                  </div>
+                </legend>
+                <div
+                  class="-translate-y-2 border-2 rounded border-[#386642] p-2 pt-3 flex flex-wrap space-x-2 space-y-2"
+                >
+                  <div>
+                    <input type="checkbox" name="Plastic Bottles" />
+                    <label for="Plastic Bottles">Plastic Bottles</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" name="Plastic Bags" />
+                    <label for="Plastic Bags">Plastic Bags</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" name="Plastic Containers" />
+                    <label for="Plastic Containers">Plastic Containers</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" name="Plastic Wrap" />
+                    <label for="Plastic Wrap">Plastic Wrap</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" name="Styrofoam" />
+                    <label for="Styrofoam">Styrofoam</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" name="Other" />
+                    <label for="Other">Other</label>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset>
+                <legend
+                  class="w-full bg-[#386642] text-[#f2e8cf] rounded px-5 py-2 flex justify-between hover:cursor-pointer"
+                >
+                  Metal
+                  <div>
+                    <i class="fa fa-angle-down"></i>
+                  </div>
+                </legend>
+                <div
+                  class="-translate-y-2 border-2 rounded border-[#386642] p-2 pt-3 flex flex-wrap space-x-2 space-y-2"
+                >
+                  <div>
+                    <input type="checkbox" name="Metal Cans" />
+                    <label for="Metal Cans">Metal Cans</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" name="Metal Containers" />
+                    <label for="Metal Containers">Metal Containers</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" name="Scrap/Sheet Metal" />
+                    <label for="Scrap/Sheet Metal">Scrap/Sheet Metal</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" name="Other" />
+                    <label for="Other">Other</label>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset>
+                <legend
+                  class="w-full bg-[#386642] text-[#f2e8cf] rounded px-5 py-2 flex justify-between hover:cursor-pointer"
+                >
+                  Fabric
+                  <div>
+                    <i class="fa fa-angle-down"></i>
+                  </div>
+                </legend>
+                <div
+                  class="-translate-y-2 border-2 rounded border-[#386642] p-2 pt-3 flex flex-wrap space-x-2 space-y-2"
+                >
+                  <div>
+                    <input type="checkbox" name="Fabric Scraps" />
+                    <label for="Fabric Scraps">Fabric Scraps</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" name="Clothing" />
+                    <label for="Clothing">Clothing</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" name="Bed Linen" />
+                    <label for="Bed Linen">Bed Linen</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" name="Towels" />
+                    <label for="Towels">Towels</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" name="Other" />
+                    <label for="Other">Other</label>
+                  </div>
+                </div>
+              </fieldset>
+              <input
+                class="w-[80%] ml-[10%] mt-5 mb-3 py-1 rounded bg-[#386642] text-[#f2e8cf]"
+                type="submit"
+                value="Submit"
+              />
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+    <site-footer></site-footer>
+    <!---------------------------------------------->
+    <!-- Your own JavaScript functions go here    -->
+    <!---------------------------------------------->
+
+    <!-- Link to scripts of your own -->
+    <!-- <script type="module" src="./src/main.js"></script> -->
+  </body>
+</html>

@@ -57,7 +57,7 @@ class SiteNavbar extends HTMLElement {
         authControls.innerHTML = "";
         authControls.classList.add("hidden")
       } else {
-        authControls.innerHTML = `<a class="bg-[#386641] text-[#f2e8cf] rounded-full px-4 py-2" href="./login.html">Login</a>`;
+        authControls.innerHTML = `<a class="w-full text-center text-[#f2e8cf]" href="/login.html">Login</a>`;
       }
     });
   }

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>My BCIT Project</title>
+    <meta name="comp1800 template" content="My 1800 App" />
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Other libraries go here -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Link to styles of your own -->
+    <!-- <link rel="stylesheet" href="./styles/style.css"> -->
+    <!-- Web Components for shared navbar and footer layout -->
+    <script type="module" src="/src/components/site-navbar.js"></script>
+    <script type="module" src="/src/components/site-footer.js"></script>
+    <style>
+      /* 
+        color-code
+        #386641 - Dark Green
+        #6a994e - Medium Green
+        #a7c957 - Light Green
+        #f2e8cf - Off-White
+        #bc4749 - Red 
+      */
+    </style>
+  </head>
+  <body class="bg-[#f2e8cf]">
+    <!------------------------------>
+    <!-- Your HTML Layout go here -->
+    <header>
+      <site-navbar></site-navbar>
+    </header>
+    <!------------------------------>
+    <!-- Stuff for body goes here -->
+    <main class="mx-16 text-[#386642]">
+      <section class="md:mt-20 mt-10">
+        <div class="border-2 p-8 md:px-20 md:pt-20 rounded-xl">
+          <h1
+            class="w-fit -mt-13 md:-mt-26 px-2 bg-[#f2e8cf] mb-5 text-3xl font-bold"
+          >
+            Routine
+          </h1>
+          <div>
+            <form action="" class="pt-2 space-y-7">
+              <label class="font-bold" for="title">Title</label>
+              <input
+                id="title"
+                class="w-full bg-white border border-[#386642] rounded p-1 focus-within:outline"
+                type="text"
+              />
+              <div class="flex justify-between">
+                <label class="font-bold -mr-3" for="date">Date</label>
+                <input id="date" class="focus:outline-none" type="date" />
+                <label class="font-bold -mr-3" for="time">Time</label>
+                <input id="time" class="focus:outline-none" type="time" />
+                <label class="font-bold -mr-3" for="repeat">Repeat</label>
+                <select
+                  name="Repeat"
+                  id="Repeat"
+                  class="bg-white border border-[#386642] rounded p-0.5 focus:outline-none"
+                >
+                  <option value="none">None</option>
+                  <option value="daily">Daily</option>
+                  <option value="weekly">Weekly</option>
+                  <option value="biweekly">Biweekly</option>
+                  <option value="monthly">Monthly</option>
+                </select>
+              </div>
+              <label class="font-bold" for="memo">Memo</label>
+              <textarea
+                name="memo"
+                id="memo"
+                class="w-full h-30 bg-white border border-[#386642] rounded p-1 resize-none focus-within:outline"
+              ></textarea>
+              <div class="flex justify-between">
+                <input
+                  class="w-[20%] ml-5 mt-5 mb-3 py-1 rounded border-2 border-[#386642] text-[#386642] hover:bg-[#a7c957] active:bg-[#386642] active:text-[#f2e8cf]"
+                  type="reset"
+                />
+                <input
+                  class="w-[20%] mr-5 mt-5 mb-3 py-1 rounded bg-[#386642] text-[#f2e8cf] border-2 border-[#386642] hover:bg-[#a7c957] hover:text-[#386642] active:bg-[#f2e8cf] active:text-[#386642]"
+                  type="submit"
+                  value="Submit"
+                />
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+    <site-footer></site-footer>
+    <!---------------------------------------------->
+    <!-- Your own JavaScript functions go here    -->
+    <!---------------------------------------------->
+
+    <!-- Link to scripts of your own -->
+    <!-- <script type="module" src="./src/main.js"></script> -->
+  </body>
+</html>

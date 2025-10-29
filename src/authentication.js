@@ -1,4 +1,5 @@
-import { auth } from "/src/firebaseConfig.js";
+import { auth, db } from "/src/firebaseConfig.js";
+import { doc, setDoc } from "firebase/firestore";
 import {
     GoogleAuthProvider,
     signInWithPopup,
@@ -41,9 +42,22 @@ export async function loginUser(email, password) {
 // Usage:
 //   const user = await signupUser("Alice", "alice@email.com", "secret");
 // -------------------------------------------------------------
-export async function signupUser(name, email, password) {
+export async function signupUser(username, email, password) {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    await updateProfile(userCredential.user, { displayName: name });
+    const user = userCredential.user; // Get user object
+    await updateProfile(userCredential.user, { displayName: username });
+
+    try {
+        await setDoc(doc(db, "users", user.uid), {
+            username: username,
+            email: email,
+            bio: "",
+            photoURL: ""
+        });
+        console.log("User added to Firestore.");
+    } catch (error) {
+        console.error("Error creating user document in Firestore:", error)
+    }
     return userCredential.user;
 }
 

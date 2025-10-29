@@ -1,14 +1,13 @@
 // Import specific functions from the Firebase Auth SDK
-// import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 
-// import { auth } from "/src/firebaseConfig.js";
-// import { logoutUser } from "/src/authentication.js";
+import { auth } from "/src/firebaseConfig.js";
+import { logoutUser } from "/src/authentication.js";
 
 class SiteNavbar extends HTMLElement {
   constructor() {
     super();
     this.renderNavbar();
-    // this.renderAuthControls();
   }
 
   renderNavbar() {
@@ -36,33 +35,32 @@ class SiteNavbar extends HTMLElement {
                 <div class="text-[#386641] md:text-[#f2e8cf] my-auto align-middle mr-2">
                   <a href="/src/pages/leaderboard.html">Leaderboard</a>
                 </div>
-                <div class="flex bg-[#386641] items-center rounded-full w-18">
-                  <a class="w-full text-center text-[#f2e8cf]" href="#">Login</a>
+                <div id="authControls" class="flex bg-[#386641] items-center rounded-full w-18">
+                  <a class="w-full text-center text-[#f2e8cf]" href="/login.html">Login</a>
                 </div>
               </div>
             </nav>
             `;
+    
+    this.renderAuthControls();
   }
 
-  // renderAuthControls() {
-  //   const authControls = this.querySelector("#authControls");
+  renderAuthControls() {
+    const authControls = this.querySelector("#authControls");
 
-  //   // Initialize with invisible placeholder to maintain layout space
-  //   authControls.innerHTML = `<div class="btn btn-outline-light" style="visibility: hidden; min-width: 80px;">Log out</div>`;
-
-  //   onAuthStateChanged(auth, (user) => {
-  //     let updatedAuthControl;
-  //     if (user) {
-  //       updatedAuthControl = `<button class="btn btn-outline-light" id="signOutBtn" type="button" style="min-width: 80px;">Log out</button>`;
-  //       authControls.innerHTML = updatedAuthControl;
-  //       const signOutBtn = authControls.querySelector("#signOutBtn");
-  //       signOutBtn?.addEventListener("click", logoutUser);
-  //     } else {
-  //       updatedAuthControl = `<a class="btn btn-outline-light" id="loginBtn" href="/login.html" style="min-width: 80px;">Log in</a>`;
-  //       authControls.innerHTML = updatedAuthControl;
-  //     }
-  //   });
-  // }
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        authControls.innerHTML = `<a id="signOutBtn" class="w-full text-center text-[#f2e8cf]">Log out</a>`;
+        const signOutBtn = authControls.querySelector("#signOutBtn");
+        signOutBtn?.addEventListener("click", logoutUser);
+      } else if (window.location.pathname.includes("login.html") || window.location.pathname.includes("profile.html")) {
+        authControls.innerHTML = "";
+        authControls.classList.add("hidden")
+      } else {
+        authControls.innerHTML = `<a class="bg-[#386641] text-[#f2e8cf] rounded-full px-4 py-2" href="./login.html">Login</a>`;
+      }
+    });
+  }
 }
 
 customElements.define("site-navbar", SiteNavbar);

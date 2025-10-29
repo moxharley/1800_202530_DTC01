@@ -89,16 +89,16 @@ function initAuthUI() {
     signupForm?.addEventListener('submit', async (e) => {
         e.preventDefault();
         hideError();
-        const name = document.querySelector('#signupName')?.value?.trim() ?? '';
+        const username = document.querySelector('#signupUsername')?.value?.trim() ?? '';
         const email = document.querySelector('#signupEmail')?.value?.trim() ?? '';
         const password = document.querySelector('#signupPassword')?.value ?? '';
-        if (!name || !email || !password) {
-            showError('Please fill in name, email, and password.');
+        if (!username || !email || !password) {
+            showError('Please fill in username, email, and password.');
             return;
         }
         setSubmitDisabled(signupForm, true);
         try {
-            await signupUser(name, email, password);
+            await signupUser(username, email, password);
             location.href = redirectUrl;
         } catch (err) {
             showError(authErrorMessage(err));

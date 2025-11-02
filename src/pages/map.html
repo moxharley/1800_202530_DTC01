@@ -1,6 +1,5 @@
 <html>
-
-<head>
+  <head>
     <title>Green Scouts Map</title>
 
     <!-- Required meta tags -->
@@ -8,54 +7,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- Other libraries go here -->
-
-    <!-- Link to styles of your own -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-</head>
+    <script
+      src="https://kit.fontawesome.com/2043d6ea2c.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Link to styles of your own -->
+    <script type="module" src="/src/components/site-navbar.js"></script>
+    <script type="module" src="/src/components/site-footer.js"></script>
+  </head>
 
-<body>
+  <body>
     <main class="flex flex-col justify-center">
-        <div class="flex justify-center">
-            <div class="flex justify-center border border-[#386641] p-2">
-                map placeholder
+      <div class="flex justify-center">
+        <div class="flex justify-center border border-[#386641] p-2">
+          map placeholder
+        </div>
+      </div>
+      <div class="flex flex-col items-center">
+        <form class="flex flex-col border border-[#386641] items-center p-2">
+          <h1 class="font-semibold pb-2">Filters</h1>
+          <div class="flex flex-row">
+            <div class="flex flex-col">
+              <div class="flex">
+                <input type="checkbox" name="bottles_and_cans" />
+                <label for="bottles_and_cans" class="px-2">Bottles/Cans</label>
+              </div>
+              <div class="flex">
+                <input type="checkbox" name="paper_and_cardboard" />
+                <label for="paper_and_cardboard" class="px-2"
+                  >Paper/Cardboard</label
+                >
+              </div>
+              <div class="flex">
+                <input type="checkbox" name="electronics" />
+                <label for="electronics" class="px-2">Electronics</label>
+              </div>
             </div>
-        </div>
-        <div class="flex flex-col items-center">
-            <form class="flex flex-col border border-[#386641] items-center p-2">
-                <h1 class="font-semibold pb-2">Filters</h1>
-                <div class="flex flex-row">
-                    <div class="flex flex-col">
-                        <div class="flex">
-                            <input type="checkbox" name="bottles_and_cans" />
-                            <label for="bottles_and_cans" class="px-2">Bottles/Cans</label>
-                        </div>
-                        <div class="flex">
-                            <input type="checkbox" name="paper_and_cardboard" />
-                            <label for="paper_and_cardboard" class="px-2">Paper/Cardboard</label>
-                        </div>
-                        <div class="flex">
-                            <input type="checkbox" name="electronics" />
-                            <label for="electronics" class="px-2">Electronics</label>
-                        </div>
-                    </div>
-                    <div class="flex flex-col">
-                        <div class="flex">
-                            <input type="checkbox" name="hard_plastic" />
-                            <label for="hard_plastic" class="px-2">Hard Plastic</label>
-                        </div>
-                        <div class="flex">
-                            <input type="checkbox" name="soft_plastic" />
-                            <label for="soft_plastic" class="px-2">Soft Plastic</label>
-                        </div>
-                        <div class="flex">
-                            <input type="checkbox" name="scrap_metal" />
-                            <label for="scrap_metal" class="px-2">Scrap Metal</label>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
+            <div class="flex flex-col">
+              <div class="flex">
+                <input type="checkbox" name="hard_plastic" />
+                <label for="hard_plastic" class="px-2">Hard Plastic</label>
+              </div>
+              <div class="flex">
+                <input type="checkbox" name="soft_plastic" />
+                <label for="soft_plastic" class="px-2">Soft Plastic</label>
+              </div>
+              <div class="flex">
+                <input type="checkbox" name="scrap_metal" />
+                <label for="scrap_metal" class="px-2">Scrap Metal</label>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
     </main>
-</body>
-
+  </body>
 </html>

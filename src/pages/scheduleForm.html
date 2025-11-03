@@ -47,7 +47,7 @@
             Schedule
           </h1>
           <div>
-            <form action="" class="pt-2 space-y-7">
+            <form onsubmit="return false" class="pt-2 space-y-7">
               <label class="font-bold" for="title">Title</label>
               <input
                 id="title"
@@ -84,6 +84,7 @@
                   type="reset"
                 />
                 <input
+                  id="submit"
                   class="w-[20%] mr-5 mt-5 mb-3 py-1 rounded bg-[#386642] text-[#f2e8cf] border-2 border-[#386642] hover:bg-[#a7c957] hover:text-[#386642] active:bg-[#f2e8cf] active:text-[#386642]"
                   type="submit"
                   value="Submit"
@@ -100,6 +101,7 @@
     <!---------------------------------------------->
 
     <!-- Link to scripts of your own -->
+    <script type="module" src="/src/scheduleForm.js"></script>
     <!-- <script type="module" src="./src/main.js"></script> -->
   </body>
 </html>

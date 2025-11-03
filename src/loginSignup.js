@@ -15,9 +15,8 @@ function initAuthUI() {
     const loginForm = document.getElementById('loginForm');
     const signupForm = document.getElementById('signupForm');
     const googleSignInBtn = document.getElementById('googleSignInBtn');
-    const redirectUrl = 'profile.html';
+    const redirectUrl = 'index.html';
 
-    // --- Helper Functions ---
     // Toggle element visibility
     function setVisible(el, visible) {
         el.classList.toggle('hidden', !visible);
@@ -45,7 +44,7 @@ function initAuthUI() {
         if (submitBtn) submitBtn.disabled = disabled;
     }
 
-    // --- Event Listeners ---
+    // Event Listeners
     // Toggle buttons
     toSignupBtn?.addEventListener('click', (e) => {
         e.preventDefault();

@@ -8,6 +8,7 @@ class SiteNavbar extends HTMLElement {
   constructor() {
     super();
     this.renderNavbar();
+    this.renderAuthControls();
   }
 
   renderNavbar() {
@@ -53,7 +54,7 @@ class SiteNavbar extends HTMLElement {
                   <i class="fa-solid fa-user md:text-2xl text-3xl hover:cursor-pointer"></i>
                   <div id="dropdownContents" class="group-hover:block hidden bg-[#6a994e] text-[#f2e8cf] rounded-b absolute md:min-w-[100px] min-w-[60px] z-10 md:mt-10 md:-ml-15 -ml-12 md:text-center text-right">
                     <a class="block p-2 hover:bg-[#386641]" href="/src/pages/recyclingForm.html">Log</a>
-                    <a class="block p-2 hover:bg-[#386641]" href="/src/pages/routine.html">Routine</a>
+                    <a class="block p-2 hover:bg-[#386641]" href="/src/pages/calendar.html">Calendar</a>
                     <a class="block p-2 hover:bg-[#386641]" href="/src/pages/profile.html">Profile</a>
                     <a class="block p-2 hover:bg-[#386641] rounded-b" id="signOutBtn" href="#">Log out</a>
                   </div>
@@ -64,8 +65,6 @@ class SiteNavbar extends HTMLElement {
               </div>
             </nav>
             `;
-
-    this.renderAuthControls();
   }
 
   renderAuthControls() {
@@ -84,7 +83,6 @@ class SiteNavbar extends HTMLElement {
         });
 
         authControls.classList.add("hidden");
-
         userDropdown.classList.remove("hidden");
       } else if (
         window.location.pathname.includes("login.html") ||
@@ -92,11 +90,9 @@ class SiteNavbar extends HTMLElement {
       ) {
         authControls.innerHTML = "";
         authControls.classList.add("hidden");
-
         userDropdown.classList.add("hidden");
       } else {
         authControls.innerHTML = `<a class="w-full text-center text-[#f2e8cf]" href="/login.html">Login</a>`;
-
         userDropdown.classList.add("hidden");
       }
     });
@@ -104,6 +100,3 @@ class SiteNavbar extends HTMLElement {
 }
 
 customElements.define("site-navbar", SiteNavbar);
-window.addEventListener("DOMContentLoaded", function () {
-  function toggleDropdown() {}
-});

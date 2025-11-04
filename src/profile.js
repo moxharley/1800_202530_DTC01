@@ -1,7 +1,8 @@
 import { onAuthReady } from "./authentication.js"
 import { auth, db, storage } from "./firebaseConfig.js";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+
 
 function initAuthUI() {
     const toEditProfile = document.getElementById('toEditProfile');
@@ -18,7 +19,6 @@ function initAuthUI() {
         e.preventDefault();
         setVisible(profileView, false);
         setVisible(editProfileView, true);
-        signupView?.querySelector('input')?.focus();
     });
 
 
@@ -34,7 +34,7 @@ function initAuthUI() {
         }
 
         const userDoc = await getDoc(doc(db, "users", user.uid));
-        if (userDoc.exists) {
+        if (userDoc.exists()) {
             const data = userDoc.data();
 
             const username = data.username || data.email
@@ -59,14 +59,13 @@ function initAuthUI() {
     // Edit User Profile
     const photoInput = document.getElementById("photoInput")
     const bioInput = document.getElementById("bioInput")
+    const usernameInput = document.getElementById("usernameInput")
     const saveProfileBtn = document.getElementById("saveProfileBtn")
-    const userProfileSection = document.getElementById("userProfileSection")
 
-    saveProfileBtn.addEventListener("click", async () => {
+    saveProfileBtn.addEventListener("click", async (e) => {
+        e.preventDefault();
         const user = auth.currentUser;
         if (!user) window.location.href = "/src/pages/loginSignup.html"
-
-        const userDoc = doc(db, "users", user.uid);
 
         try {
             let photoURL;
@@ -79,25 +78,25 @@ function initAuthUI() {
                 photoURL = await getDownloadURL(storageRef)
             }
 
-            await updateDoc(
-                userDoc,
+            await setDoc(
+                doc(db, "users", user.uid),
                 {
-                    bio: bioInput.value,
-                    photoURL: photoURL
-                }
+                    username: usernameInput.value || "",
+                    bio: bioInput.value || "",
+                    photoURL: photoURL || ""
+                },
+                { merge: true }
             )
             
             setVisible(editProfileView, false);
             setVisible(profileView, true);
-            userProfileSection.append("Profile successfully updated.")
+            profileView.append("Profile successfully updated.")
         } catch (error) {
             console.error("Error updating profile", error)
-            userProfileSection.append("Something went wrong while updating your profile. Please try again later.")
+            profileView.append("Something went wrong while updating your profile. Please try again later.")
         }
     })
 }
-
-
 
 
 document.addEventListener('DOMContentLoaded', initAuthUI);

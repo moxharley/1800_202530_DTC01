@@ -10,6 +10,10 @@
 
     <!-- Other libraries go here -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script
+      src="https://kit.fontawesome.com/2043d6ea2c.js"
+      crossorigin="anonymous"
+    ></script>
     <!-- Link to styles of your own -->
     <!-- <link rel="stylesheet" href="./styles/style.css"> -->
     <!-- Web Components for shared navbar and footer layout -->
@@ -40,10 +44,10 @@
           <h1
             class="w-fit -mt-13 md:-mt-26 px-2 bg-[#f2e8cf] mb-5 text-3xl font-bold"
           >
-            Routine
+            Schedule
           </h1>
           <div>
-            <form action="" class="pt-2 space-y-7">
+            <form onsubmit="return false" class="pt-2 space-y-7">
               <label class="font-bold" for="title">Title</label>
               <input
                 id="title"
@@ -57,8 +61,8 @@
                 <input id="time" class="focus:outline-none" type="time" />
                 <label class="font-bold -mr-3" for="repeat">Repeat</label>
                 <select
-                  name="Repeat"
-                  id="Repeat"
+                  name="repeat"
+                  id="repeat"
                   class="bg-white border border-[#386642] rounded p-0.5 focus:outline-none"
                 >
                   <option value="none">None</option>
@@ -80,6 +84,7 @@
                   type="reset"
                 />
                 <input
+                  id="submit"
                   class="w-[20%] mr-5 mt-5 mb-3 py-1 rounded bg-[#386642] text-[#f2e8cf] border-2 border-[#386642] hover:bg-[#a7c957] hover:text-[#386642] active:bg-[#f2e8cf] active:text-[#386642]"
                   type="submit"
                   value="Submit"
@@ -96,6 +101,7 @@
     <!---------------------------------------------->
 
     <!-- Link to scripts of your own -->
+    <script type="module" src="/src/scheduleForm.js"></script>
     <!-- <script type="module" src="./src/main.js"></script> -->
   </body>
 </html>

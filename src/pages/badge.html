@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>My BCIT Project</title>
+    <meta name="comp1800 template" content="My 1800 App" />
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Other libraries go here -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script
+      src="https://kit.fontawesome.com/2043d6ea2c.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Link to styles of your own -->
+    <!-- <link rel="stylesheet" href="./styles/style.css"> -->
+    <!-- Web Components for shared navbar and footer layout -->
+    <script type="module" src="/src/components/site-navbar.js"></script>
+    <script type="module" src="/src/components/site-footer.js"></script>
+    <style>
+      /* 
+        color-code
+        #386641 - Dark Green
+        #6a994e - Medium Green
+        #a7c957 - Light Green
+        #f2e8cf - Off-White
+        #bc4749 - Red 
+      */
+    </style>
+  </head>
+  <body class="bg-[#f2e8cf]">
+    <!------------------------------>
+    <!-- Your HTML Layout go here -->
+    <header>
+      <site-navbar></site-navbar>
+    </header>
+    <!------------------------------>
+    <!-- Stuff for body goes here -->
+    <main class="mx-16 text-[#386642]">
+      <div
+        class="max-w-screen-lg h-full p-8 mx-auto flex flex-col gap-8 bg-[#a7c957] overflow:hidden"
+      >
+        <h1 class="text-3xl font-bold text-center">Achievements</h1>
+
+        <div
+          class="badge-card pt-6 pb-8 px-8 w-full max-w-screen-sm mx-auto bg-[#f2e8cf] rounded-full border-4 border-[386641]"
+          data-badge-name="green"
+        >
+          <div class="flex flex-row gap-4 items-center">
+            <img
+              src="/images/placeholder_logo.png"
+              alt="Badge"
+              class="w-16 h-16"
+            />
+            <h1 class="font-bold text-2xl">Green</h1>
+          </div>
+          <p>Recycle 30 times.</p>
+        </div>
+
+        <div
+          class="badge-card pt-6 pb-8 px-8 w-full max-w-screen-sm mx-auto bg-[#f2e8cf] rounded-full border-4 border-[386641]"
+          data-badge-name="lumberjack"
+        >
+          <div class="flex flex-row gap-4 items-center">
+            <img
+              src="/images/placeholder_logo.png"
+              alt="Badge"
+              class="w-16 h-16"
+            />
+            <h1 class="font-bold text-2xl">Lumberjack</h1>
+          </div>
+          <p>Recycle paper 5 times.</p>
+        </div>
+
+        
+        <div
+          class="badge-card pt-6 pb-8 px-8 w-full max-w-screen-sm mx-auto bg-[#f2e8cf] rounded-full border-4 border-[386641]"
+          data-badge-name="polymer"
+        >
+          <div class="flex flex-row gap-4 items-center">
+            <img
+              src="/images/placeholder_logo.png"
+              alt="Badge"
+              class="w-16 h-16"
+            />
+            <h1 class="font-bold text-2xl">Polymer</h1>
+          </div>
+          <p>Recycle plastic 5 times.</p>
+        </div>
+
+        
+        <div
+          class="badge-card pt-6 pb-8 px-8 w-full max-w-screen-sm mx-auto bg-[#f2e8cf] rounded-full border-4 border-[386641]"
+          data-badge-name="fragile"
+        >
+          <div class="flex flex-row gap-4 items-center">
+            <img
+              src="/images/placeholder_logo.png"
+              alt="Badge"
+              class="w-16 h-16"
+            />
+            <h1 class="font-bold text-2xl">Fragile</h1>
+          </div>
+          <p>Recycle glass 5 times.</p>
+        </div>
+
+        
+        <div
+          class="badge-card pt-6 pb-8 px-8 w-full max-w-screen-sm mx-auto bg-[#f2e8cf] rounded-full border-4 border-[386641]"
+          data-badge-name="scrappy"
+        >
+          <div class="flex flex-row gap-4 items-center">
+            <img
+              src="/images/placeholder_logo.png"
+              alt="Badge"
+              class="w-16 h-16"
+            />
+            <h1 class="font-bold text-2xl">Scrappy</h1>
+          </div>
+          <p>Recycle metal 5 times.</p>
+        </div>
+
+        
+        <div
+          class="badge-card pt-6 pb-8 px-8 w-full max-w-screen-sm mx-auto bg-[#f2e8cf] rounded-full border-4 border-[386641]"
+          data-badge-name="electric"
+        >
+          <div class="flex flex-row gap-4 items-center">
+            <img
+              src="/images/placeholder_logo.png"
+              alt="Badge"
+              class="w-16 h-16"
+            />
+            <h1 class="font-bold text-2xl">Electric</h1>
+          </div>
+          <p>Recycle electronics 5 times.</p>
+        </div>
+
+        
+        <div
+          class="badge-card pt-6 pb-8 px-8 w-full max-w-screen-sm mx-auto bg-[#f2e8cf] rounded-full border-4 border-[386641]"
+          data-badge-name="thrifty"
+        >
+          <div class="flex flex-row gap-4 items-center">
+            <img
+              src="/images/placeholder_logo.png"
+              alt="Badge"
+              class="w-16 h-16"
+            />
+            <h1 class="font-bold text-2xl">Thrifty</h1>
+          </div>
+          <p>Recycle fabric 5 times.</p>
+        </div>
+
+        
+        <div
+          class="badge-card pt-6 pb-8 px-8 w-full max-w-screen-sm mx-auto bg-[#f2e8cf] rounded-full border-4 border-[386641]"
+          data-badge-name="esoteric"
+        >
+          <div class="flex flex-row gap-4 items-center">
+            <img
+              src="/images/placeholder_logo.png"
+              alt="Badge"
+              class="w-16 h-16"
+            />
+            <h1 class="font-bold text-2xl">Esoteric</h1>
+          </div>
+          <p>Recycle <i>other</i> 5 times.</p>
+        </div>
+
+      </div>
+    </main>
+    <site-footer></site-footer>
+    <!---------------------------------------------->
+    <!-- Your own JavaScript functions go here    -->
+    <!---------------------------------------------->
+    <script type="module" src="/src/badge.js"></script>
+    <!-- <script type="module" src="./src/main.js"></script> -->
+  </body>
+</html>

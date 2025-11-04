@@ -13,13 +13,16 @@
     <!-- Link to styles of your own -->
     <script type="module" src="/src/components/site-navbar.js"></script>
     <script type="module" src="/src/components/site-footer.js"></script>
+    <script src="/src/map.js" type="module" defer></script>
+
 </head>
 
 <body class="bg-[#f2e8cf]">
     <main class="flex flex-col justify-center">
         <site-navbar></site-navbar>
         <div class="flex justify-center">
-            <div class="flex justify-center border-2 border-[#386641] p-2 my-2">
+            <div id="map"
+                class="flex justify-center border-2 border-[#386641] p-2 my-2 max-w-5xl max-h-[1024px] min-w-[500px] min-h-[500px]">
                 map placeholder
             </div>
         </div>
@@ -61,6 +64,7 @@
         </div>
         <site-footer></site-footer>
     </main>
+
 </body>
 
 </html>

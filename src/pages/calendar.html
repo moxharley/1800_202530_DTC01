@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>My BCIT Project</title>
+    <meta name="comp1800 template" content="My 1800 App" />
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Other libraries go here -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script
+      src="https://kit.fontawesome.com/2043d6ea2c.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Link to styles of your own -->
+    <!-- <link rel="stylesheet" href="./styles/style.css"> -->
+    <!-- Web Components for shared navbar and footer layout -->
+    <script type="module" src="/src/components/site-navbar.js"></script>
+    <script type="module" src="/src/components/site-footer.js"></script>
+    <style>
+      /* 
+        color-code
+        #386641 - Dark Green
+        #6a994e - Medium Green
+        #a7c957 - Light Green
+        #f2e8cf - Off-White
+        #bc4749 - Red 
+      */
+    </style>
+  </head>
+  <body class="bg-[#f2e8cf]">
+    <!------------------------------>
+    <!-- Your HTML Layout go here -->
+    <header>
+      <site-navbar></site-navbar>
+    </header>
+    <!------------------------------>
+    <!-- Stuff for body goes here -->
+    <main class="mx-16 text-[#386642]">
+      <section class="md:mt-20 mt-10">
+        <h1 class="my-5 text-3xl font-bold text-center">Calendar</h1>
+        <h1
+          class="text-[#6a994e] text-2xl font-bold text-center flex justify-between items-center px-1"
+        >
+          <a href=""><i class="fa-solid fa-chevron-left"></i></a>
+          <span class="bg-[#6a994e] text-[#f2e8cf] px-2 rounded-sm"
+            >November</span
+          >
+          <a href=""><i class="fa-solid fa-chevron-right"></i></a>
+        </h1>
+        <table class="mt-2 w-full table-fixed border-collapse">
+          <tr class="bg-[#6a994e] text-[#f2e8cf] h-1/10">
+            <th class="border-[#6a994e] border-r-[#f2e8cf] border p-2">Sun</th>
+            <th class="border-[#6a994e] border-r-[#f2e8cf] border p-2">Mon</th>
+            <th class="border-[#6a994e] border-r-[#f2e8cf] border p-2">Tue</th>
+            <th class="border-[#6a994e] border-r-[#f2e8cf] border p-2">Wed</th>
+            <th class="border-[#6a994e] border-r-[#f2e8cf] border p-2">Thu</th>
+            <th class="border-[#6a994e] border-r-[#f2e8cf] border p-2">Fri</th>
+            <th class="border-[#6a994e] border p-2">Sat</th>
+          </tr>
+          <tr class="h-[80px]">
+            <td class="border px-2 pb-2 align-top">
+              <h3 class="mt-0 text-right"></h3>
+            </td>
+            <td class="border px-2 pb-2 align-top">
+              <h3 class="mt-0 text-right"></h3>
+            </td>
+            <td class="border px-2 pb-2 align-top">
+              <h3 class="mt-0 text-right"></h3>
+            </td>
+            <td class="border px-2 pb-2 align-top">
+              <h3 class="mt-0 text-right"></h3>
+            </td>
+            <td class="border px-2 pb-2 align-top">
+              <h3 class="mt-0 text-right"></h3>
+            </td>
+            <td class="border px-2 pb-2 align-top">
+              <h3 class="mt-0 text-right"></h3>
+            </td>
+            <td class="border px-2 pb-2 align-top">
+              <h3 class="mt-0 text-right">1</h3>
+            </td>
+          </tr>
+          <tr class="h-[80px]">
+            <td class="border px-2 pb-2 align-top">
+              <h3 class="mt-0 text-right">2</h3>
+            </td>
+            <td class="border px-2 pb-2 align-top">
+              <h3 class="mt-0 text-right">3</h3>
+            </td>
+            <td class="border px-2 pb-2 align-top">
+              <h3 class="mt-0 text-right">4</h3>
+            </td>
+            <td class="border px-2 pb-2 align-top">
+              <h3 class="mt-0 text-right">5</h3>
+            </td>
+            <td class="border px-2 pb-2 align-top">
+              <h3 class="mt-0 text-right">6</h3>
+            </td>
+            <td class="border px-2 pb-2 align-top">
+              <h3 class="mt-0 text-right">7</h3>
+            </td>
+            <td class="border px-2 pb-2 align-top">
+              <h3 class="mt-0 text-right">8</h3>
+            </td>
+          </tr>
+          <tr class="h-[80px]">
+            <td class="border px-2 pb-2 align-top">
+              <h3 class="mt-0 text-right">9</h3>
+            </td>
+            <td class="border px-2 pb-2 align-top">
+              <h3 class="mt-0 text-right">10</h3>
+            </td>
+            <td class="border px-2 pb-2 align-top">
+              <h3 class="mt-0 text-right">11</h3>
+            </td>
+            <td class="border px-2 pb-2 align-top">
+              <h3 class="mt-0 text-right">12</h3>
+            </td>
+            <td class="border px-2 pb-2 align-top">
+              <h3 class="mt-0 text-right">13</h3>
+            </td>
+            <td class="border px-2 pb-2 align-top">
+              <h3 class="mt-0 text-right">14</h3>
+            </td>
+            <td class="border px-2 pb-2 align-top">
+              <h3 class="mt-0 text-right">15</h3>
+            </td>
+          </tr>
+          <tr class="h-[80px]">
+            <td class="border px-2 pb-2 align-top">
+              <h3 class="mt-0 text-right">16</h3>
+            </td>
+            <td class="border px-2 pb-2 align-top">
+              <h3 class="mt-0 text-right">17</h3>
+            </td>
+            <td class="border px-2 pb-2 align-top">
+              <h3 class="mt-0 text-right">18</h3>
+            </td>
+            <td class="border px-2 pb-2 align-top">
+              <h3 class="mt-0 text-right">19</h3>
+            </td>
+            <td class="border px-2 pb-2 align-top">
+              <h3 class="mt-0 text-right">20</h3>
+            </td>
+            <td class="border px-2 pb-2 align-top">
+              <h3 class="mt-0 text-right">21</h3>
+            </td>
+            <td class="border px-2 pb-2 align-top">
+              <h3 class="mt-0 text-right">22</h3>
+            </td>
+          </tr>
+          <tr class="h-[80px]">
+            <td class="border px-2 pb-2 align-top">
+              <h3 class="mt-0 text-right">23</h3>
+            </td>
+            <td class="border px-2 pb-2 align-top">
+              <h3 class="mt-0 text-right">24</h3>
+            </td>
+            <td class="border px-2 pb-2 align-top">
+              <h3 class="mt-0 text-right">25</h3>
+            </td>
+            <td class="border px-2 pb-2 align-top">
+              <h3 class="mt-0 text-right">26</h3>
+            </td>
+            <td class="border px-2 pb-2 align-top">
+              <h3 class="mt-0 text-right">27</h3>
+            </td>
+            <td class="border px-2 pb-2 align-top">
+              <h3 class="mt-0 text-right">28</h3>
+            </td>
+            <td class="border px-2 pb-2 align-top">
+              <h3 class="mt-0 text-right">29</h3>
+            </td>
+          </tr>
+          <tr class="h-[80px]">
+            <td class="border px-2 pb-2 align-top">
+              <h3 class="mt-0 text-right">30</h3>
+            </td>
+            <td class="border px-2 pb-2 align-top">
+              <h3 class="mt-0 text-right"></h3>
+            </td>
+            <td class="border px-2 pb-2 align-top">
+              <h3 class="mt-0 text-right"></h3>
+            </td>
+            <td class="border px-2 pb-2 align-top">
+              <h3 class="mt-0 text-right"></h3>
+            </td>
+            <td class="border px-2 pb-2 align-top">
+              <h3 class="mt-0 text-right"></h3>
+            </td>
+            <td class="border px-2 pb-2 align-top">
+              <h3 class="mt-0 text-right"></h3>
+            </td>
+            <td class="border px-2 pb-2 align-top">
+              <h3 class="mt-0 text-right"></h3>
+            </td>
+          </tr>
+        </table>
+        <div class="mb-5 text-right">
+          <a href=""><i class="fa-solid fa-chevron-up"></i></a>
+        </div>
+      </section>
+      <hr class="border" />
+      <section class="mb-10">
+        <div class="mt-2 px-2 flex justify-between">
+          <a
+            class="bg-[#386642] text-[#f2e8cf] px-1 rounded"
+            href="/src/pages/scheduleForm.html"
+            >Add Schedule</a
+          >
+
+          <div class="space-x-2">
+            <button
+              class="bg-[#6a994e] text-[#f2e8cf] px-1 rounded hover:cursor-pointer"
+            >
+              Edit
+            </button>
+            <button
+              class="bg-[#bc4749] text-[#f2e8cf] px-1 rounded hover:cursor-pointer"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+        <div class="mt-3 mb-30">
+          <div
+            class="bg-[#386642] text-[#f2e8cf] border rounded flex justify-between p-2 mb-3"
+          >
+            <h3 class="ml-3 font-bold">Title</h3>
+            <div class="space-x-10">
+              <span>Date</span><span class="mr-1">Time</span>
+            </div>
+          </div>
+          <div id="schedulesDiv" class="space-y-3">
+            <template id="scheduleTemplate">
+              <div class="group flex justify-between p-2 border rounded">
+                <h3 id="title" class="font-bold">Title</h3>
+                <div
+                  id="memo"
+                  class="bg-[#6a994e] text-[#f2e8cf] w-40 h-20 p-2 absolute mt-7 ml-8 rounded group-hover:block hidden"
+                >
+                  Memo
+                </div>
+                <div class="space-x-2">
+                  <span id="date">Date</span><span id="time">Time</span>
+                </div>
+              </div>
+            </template>
+          </div>
+        </div>
+      </section>
+    </main>
+    <site-footer></site-footer>
+    <!---------------------------------------------->
+    <!-- Your own JavaScript functions go here    -->
+    <!---------------------------------------------->
+    <!-- Link to scripts of your own -->
+    <script type="module" src="/src/calendar.js"></script>
+  </body>
+</html>

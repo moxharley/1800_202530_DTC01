@@ -56,6 +56,7 @@ class SiteNavbar extends HTMLElement {
                     <a class="block p-2 hover:bg-[#386641]" href="/src/pages/recyclingForm.html">Log</a>
                     <a class="block p-2 hover:bg-[#386641]" href="/src/pages/calendar.html">Calendar</a>
                     <a class="block p-2 hover:bg-[#386641]" href="/src/pages/profile.html">Profile</a>
+                    <a class="block p-2 hover:bg-[#386641]" href="/src/pages/badge.html">Badges</a>
                     <a class="block p-2 hover:bg-[#386641] rounded-b" id="signOutBtn" href="#">Log out</a>
                   </div>
                 </div>

@@ -8,14 +8,14 @@ function setDimmed(element, dim) {
   element.classList.toggle("brightness-[50%]", dim);
 }
 
-//Acquire the name of the badge.
+//Acquire the elements of the badge using a map (kinda like a dictionary in python).
 function getBadgeElements() {
-  const map = new Map();
+  const elements = new Map();
   document.querySelectorAll(".badge-card[data-badge-name]").forEach(element => {
     const name = element.dataset.badgeName || element.getAttribute("data-badge-name");
-    if (name) map.set(name, element);
+    if (name) elements.set(name, element);
   });
-  return map;
+  return elements;
 }
 
 //Acquire user badge data.

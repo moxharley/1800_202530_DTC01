@@ -10,12 +10,7 @@ function setDimmed(element, dim) {
 
 //Acquire the elements of the badge using a map (kinda like a dictionary in python).
 function getBadgeElements() {
-  const elements = new Map();
-  document.querySelectorAll(".badge-card[data-badge-name]").forEach(element => {
-    const name = element.dataset.badgeName || element.getAttribute("data-badge-name");
-    if (name) elements.set(name, element);
-  });
-  return elements;
+  //insert code here??
 }
 
 //Acquire user badge data.
@@ -40,11 +35,9 @@ onAuthStateChanged(auth, async (user) => {
 
   try {
     const badges = await fetchUserBadges(user.uid);
-    for (const [name, element] of badgeElements.entries()) {
-      const assigned = badges[name] ?? 0;
-      setDimmed(element, assigned === 0); // dim if unearned
+      // dim if unearned
     }
-  } catch (error) {
+   catch (error) {
     console.error("Error loading badges:", error);
     badgeElements.forEach(element => setDimmed(element, true));
   }

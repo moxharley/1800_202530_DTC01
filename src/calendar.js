@@ -1,6 +1,6 @@
 import { onAuthReady } from "./authentication.js";
 import { db } from "./firebaseConfig.js";
-import { collection, doc, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs } from "firebase/firestore";
 
 function displayScheduleDynamically() {
   onAuthReady(async (user) => {
@@ -17,14 +17,13 @@ function displayScheduleDynamically() {
           collection(db, "schedules"),
           where("userUid", "==", userUid)
         );
-
-        const scheduleCollectionRef = collection(scheduleQuery);
-        const querySnapshot = await getDocs(scheduleCollectionRef);
+        const querySnapshot = await getDocs(scheduleQuery);
 
         let scheduleTemplate = document.getElementById("scheduleTemplate");
 
         querySnapshot.forEach((doc) => {
           let newSchedule = scheduleTemplate.content.cloneNode(true);
+
           const schedule = doc.data();
 
           newSchedule.querySelector("#title").textContent = schedule.title;

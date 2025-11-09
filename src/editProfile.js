@@ -1,7 +1,6 @@
 import { onAuthReady } from "./authentication.js"
-import { auth, db, storage } from "./firebaseConfig.js";
+import { auth, db } from "./firebaseConfig.js";
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 function initAuthUI() {
     // Read data from logged-in-user's collection in db and display their username, bio, and profile picture
@@ -10,6 +9,7 @@ function initAuthUI() {
     const profilePictureElement = document.getElementById("profilePictureElement")
     const photoInput = document.getElementById("photoInput")
     const saveProfileBtn = document.getElementById("saveProfileBtn")
+    const fileName = document.getElementById("fileName")
 
     onAuthReady(async (user) => {
         if (!user) {
@@ -39,6 +39,15 @@ function initAuthUI() {
         }
     });
 
+    // Give user feedback when they've uploaded a photo
+    photoInput.addEventListener("change", () => {
+        if (photoInput.files.length > 0) {
+            fileName.textContent = photoInput.files[0].name;
+        } else {
+            fileName.textContent = "No file chosen"
+        }
+    })
+
     // Edit User Profile
     saveProfileBtn.addEventListener("click", async (e) => {
         e.preventDefault();
@@ -48,23 +57,26 @@ function initAuthUI() {
         try {
             let photoURL;
 
-            // Upload selected file to Firebase Storage
+            // Convert uploaded file to Base64 before adding to firestore (avoids paying for Firebase Storage)
             if (photoInput.files[0]) {
                 const file = photoInput.files[0];
-                const storageRef = ref(storage, `profilePictures/${user.uid}`)
-                await uploadBytes(storageRef, file);
-                photoURL = await getDownloadURL(storageRef)
+                photoURL = await new Promise((resolve) => {
+                    const reader = new FileReader();
+                    reader.onloadend = () => resolve(reader.result);
+                    reader.readAsDataURL(file);
+                });
             }
 
-            await setDoc(
-                doc(db, "users", user.uid),
-                {
-                    username: usernameInput.value || "",
-                    bio: bioInput.value || "",
-                    photoURL: photoURL || ""
-                },
-                { merge: true }
-            )
+            const updatingData = {
+                username: usernameInput.value || "",
+                bio: bioInput.value || ""
+            };
+
+            if (photoURL) {
+            updatingData.photoURL = photoURL;
+            }
+
+            await setDoc(doc(db, "users", user.uid), updatingData, { merge: true });
             
             // Set success flag then redirect user to updated profile page
             sessionStorage.setItem("profileUpdated", "true");
@@ -74,9 +86,8 @@ function initAuthUI() {
 
             // Show error flag on top of form
             const feedbackBanner = document.getElementById("feedbackBanner");
-            feedbackBanner.textContent = "There was an issue updating your profile. Please try again.";
+            feedbackBanner.textContent = "We couldn't update your profile. Please try again.";
             feedbackBanner.classList.remove("hidden");
-            feedbackBanner.classList.add("error"); // style however you want
         }
     })
 }

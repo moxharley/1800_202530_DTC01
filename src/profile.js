@@ -43,7 +43,6 @@ function initAuthUI() {
     if (sessionStorage.getItem("profileUpdated")) {
         feedbackBanner.textContent = "Profile updated successfully.";
         feedbackBanner.classList.remove("hidden");
-        feedbackBanner.classList.add("success"); // style it nicely
 
         // Remove flag to prevent it from displaying again later
         sessionStorage.removeItem("profileUpdated");

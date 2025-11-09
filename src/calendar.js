@@ -43,7 +43,7 @@ function displayScheduleDynamically() {
 }
 displayScheduleDynamically();
 
-function displayCalendar() {
+function displayCalendar(baseDate) {
   const months = [
     "January",
     "February",
@@ -69,12 +69,15 @@ function displayCalendar() {
     "satDate",
   ];
 
-  const today = new Date();
-  const month = months[today.getMonth()];
-  const firstDay = new Date(today.getFullYear(), today.getMonth(), 1).getDay();
+  const month = months[baseDate.getMonth()];
+  const firstDay = new Date(
+    baseDate.getFullYear(),
+    baseDate.getMonth(),
+    1
+  ).getDay();
   const lastDate = new Date(
-    today.getFullYear(),
-    today.getMonth() + 1,
+    baseDate.getFullYear(),
+    baseDate.getMonth() + 1,
     0
   ).getDate();
 
@@ -82,7 +85,7 @@ function displayCalendar() {
 
   let weekNum = 0;
 
-  if (today.getMonth() % 7 != 0) {
+  if (lastDate % 7 != 0) {
     if (firstDay + (lastDate % 7) > 7) {
       weekNum = 6;
     } else {
@@ -123,4 +126,44 @@ function displayCalendar() {
     }
   }
 }
-displayCalendar();
+displayCalendar(new Date());
+
+let monthBtns = document.getElementsByClassName("monthBtn");
+for (let monthBtn of monthBtns) {
+  monthBtn.addEventListener("click", () => {
+    const monthMap = {
+      January: 0,
+      February: 1,
+      March: 2,
+      April: 3,
+      May: 4,
+      June: 5,
+      July: 6,
+      August: 7,
+      September: 8,
+      October: 9,
+      November: 10,
+      December: 11,
+    };
+
+    let today = new Date();
+
+    let currentMonthName = document.getElementById("monthName").innerHTML;
+
+    today.setMonth(monthMap[currentMonthName]);
+    let month = today.getMonth();
+
+    if (monthBtn.id == "prevMonth") {
+      month -= 1;
+    } else {
+      month += 1;
+    }
+    let temp = document.getElementById("calendar");
+
+    for (let i = temp.children.length - 1; i > 0; i--) {
+      temp.children[i].remove();
+    }
+    // console.log();
+    displayCalendar(new Date(today.getFullYear(), month));
+  });
+}

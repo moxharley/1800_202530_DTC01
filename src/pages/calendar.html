@@ -43,106 +43,179 @@
         <h1 class="mb-5 md:text-3xl text-2xl font-bold text-center">
           Calendar
         </h1>
-        <div class="relative">
-          <div
-            class="text-[#6a994e] md:text-2xl text-lg font-bold text-center flex justify-center items-end px-1"
-          >
-            <button id="prevMonth" class="monthBtn hover:cursor-pointer">
-              <i class="fa-solid fa-chevron-left"></i>
-            </button>
-            <div class="flex flex-col">
-              <span id="year" class="text-sm">year</span>
-              <span
-                id="monthName"
-                class="bg-[#6a994e] text-[#f2e8cf] px-2 rounded-sm"
-              >
-                month
-              </span>
-            </div>
-            <button id="nextMonth" class="monthBtn hover:cursor-pointer">
-              <i class="fa-solid fa-chevron-right"></i>
-            </button>
-          </div>
-          <div class="absolute right-1 bottom-0">
-            <button
-              id="todayBtn"
-              class="bg-[#386642] text-[#f2e8cf] md:text-base md:font-normal text-sm font-bold py-0.5 px-1 rounded"
+        <section id="calendarTable">
+          <div class="relative">
+            <div
+              class="text-[#6a994e] md:text-2xl text-lg font-bold text-center flex justify-center items-end px-1"
             >
-              Today
-            </button>
+              <button id="prevMonth" class="monthBtn hover:cursor-pointer">
+                <i class="fa-solid fa-chevron-left"></i>
+              </button>
+              <div class="flex flex-col">
+                <span id="year" class="text-sm">year</span>
+                <span
+                  id="monthName"
+                  class="bg-[#6a994e] text-[#f2e8cf] px-2 rounded-sm"
+                >
+                  month
+                </span>
+              </div>
+              <button id="nextMonth" class="monthBtn hover:cursor-pointer">
+                <i class="fa-solid fa-chevron-right"></i>
+              </button>
+            </div>
+            <div class="absolute right-1 bottom-0">
+              <button
+                id="todayBtn"
+                class="bg-[#386642] text-[#f2e8cf] md:text-base md:font-normal text-sm font-bold py-0.5 px-1 rounded"
+              >
+                Today
+              </button>
+            </div>
           </div>
-        </div>
-        <table id="calendar" class="mt-2 w-full table-fixed border-collapse">
-          <tr class="bg-[#6a994e] text-[#f2e8cf] md:text-base text-sm">
-            <th class="border-[#6a994e] border-r-[#f2e8cf] border md:p-2">
-              Sun
-            </th>
-            <th class="border-[#6a994e] border-r-[#f2e8cf] border md:p-2">
-              Mon
-            </th>
-            <th class="border-[#6a994e] border-r-[#f2e8cf] border md:p-2">
-              Tue
-            </th>
-            <th class="border-[#6a994e] border-r-[#f2e8cf] border md:p-2">
-              Wed
-            </th>
-            <th class="border-[#6a994e] border-r-[#f2e8cf] border md:p-2">
-              Thu
-            </th>
-            <th class="border-[#6a994e] border-r-[#f2e8cf] border md:p-2">
-              Fri
-            </th>
-            <th class="border-[#6a994e] border p-2">Sat</th>
-          </tr>
-          <template id="calendarTemplate">
-            <tr class="md:h-[80px] h-[50px]">
-              <td class="border px-2 pb-2 align-top">
-                <h3
-                  id="sunDate"
-                  class="mt-0 text-right md:text-base text-sm"
-                ></h3>
-              </td>
-              <td class="border px-2 pb-2 align-top">
-                <h3
-                  id="monDate"
-                  class="mt-0 text-right md:text-base text-sm"
-                ></h3>
-              </td>
-              <td class="border px-2 pb-2 align-top">
-                <h3
-                  id="tueDate"
-                  class="mt-0 text-right md:text-base text-sm"
-                ></h3>
-              </td>
-              <td class="border px-2 pb-2 align-top">
-                <h3
-                  id="wedDate"
-                  class="mt-0 text-right md:text-base text-sm"
-                ></h3>
-              </td>
-              <td class="border px-2 pb-2 align-top">
-                <h3
-                  id="thuDate"
-                  class="mt-0 text-right md:text-base text-sm"
-                ></h3>
-              </td>
-              <td class="border px-2 pb-2 align-top">
-                <h3
-                  id="friDate"
-                  class="mt-0 text-right md:text-base text-sm"
-                ></h3>
-              </td>
-              <td class="border px-2 pb-2 align-top">
-                <h3
-                  id="satDate"
-                  class="mt-0 text-right md:text-base text-sm"
-                ></h3>
-              </td>
+          <table id="calendar" class="mt-2 w-full table-fixed border-collapse">
+            <tr class="bg-[#6a994e] text-[#f2e8cf] md:text-base text-sm">
+              <th class="border-[#6a994e] border-r-[#f2e8cf] border md:p-2">
+                Sun
+              </th>
+              <th class="border-[#6a994e] border-r-[#f2e8cf] border md:p-2">
+                Mon
+              </th>
+              <th class="border-[#6a994e] border-r-[#f2e8cf] border md:p-2">
+                Tue
+              </th>
+              <th class="border-[#6a994e] border-r-[#f2e8cf] border md:p-2">
+                Wed
+              </th>
+              <th class="border-[#6a994e] border-r-[#f2e8cf] border md:p-2">
+                Thu
+              </th>
+              <th class="border-[#6a994e] border-r-[#f2e8cf] border md:p-2">
+                Fri
+              </th>
+              <th class="border-[#6a994e] border p-2">Sat</th>
             </tr>
-          </template>
-        </table>
+            <template id="calendarTemplate">
+              <tr class="md:h-[80px] h-[50px]">
+                <td class="border px-2 pb-2 align-top">
+                  <h3
+                    id="sunDate"
+                    class="mt-0 text-right md:text-base text-sm"
+                  ></h3>
+                </td>
+                <td class="border px-2 pb-2 align-top">
+                  <h3
+                    id="monDate"
+                    class="mt-0 text-right md:text-base text-sm"
+                  ></h3>
+                </td>
+                <td class="border px-2 pb-2 align-top">
+                  <h3
+                    id="tueDate"
+                    class="mt-0 text-right md:text-base text-sm"
+                  ></h3>
+                </td>
+                <td class="border px-2 pb-2 align-top">
+                  <h3
+                    id="wedDate"
+                    class="mt-0 text-right md:text-base text-sm"
+                  ></h3>
+                </td>
+                <td class="border px-2 pb-2 align-top">
+                  <h3
+                    id="thuDate"
+                    class="mt-0 text-right md:text-base text-sm"
+                  ></h3>
+                </td>
+                <td class="border px-2 pb-2 align-top">
+                  <h3
+                    id="friDate"
+                    class="mt-0 text-right md:text-base text-sm"
+                  ></h3>
+                </td>
+                <td class="border px-2 pb-2 align-top">
+                  <h3
+                    id="satDate"
+                    class="mt-0 text-right md:text-base text-sm"
+                  ></h3>
+                </td>
+              </tr>
+            </template>
+          </table>
+        </section>
+        <section id="weekTable" class="hidden">
+          <table id="week" class="mt-2 w-full table-fixed border-collapse">
+            <tr class="bg-[#6a994e] text-[#f2e8cf] md:text-base text-sm">
+              <th class="border-[#6a994e] border-r-[#f2e8cf] border md:p-2">
+                Sun
+              </th>
+              <th class="border-[#6a994e] border-r-[#f2e8cf] border md:p-2">
+                Mon
+              </th>
+              <th class="border-[#6a994e] border-r-[#f2e8cf] border md:p-2">
+                Tue
+              </th>
+              <th class="border-[#6a994e] border-r-[#f2e8cf] border md:p-2">
+                Wed
+              </th>
+              <th class="border-[#6a994e] border-r-[#f2e8cf] border md:p-2">
+                Thu
+              </th>
+              <th class="border-[#6a994e] border-r-[#f2e8cf] border md:p-2">
+                Fri
+              </th>
+              <th class="border-[#6a994e] border p-2">Sat</th>
+            </tr>
+            <template id="weekTemplate">
+              <tr class="md:h-[80px] h-[50px]">
+                <td class="border px-2 pb-2 align-top">
+                  <h3
+                    id="sunDate"
+                    class="mt-0 text-right md:text-base text-sm"
+                  ></h3>
+                </td>
+                <td class="border px-2 pb-2 align-top">
+                  <h3
+                    id="monDate"
+                    class="mt-0 text-right md:text-base text-sm"
+                  ></h3>
+                </td>
+                <td class="border px-2 pb-2 align-top">
+                  <h3
+                    id="tueDate"
+                    class="mt-0 text-right md:text-base text-sm"
+                  ></h3>
+                </td>
+                <td class="border px-2 pb-2 align-top">
+                  <h3
+                    id="wedDate"
+                    class="mt-0 text-right md:text-base text-sm"
+                  ></h3>
+                </td>
+                <td class="border px-2 pb-2 align-top">
+                  <h3
+                    id="thuDate"
+                    class="mt-0 text-right md:text-base text-sm"
+                  ></h3>
+                </td>
+                <td class="border px-2 pb-2 align-top">
+                  <h3
+                    id="friDate"
+                    class="mt-0 text-right md:text-base text-sm"
+                  ></h3>
+                </td>
+                <td class="border px-2 pb-2 align-top">
+                  <h3
+                    id="satDate"
+                    class="mt-0 text-right md:text-base text-sm"
+                  ></h3>
+                </td>
+              </tr>
+            </template>
+          </table>
+        </section>
         <div class="mb-5 text-right">
-          <button class="hover:cursor-pointer">
+          <button id="toggleCalendar" class="hover:cursor-pointer">
             <i class="fa-solid fa-chevron-up"></i>
           </button>
         </div>

@@ -191,3 +191,40 @@ for (let monthBtn of monthBtns) {
 
 let todayBtn = document.getElementById("todayBtn");
 todayBtn.addEventListener("click", () => displayCalendar(new Date()));
+
+function displayWeek() {
+  const dateId = [
+    "sunDate",
+    "monDate",
+    "tueDate",
+    "wedDate",
+    "thuDate",
+    "friDate",
+    "satDate",
+  ];
+
+  let today = new Date();
+  let sunday = today.getDate() - today.getDay();
+  today.setDate(sunday);
+
+  let weekTemplate = document.getElementById("weekTemplate");
+  let newDate = weekTemplate.content.cloneNode(true);
+  for (let i = 0; i < 7; i++) {
+    newDate.querySelector("#" + dateId[i]).textContent = sunday + i;
+  }
+  document.getElementById("week").appendChild(newDate);
+}
+displayWeek();
+
+let toggleCalendarBtn = document.getElementById("toggleCalendar");
+toggleCalendarBtn.addEventListener("click", () => {
+  let calendarTable = document.getElementById("calendarTable");
+  calendarTable.classList.toggle("hidden");
+
+  let weekTable = document.getElementById("weekTable");
+  weekTable.classList.toggle("hidden");
+
+  let arrowIcon = toggleCalendarBtn.querySelector("i");
+  arrowIcon.classList.toggle("fa-chevron-up");
+  arrowIcon.classList.toggle("fa-chevron-down");
+});

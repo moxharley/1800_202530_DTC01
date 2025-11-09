@@ -11,14 +11,18 @@ function displayScheduleDynamically() {
       return;
     } else {
       try {
+        // get user's uid
         const userUid = user.uid;
 
+        // firestore query to compare uid
         const scheduleQuery = query(
           collection(db, "schedules"),
           where("userUid", "==", userUid)
         );
+
         const querySnapshot = await getDocs(scheduleQuery);
 
+        // Schedule Template
         let scheduleTemplate = document.getElementById("scheduleTemplate");
 
         querySnapshot.forEach((doc) => {
@@ -26,6 +30,7 @@ function displayScheduleDynamically() {
 
           const schedule = doc.data();
 
+          // set each data to the template
           newSchedule.querySelector("#title").textContent = schedule.title;
           newSchedule.querySelector("#memo").textContent = schedule.memo;
           newSchedule.querySelector("#date").textContent = schedule.date;
@@ -43,6 +48,7 @@ function displayScheduleDynamically() {
 displayScheduleDynamically();
 
 function displayCalendar(baseDate) {
+  // Reset Calendar
   let temp = document.getElementById("calendar");
   for (let i = temp.children.length - 1; i > 0; i--) {
     temp.children[i].remove();
@@ -63,6 +69,7 @@ function displayCalendar(baseDate) {
     "December",
   ];
 
+  // from Template
   const dateId = [
     "sunDate",
     "monDate",
@@ -73,6 +80,7 @@ function displayCalendar(baseDate) {
     "satDate",
   ];
 
+  // get month name as a string
   const month = months[baseDate.getMonth()];
   const firstDay = new Date(
     baseDate.getFullYear(),
@@ -85,11 +93,12 @@ function displayCalendar(baseDate) {
     0
   ).getDate();
 
+  // set year and month to the page
   document.getElementById("year").innerText = baseDate.getFullYear();
   document.getElementById("monthName").innerText = month;
 
+  // count how many week sections are needed
   let weekNum = 0;
-
   if (lastDate % 7 != 0) {
     if (firstDay + (lastDate % 7) > 7) {
       weekNum = 6;
@@ -97,6 +106,7 @@ function displayCalendar(baseDate) {
       weekNum = 5;
     }
   } else {
+    // for February
     if (firstDay == 0) {
       weekNum = 4;
     } else {
@@ -110,12 +120,14 @@ function displayCalendar(baseDate) {
     let newWeek = calendarTemplate.content.cloneNode(true);
 
     if (i == 0) {
+      // set the first week
       for (let j = firstDay; j < 7; j++) {
         newWeek.querySelector("#" + dateId[j]).textContent = dateCount;
         dateCount += 1;
       }
       document.getElementById("calendar").appendChild(newWeek);
     } else if (i + 1 == weekNum) {
+      // set the last week
       let maxNum = lastDate - dateCount;
       for (let j = 0; j <= maxNum; j++) {
         newWeek.querySelector("#" + dateId[j]).textContent = dateCount;
@@ -131,11 +143,14 @@ function displayCalendar(baseDate) {
     }
   }
 }
+// initial setting
 displayCalendar(new Date());
 
+// add click event for the monthly arrows
 let monthBtns = document.getElementsByClassName("monthBtn");
 for (let monthBtn of monthBtns) {
   monthBtn.addEventListener("click", () => {
+    // to convert string to int
     const monthMap = {
       January: 0,
       February: 1,
@@ -155,13 +170,16 @@ for (let monthBtn of monthBtns) {
 
     let baseDate = new Date();
 
-    let currentMonthName = document.getElementById("monthName").innerText;
+    const currentMonthName = document.getElementById("monthName").innerText;
+    // set the month from the calendar
     baseDate.setMonth(monthMap[currentMonthName]);
     let month = baseDate.getMonth();
 
-    let currentYear = parseInt(document.getElementById("year").innerText);
+    const currentYear = parseInt(document.getElementById("year").innerText);
+    // set the year from the calendar
     baseDate.setFullYear(currentYear);
 
+    // change the year when the month is January or December
     if (month == 0) {
       if (btnId == "prevMonth") {
         baseDate.setFullYear(baseDate.getFullYear() - 1);
@@ -184,14 +202,17 @@ for (let monthBtn of monthBtns) {
       }
     }
 
-    displayCalendar(new Date(baseDate.getFullYear(), baseDate.getMonth()));
+    // change the calendar according to the user's click
+    displayCalendar(baseDate);
   });
 }
 
+// easily back to current calendar
 let todayBtn = document.getElementById("todayBtn");
 todayBtn.addEventListener("click", () => displayCalendar(new Date()));
 
 function displayWeek() {
+  // from Template
   const dateId = [
     "sunDate",
     "monDate",
@@ -203,9 +224,12 @@ function displayWeek() {
   ];
 
   let today = new Date();
+  // calcualte the date of Sunday
   let sunday = today.getDate() - today.getDay();
+  // change the base date to Sunday
   today.setDate(sunday);
 
+  // Weekly Template
   let weekTemplate = document.getElementById("weekTemplate");
   let newDate = weekTemplate.content.cloneNode(true);
   for (let i = 0; i < 7; i++) {
@@ -213,6 +237,7 @@ function displayWeek() {
   }
   document.getElementById("week").appendChild(newDate);
 }
+// set initial weekly calendar
 displayWeek();
 
 let toggleCalendarBtn = document.getElementById("toggleCalendar");

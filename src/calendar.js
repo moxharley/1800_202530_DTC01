@@ -1,6 +1,6 @@
 import { onAuthReady } from "./authentication.js";
 import { db } from "./firebaseConfig.js";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, doc, getDocs } from "firebase/firestore";
 
 function displayScheduleDynamically() {
   onAuthReady(async (user) => {
@@ -81,7 +81,8 @@ function displayCalendar(baseDate) {
     0
   ).getDate();
 
-  document.getElementById("monthName").innerHTML = month;
+  document.getElementById("year").innerText = baseDate.getFullYear();
+  document.getElementById("monthName").innerText = month;
 
   let weekNum = 0;
 
@@ -146,24 +147,43 @@ for (let monthBtn of monthBtns) {
       December: 11,
     };
 
-    let today = new Date();
+    const btnId = monthBtn.id;
 
-    let currentMonthName = document.getElementById("monthName").innerHTML;
+    let baseDate = new Date();
 
-    today.setMonth(monthMap[currentMonthName]);
-    let month = today.getMonth();
+    let currentMonthName = document.getElementById("monthName").innerText;
+    baseDate.setMonth(monthMap[currentMonthName]);
+    let month = baseDate.getMonth();
 
-    if (monthBtn.id == "prevMonth") {
-      month -= 1;
+    let currentYear = parseInt(document.getElementById("year").innerText);
+    baseDate.setFullYear(currentYear);
+
+    if (month == 0) {
+      if (btnId == "prevMonth") {
+        baseDate.setFullYear(baseDate.getFullYear() - 1);
+        baseDate.setMonth(11);
+      } else {
+        baseDate.setMonth(month + 1);
+      }
+    } else if (month == 11) {
+      if (btnId == "nextMonth") {
+        baseDate.setFullYear(baseDate.getFullYear() + 1);
+        baseDate.setMonth(0);
+      } else {
+        baseDate.setMonth(month - 1);
+      }
     } else {
-      month += 1;
+      if (btnId == "prevMonth") {
+        baseDate.setMonth(month - 1);
+      } else {
+        baseDate.setMonth(month + 1);
+      }
     }
     let temp = document.getElementById("calendar");
 
     for (let i = temp.children.length - 1; i > 0; i--) {
       temp.children[i].remove();
     }
-    // console.log();
-    displayCalendar(new Date(today.getFullYear(), month));
+    displayCalendar(new Date(baseDate.getFullYear(), baseDate.getMonth()));
   });
 }

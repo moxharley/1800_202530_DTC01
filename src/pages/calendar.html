@@ -43,21 +43,25 @@
         <h1 class="mb-5 md:text-3xl text-2xl font-bold text-center">
           Calendar
         </h1>
-        <h1
-          class="text-[#6a994e] md:text-2xl text-lg font-bold text-center flex justify-between items-center px-1"
+        <div
+          class="text-[#6a994e] md:text-2xl text-lg font-bold text-center flex justify-between items-end px-1"
         >
           <button id="prevMonth" class="monthBtn hover:cursor-pointer">
             <i class="fa-solid fa-chevron-left"></i>
           </button>
-          <span
-            id="monthName"
-            class="bg-[#6a994e] text-[#f2e8cf] px-2 rounded-sm"
-          >
-          </span>
+          <div class="flex flex-col">
+            <span id="year" class="text-sm">year</span>
+            <span
+              id="monthName"
+              class="bg-[#6a994e] text-[#f2e8cf] px-2 rounded-sm"
+            >
+              month
+            </span>
+          </div>
           <button id="nextMonth" class="monthBtn hover:cursor-pointer">
             <i class="fa-solid fa-chevron-right"></i>
           </button>
-        </h1>
+        </div>
         <table id="calendar" class="mt-2 w-full table-fixed border-collapse">
           <tr class="bg-[#6a994e] text-[#f2e8cf] md:text-base text-sm">
             <th class="border-[#6a994e] border-r-[#f2e8cf] border md:p-2">

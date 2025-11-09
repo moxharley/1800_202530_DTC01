@@ -44,6 +44,11 @@ function displayScheduleDynamically() {
 displayScheduleDynamically();
 
 function displayCalendar(baseDate) {
+  let temp = document.getElementById("calendar");
+  for (let i = temp.children.length - 1; i > 0; i--) {
+    temp.children[i].remove();
+  }
+
   const months = [
     "January",
     "February",
@@ -179,11 +184,10 @@ for (let monthBtn of monthBtns) {
         baseDate.setMonth(month + 1);
       }
     }
-    let temp = document.getElementById("calendar");
 
-    for (let i = temp.children.length - 1; i > 0; i--) {
-      temp.children[i].remove();
-    }
     displayCalendar(new Date(baseDate.getFullYear(), baseDate.getMonth()));
   });
 }
+
+let todayBtn = document.getElementById("todayBtn");
+todayBtn.addEventListener("click", () => displayCalendar(new Date()));

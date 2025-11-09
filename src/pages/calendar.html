@@ -38,166 +38,89 @@
     </header>
     <!------------------------------>
     <!-- Stuff for body goes here -->
-    <main class="mx-16 text-[#386642]">
-      <section class="md:mt-20 mt-10">
-        <h1 class="my-5 text-3xl font-bold text-center">Calendar</h1>
+    <main class="max-w-[1400px] md:mx-16 mx-7 text-[#386642]">
+      <section class="md:mt-20 mt-0">
+        <h1 class="mb-5 md:text-3xl text-2xl font-bold text-center">
+          Calendar
+        </h1>
         <h1
-          class="text-[#6a994e] text-2xl font-bold text-center flex justify-between items-center px-1"
+          class="text-[#6a994e] md:text-2xl text-lg font-bold text-center flex justify-between items-center px-1"
         >
           <a href=""><i class="fa-solid fa-chevron-left"></i></a>
-          <span class="bg-[#6a994e] text-[#f2e8cf] px-2 rounded-sm"
-            >November</span
-          >
+          <span
+            id="monthName"
+            class="bg-[#6a994e] text-[#f2e8cf] px-2 rounded-sm"
+          ></span>
           <a href=""><i class="fa-solid fa-chevron-right"></i></a>
         </h1>
-        <table class="mt-2 w-full table-fixed border-collapse">
-          <tr class="bg-[#6a994e] text-[#f2e8cf] h-1/10">
-            <th class="border-[#6a994e] border-r-[#f2e8cf] border p-2">Sun</th>
-            <th class="border-[#6a994e] border-r-[#f2e8cf] border p-2">Mon</th>
-            <th class="border-[#6a994e] border-r-[#f2e8cf] border p-2">Tue</th>
-            <th class="border-[#6a994e] border-r-[#f2e8cf] border p-2">Wed</th>
-            <th class="border-[#6a994e] border-r-[#f2e8cf] border p-2">Thu</th>
-            <th class="border-[#6a994e] border-r-[#f2e8cf] border p-2">Fri</th>
+        <table id="calendar" class="mt-2 w-full table-fixed border-collapse">
+          <tr class="bg-[#6a994e] text-[#f2e8cf] md:text-base text-sm">
+            <th class="border-[#6a994e] border-r-[#f2e8cf] border md:p-2">
+              Sun
+            </th>
+            <th class="border-[#6a994e] border-r-[#f2e8cf] border md:p-2">
+              Mon
+            </th>
+            <th class="border-[#6a994e] border-r-[#f2e8cf] border md:p-2">
+              Tue
+            </th>
+            <th class="border-[#6a994e] border-r-[#f2e8cf] border md:p-2">
+              Wed
+            </th>
+            <th class="border-[#6a994e] border-r-[#f2e8cf] border md:p-2">
+              Thu
+            </th>
+            <th class="border-[#6a994e] border-r-[#f2e8cf] border md:p-2">
+              Fri
+            </th>
             <th class="border-[#6a994e] border p-2">Sat</th>
           </tr>
-          <tr class="h-[80px]">
-            <td class="border px-2 pb-2 align-top">
-              <h3 class="mt-0 text-right"></h3>
-            </td>
-            <td class="border px-2 pb-2 align-top">
-              <h3 class="mt-0 text-right"></h3>
-            </td>
-            <td class="border px-2 pb-2 align-top">
-              <h3 class="mt-0 text-right"></h3>
-            </td>
-            <td class="border px-2 pb-2 align-top">
-              <h3 class="mt-0 text-right"></h3>
-            </td>
-            <td class="border px-2 pb-2 align-top">
-              <h3 class="mt-0 text-right"></h3>
-            </td>
-            <td class="border px-2 pb-2 align-top">
-              <h3 class="mt-0 text-right"></h3>
-            </td>
-            <td class="border px-2 pb-2 align-top">
-              <h3 class="mt-0 text-right">1</h3>
-            </td>
-          </tr>
-          <tr class="h-[80px]">
-            <td class="border px-2 pb-2 align-top">
-              <h3 class="mt-0 text-right">2</h3>
-            </td>
-            <td class="border px-2 pb-2 align-top">
-              <h3 class="mt-0 text-right">3</h3>
-            </td>
-            <td class="border px-2 pb-2 align-top">
-              <h3 class="mt-0 text-right">4</h3>
-            </td>
-            <td class="border px-2 pb-2 align-top">
-              <h3 class="mt-0 text-right">5</h3>
-            </td>
-            <td class="border px-2 pb-2 align-top">
-              <h3 class="mt-0 text-right">6</h3>
-            </td>
-            <td class="border px-2 pb-2 align-top">
-              <h3 class="mt-0 text-right">7</h3>
-            </td>
-            <td class="border px-2 pb-2 align-top">
-              <h3 class="mt-0 text-right">8</h3>
-            </td>
-          </tr>
-          <tr class="h-[80px]">
-            <td class="border px-2 pb-2 align-top">
-              <h3 class="mt-0 text-right">9</h3>
-            </td>
-            <td class="border px-2 pb-2 align-top">
-              <h3 class="mt-0 text-right">10</h3>
-            </td>
-            <td class="border px-2 pb-2 align-top">
-              <h3 class="mt-0 text-right">11</h3>
-            </td>
-            <td class="border px-2 pb-2 align-top">
-              <h3 class="mt-0 text-right">12</h3>
-            </td>
-            <td class="border px-2 pb-2 align-top">
-              <h3 class="mt-0 text-right">13</h3>
-            </td>
-            <td class="border px-2 pb-2 align-top">
-              <h3 class="mt-0 text-right">14</h3>
-            </td>
-            <td class="border px-2 pb-2 align-top">
-              <h3 class="mt-0 text-right">15</h3>
-            </td>
-          </tr>
-          <tr class="h-[80px]">
-            <td class="border px-2 pb-2 align-top">
-              <h3 class="mt-0 text-right">16</h3>
-            </td>
-            <td class="border px-2 pb-2 align-top">
-              <h3 class="mt-0 text-right">17</h3>
-            </td>
-            <td class="border px-2 pb-2 align-top">
-              <h3 class="mt-0 text-right">18</h3>
-            </td>
-            <td class="border px-2 pb-2 align-top">
-              <h3 class="mt-0 text-right">19</h3>
-            </td>
-            <td class="border px-2 pb-2 align-top">
-              <h3 class="mt-0 text-right">20</h3>
-            </td>
-            <td class="border px-2 pb-2 align-top">
-              <h3 class="mt-0 text-right">21</h3>
-            </td>
-            <td class="border px-2 pb-2 align-top">
-              <h3 class="mt-0 text-right">22</h3>
-            </td>
-          </tr>
-          <tr class="h-[80px]">
-            <td class="border px-2 pb-2 align-top">
-              <h3 class="mt-0 text-right">23</h3>
-            </td>
-            <td class="border px-2 pb-2 align-top">
-              <h3 class="mt-0 text-right">24</h3>
-            </td>
-            <td class="border px-2 pb-2 align-top">
-              <h3 class="mt-0 text-right">25</h3>
-            </td>
-            <td class="border px-2 pb-2 align-top">
-              <h3 class="mt-0 text-right">26</h3>
-            </td>
-            <td class="border px-2 pb-2 align-top">
-              <h3 class="mt-0 text-right">27</h3>
-            </td>
-            <td class="border px-2 pb-2 align-top">
-              <h3 class="mt-0 text-right">28</h3>
-            </td>
-            <td class="border px-2 pb-2 align-top">
-              <h3 class="mt-0 text-right">29</h3>
-            </td>
-          </tr>
-          <tr class="h-[80px]">
-            <td class="border px-2 pb-2 align-top">
-              <h3 class="mt-0 text-right">30</h3>
-            </td>
-            <td class="border px-2 pb-2 align-top">
-              <h3 class="mt-0 text-right"></h3>
-            </td>
-            <td class="border px-2 pb-2 align-top">
-              <h3 class="mt-0 text-right"></h3>
-            </td>
-            <td class="border px-2 pb-2 align-top">
-              <h3 class="mt-0 text-right"></h3>
-            </td>
-            <td class="border px-2 pb-2 align-top">
-              <h3 class="mt-0 text-right"></h3>
-            </td>
-            <td class="border px-2 pb-2 align-top">
-              <h3 class="mt-0 text-right"></h3>
-            </td>
-            <td class="border px-2 pb-2 align-top">
-              <h3 class="mt-0 text-right"></h3>
-            </td>
-          </tr>
+          <template id="calendarTemplate">
+            <tr class="md:h-[80px] h-[50px]">
+              <td class="border px-2 pb-2 align-top">
+                <h3
+                  id="sunDate"
+                  class="mt-0 text-right md:text-base text-sm"
+                ></h3>
+              </td>
+              <td class="border px-2 pb-2 align-top">
+                <h3
+                  id="monDate"
+                  class="mt-0 text-right md:text-base text-sm"
+                ></h3>
+              </td>
+              <td class="border px-2 pb-2 align-top">
+                <h3
+                  id="tueDate"
+                  class="mt-0 text-right md:text-base text-sm"
+                ></h3>
+              </td>
+              <td class="border px-2 pb-2 align-top">
+                <h3
+                  id="wedDate"
+                  class="mt-0 text-right md:text-base text-sm"
+                ></h3>
+              </td>
+              <td class="border px-2 pb-2 align-top">
+                <h3
+                  id="thuDate"
+                  class="mt-0 text-right md:text-base text-sm"
+                ></h3>
+              </td>
+              <td class="border px-2 pb-2 align-top">
+                <h3
+                  id="friDate"
+                  class="mt-0 text-right md:text-base text-sm"
+                ></h3>
+              </td>
+              <td class="border px-2 pb-2 align-top">
+                <h3
+                  id="satDate"
+                  class="mt-0 text-right md:text-base text-sm"
+                ></h3>
+              </td>
+            </tr>
+          </template>
         </table>
         <div class="mb-5 text-right">
           <a href=""><i class="fa-solid fa-chevron-up"></i></a>

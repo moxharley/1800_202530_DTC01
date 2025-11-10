@@ -14,7 +14,6 @@ function addBadgeData() {
         fragile: 0, 
         thrifty: 0, 
         electric: 0,
-        last_updated: serverTimestamp()
     });
 }
 //0 - Not Unlocked
@@ -24,7 +23,7 @@ function addBadgeData() {
 //4 - Platinum
 
 async function seedUserBadges() {
-    const badgeRef = collection(db, "hikes");
+    const badgeRef = collection(db, "users", uid);
     const querySnapshot = await getDocs(badgeRef);
 
     if (querySnapshot.empty) {

@@ -29,7 +29,18 @@ export async function signupUser(username, email, password) {
             username: username,
             email: email,
             bio: "",
-            photoURL: ""
+            photoURL: "",
+            exp: 0,
+            lvl: 0,
+            badges: {            
+            green: 0,
+            lumberjack: 0, 
+            polymer: 0, 
+            scrappy: 0, 
+            esoteric: 0, 
+            fragile: 0, 
+            thrifty: 0, 
+            electric: 0,}
         });
         console.log("User added to Firestore.");
     } catch (error) {

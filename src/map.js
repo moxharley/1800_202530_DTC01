@@ -5,6 +5,7 @@ import { doc, onSnapshot, getDoc, collection, getDocs, addDoc, serverTimestamp }
 const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 
 let map;
+let infoWindow;
 
 setOptions({
     key: apiKey,
@@ -38,6 +39,7 @@ function addDepotsData() {
     addDoc(depotsRef, {
         name: "Mt Pleasant Return-It Depot", city: "Vancouver",
         address: "501 E Broadway, Vancouver",
+        phone: "(604)-874-9223",
         lat: 49.2638, lng: -123.0985,
         accepts: ["Beverage Containers", "Electronics", "Flexible Plastic Packaging", "Glass Packaging", "Paper Packaging", "Metal Packaging", "Rigid Plastic Packaging", "Printed Paper", "Small Appliances"],
         last_updated: serverTimestamp()
@@ -46,12 +48,14 @@ function addDepotsData() {
         name: "Powell Street Return-It Depot", city: "Vancouver",
         address: "1856 Powell St, Vancouver",
         lat: 49.2831, lng: -123.0955,
+        phone: "(604) 253-4987",
         accepts: ["Beverage Containers", "Electronics", "Flexible Plastic Packaging", "Glass Packaging", "Paper Packaging", "Metal Packaging", "Rigid Plastic Packaging", "Printed Paper", "Small Appliances"],
         last_updated: serverTimestamp()
     });
     addDoc(depotsRef, {
         name: "North Shore Recycling and Waste Centre", city: "North Vancouver",
         address: "30 Riverside Dr W, North Vancouver",
+        phone: "(604) 681-5600",
         lat: 49.319343, lng: -123.011467,
         accepts: ["Beverage Containers", "Electronics", "Flexible Plastic Packaging", "Glass Packaging", "Paper Packaging", "Metal Packaging", "Rigid Plastic Packaging", "Printed Paper", "Small Appliances"],
         last_updated: serverTimestamp()
@@ -73,28 +77,66 @@ async function seedDepots() {
 async function loadDepots() {
     const depotsRef = collection(db, "depots");
     const querySnapshot = await getDocs(depotsRef);
-    const { AdvancedMarkerElement } = await importLibrary("marker")
+
 
     if (querySnapshot.empty) {
         console.warn("No depots found in Firestore.");
         return;
     } else {
         querySnapshot.forEach((depot) => {
-            console.log("Depot data: ", depot._document.data.value.mapValue.fields)
-            const data = depot._document.data.value.mapValue.fields
-            const { address } = data
-            const name = data.name.stringValue
-            const lat = data.lat.doubleValue
-            const lng = data.lng.doubleValue
-            const marker = new AdvancedMarkerElement({
-                map: map,
-                position: { lat, lng },
-                title: name
-            })
+            createDepotMarker(depot)
         });
     }
+    infoWindow = new google.maps.InfoWindow();
 
+}
 
+async function createDepotMarker(depot) {
+    const { AdvancedMarkerElement } = await importLibrary("marker")
+    console.log("Depot data: ", depot._document.data.value.mapValue.fields)
+
+    const data = depot._document.data.value.mapValue.fields
+    const name = data.name.stringValue
+    const lat = data.lat.doubleValue
+    const lng = data.lng.doubleValue
+    const address = data.address.stringValue
+    const phone = data.phone.stringValue
+    const accepts = data.accepts.arrayValue.values
+
+    const marker = new AdvancedMarkerElement({
+        map: map,
+        position: { lat, lng },
+        title: name
+    })
+
+    marker.addListener("click", () => {
+        const infoWindowContent = createInfoWindowContent({ name, address, phone, accepts, lat, lng })
+        infoWindow.setContent(infoWindowContent)
+        infoWindow.open({ anchor: marker, map })
+    })
+}
+
+function createInfoWindowContent({ name, address, phone, accepts, lat, lng }) {
+    return `
+        <div class="text-sm max-w-xs">
+            <p class="text-[#386641] mb-1 font-semibold">${name}</p>
+            <div class="text-[#386641] mb-1">${address}</div>
+            ${phone ? `<span class="text-blue-600 hover:underline mb-1 block">${phone}</span>` : ""}
+
+            ${`
+                <div class="mb-2">
+                    <span class="block text-gray-800 mb-1">Accepts:</span>
+                    <div class="flex flex-wrap gap-1">
+                        ${accepts.map(item => `<span class="bg-green-100 text-[#386641] text-xs px-2 py-1 rounded">${item.stringValue}</span>`).join('')}
+                    </div>
+                </div>
+            `}
+
+            <a href="https://www.google.com/maps/dir/?api=1&destination=${address}" target="_blank" class="text-blue-600 hover:underline block">
+                Get Directions
+            </a>
+        </div>
+    `;
 }
 
 seedDepots();

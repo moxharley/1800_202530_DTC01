@@ -249,6 +249,7 @@
               Edit
             </button>
             <button
+              id="delBtn"
               class="bg-[#bc4749] text-[#f2e8cf] px-1 rounded hover:cursor-pointer"
             >
               Delete
@@ -269,16 +270,18 @@
           <div id="schedulesDiv" class="space-y-3">
             <!-- Schedule Template -->
             <template id="scheduleTemplate">
-              <div class="group flex justify-between p-2 border rounded">
-                <h3 id="title" class="font-bold">Title</h3>
-                <div
-                  id="memo"
-                  class="bg-[#6a994e] text-[#f2e8cf] w-40 h-20 p-2 absolute mt-7 ml-8 rounded group-hover:block hidden"
-                >
-                  Memo
-                </div>
-                <div class="space-x-2">
-                  <span id="date">Date</span><span id="time">Time</span>
+              <div class="schedule">
+                <div class="group flex justify-between p-2 border rounded">
+                  <h3 id="title" class="font-bold">Title</h3>
+                  <div
+                    id="memo"
+                    class="bg-[#6a994e] text-[#f2e8cf] w-40 h-20 p-2 absolute mt-7 ml-8 rounded group-hover:block hidden"
+                  >
+                    Memo
+                  </div>
+                  <div class="space-x-2">
+                    <span id="date">Date</span><span id="time">Time</span>
+                  </div>
                 </div>
               </div>
             </template>

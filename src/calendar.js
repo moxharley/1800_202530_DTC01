@@ -1,6 +1,13 @@
 import { onAuthReady } from "./authentication.js";
 import { db } from "./firebaseConfig.js";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  query,
+  where,
+  getDocs,
+  deleteDoc,
+} from "firebase/firestore";
 
 function displayScheduleDynamically() {
   onAuthReady(async (user) => {
@@ -31,6 +38,7 @@ function displayScheduleDynamically() {
           const schedule = doc.data();
 
           // set each data to the template
+          newSchedule.querySelector(".group").id = doc.id;
           newSchedule.querySelector("#title").textContent = schedule.title;
           newSchedule.querySelector("#memo").textContent = schedule.memo;
           newSchedule.querySelector("#date").textContent = schedule.date;
@@ -46,6 +54,38 @@ function displayScheduleDynamically() {
   });
 }
 displayScheduleDynamically();
+
+let delBtn = document.getElementById("delBtn");
+delBtn.addEventListener("click", async () => {
+  let checkBoxes = document.getElementsByTagName("input");
+  if (checkBoxes.length) {
+    for (let checkBox of checkBoxes) {
+      if (checkBox.checked) {
+        let scheduleId = checkBox.nextSibling.nextSibling.id;
+        console.log(scheduleId);
+        try {
+          await deleteDoc(doc(db, "schedules", scheduleId));
+          location.reload();
+        } catch (error) {
+          console.log(error);
+          alert("Sorry, something happened :(");
+        }
+      }
+    }
+  } else {
+    let schedules = document.getElementsByClassName("schedule");
+
+    for (let schedule of schedules) {
+      schedule.classList.add("flex");
+      schedule.firstChild.nextSibling.classList.add("basis7/8", "w-full");
+
+      let checkBox = document.createElement("input");
+      checkBox.type = "checkbox";
+      checkBox.classList.add("mr-1");
+      schedule.prepend(checkBox);
+    }
+  }
+});
 
 function displayCalendar(baseDate) {
   // Reset Calendar

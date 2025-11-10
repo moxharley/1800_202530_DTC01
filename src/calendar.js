@@ -55,32 +55,89 @@ function displayScheduleDynamically() {
 }
 displayScheduleDynamically();
 
+let editBtn = document.getElementById("editBtn");
+editBtn.addEventListener("click", () => {
+  // check if the buttons are activated
+  let checkedRadio = document.querySelector("input[type='radio']:checked");
+  let checkBoxes = document.querySelectorAll("input[type='checkbox']");
+
+  if (checkedRadio) {
+    // user choose to edit the schedule
+    let scheduleId = checkedRadio.nextSibling.nextSibling.id;
+
+    // to avoid doubled items in the local storage
+    if (localStorage.getItem("scheduleDocId")) {
+      localStorage.removeItem("scheduleDocId");
+    }
+
+    localStorage.setItem("scheduleDocId", scheduleId);
+    location.href = "/src/pages/scheduleForm.html";
+  } else if (checkBoxes.length) {
+    // user clicked the delete first, then clicked the edit btn
+    // so change the type of inputs
+    for (let checkbox of checkBoxes) {
+      checkbox.type = "radio";
+    }
+  } else {
+    // user clicked the edit btn the first time
+    let schedules = document.getElementsByClassName("schedule");
+
+    // set radio button for selection
+    for (let schedule of schedules) {
+      schedule.classList.add("flex");
+      schedule.firstChild.nextSibling.classList.add("basis7/8", "w-full");
+
+      let radio = document.createElement("input");
+      radio.type = "radio";
+      radio.name = "scheduleList";
+      radio.classList.add("mr-1");
+      schedule.prepend(radio);
+    }
+  }
+});
+
 let delBtn = document.getElementById("delBtn");
 delBtn.addEventListener("click", async () => {
-  let checkBoxes = document.getElementsByTagName("input");
+  // check if the buttons are activated
+  let checkBoxes = document.querySelectorAll("input[type='checkbox']");
+  let radios = document.querySelectorAll("input[type='radio']");
+
   if (checkBoxes.length) {
+    // user choose to delete the schedule
     for (let checkBox of checkBoxes) {
       if (checkBox.checked) {
+        // get document id from the div id
         let scheduleId = checkBox.nextSibling.nextSibling.id;
-        console.log(scheduleId);
-        try {
-          await deleteDoc(doc(db, "schedules", scheduleId));
-          location.reload();
-        } catch (error) {
-          console.log(error);
-          alert("Sorry, something happened :(");
+        if (confirm("Do you want delete?") == true) {
+          try {
+            // delete the schedule and refresh the page
+            await deleteDoc(doc(db, "schedules", scheduleId));
+            location.reload();
+          } catch (error) {
+            console.log(error);
+            alert("Sorry, something went wrong :(");
+          }
         }
       }
     }
+  } else if (radios.length) {
+    // user clicked the edit first, then clicked the delete btn
+    // so change the type of inputs
+    for (let radio of radios) {
+      radio.type = "checkbox";
+    }
   } else {
+    // user clicked the delete btn the first time
     let schedules = document.getElementsByClassName("schedule");
 
+    // set checkboxes for selection
     for (let schedule of schedules) {
       schedule.classList.add("flex");
       schedule.firstChild.nextSibling.classList.add("basis7/8", "w-full");
 
       let checkBox = document.createElement("input");
       checkBox.type = "checkbox";
+      checkBox.name = "scheduleList";
       checkBox.classList.add("mr-1");
       schedule.prepend(checkBox);
     }

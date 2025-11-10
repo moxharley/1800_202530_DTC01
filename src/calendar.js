@@ -46,6 +46,14 @@ function displayScheduleDynamically() {
 
           document.getElementById("schedulesDiv").appendChild(newSchedule);
         });
+
+        // add click event for memo tooltip
+        let scheduleDivs = document.getElementsByClassName("schedule");
+        for (let scheduleDiv of scheduleDivs) {
+          scheduleDiv.addEventListener("click", () => {
+            scheduleDiv.querySelector("#memo").classList.toggle("hidden");
+          });
+        }
       } catch (error) {
         let errorHtml = `<div class="font-bold text-center">Nothing to display</div>`;
         document.getElementById("schedulesDiv").innerHTML = errorHtml;

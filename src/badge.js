@@ -1,42 +1,66 @@
 import { auth, db } from "./firebaseConfig.js";
+import { doc, getDoc } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
-import { collection, getDocs } from "firebase/firestore";
 
-function addBadgeData() {
-    const badgeRef = collection(db, "users", uid, "badge");
-    console.log("Adding sample badge data...");
-    addDoc(badgeRef, {
-        green: 0,
-        lumberjack: 0, 
-        polymer: 0, 
-        scrappy: 0, 
-        esoteric: 0, 
-        fragile: 0, 
-        thrifty: 0, 
-        electric: 0,
-        last_updated: serverTimestamp()
-    });
-}
 //0 - Not Unlocked
 //1 - Bronze
 //2 - Silver
 //3 - Gold
 //4 - Platinum
 
-async function seedUserBadges() {
-    const badgeRef = collection(db, "hikes");
-    const querySnapshot = await getDocs(badgeRef);
+async function toggleBadges(user) {
+    const userDoc = await getDoc(doc(db, "users", user.uid));
 
-    if (querySnapshot.empty) {
-        console.log("Badges collection is empty. Seeding data...");
-        addBadgeData();
-    } else {
-        console.log("Badges collection already contains data. Skipping seed.");
+    const greenRef = userDoc.data().badges.green;
+    const lumberjackRef = userDoc.data().badges.lumberjack;
+    const polymerRef = userDoc.data().badges.polymer;
+    const fragileRef = userDoc.data().badges.fragile;
+    const scrappyRef = userDoc.data().badges.scrappy;
+    const electricRef = userDoc.data().badges.electric;
+    const thriftyRef = userDoc.data().badges.thrifty;
+    const esotericRef = userDoc.data().badges.esoteric;
+
+    console.log(greenRef)
+
+    if (greenRef === 0) {
+        document.getElementById('green').classList.toggle('grayscale')
+        document.getElementById('green').classList.toggle('brightness-[50%]')
+    }
+    if (lumberjackRef === 0) {
+        document.getElementById('lumberjack').classList.toggle('grayscale')
+        document.getElementById('lumberjack').classList.toggle('brightness-[50%]')
+    }
+    if (polymerRef === 0) {
+        document.getElementById('polymer').classList.toggle('grayscale')
+        document.getElementById('polymer').classList.toggle('brightness-[50%]')
+    }
+    if (fragileRef === 0) {
+        document.getElementById('fragile').classList.toggle('grayscale')
+        document.getElementById('fragile').classList.toggle('brightness-[50%]')
+    }
+    if (scrappyRef === 0) {
+        document.getElementById('scrappy').classList.toggle('grayscale')
+        document.getElementById('scrappy').classList.toggle('brightness-[50%]')
+    }
+    if (electricRef === 0) {
+        document.getElementById('electric').classList.toggle('grayscale')
+        document.getElementById('electric').classList.toggle('brightness-[50%]')
+    }
+    if (thriftyRef === 0) {
+        document.getElementById('thrifty').classList.toggle('grayscale')
+        document.getElementById('thrifty').classList.toggle('brightness-[50%]')
+    }
+    if (esotericRef === 0) {
+        document.getElementById('esoteric').classList.toggle('grayscale')
+        document.getElementById('esoteric').classList.toggle('brightness-[50%]')
     }
 }
-seedUserBadges();
 
-function setDimmed(element, dim) {
-  element.classList.toggle("grayscale", dim);
-  element.classList.toggle("brightness-[50%]", dim);
-}
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        toggleBadges(user);
+    } 
+    else {
+        console.log('User = Null')
+    }
+});

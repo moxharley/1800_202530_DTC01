@@ -4,6 +4,8 @@ import { doc, onSnapshot, getDoc, collection, getDocs, addDoc, serverTimestamp }
 
 const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 
+let map;
+
 setOptions({
     key: apiKey,
     libraries: ["places", "maps"],
@@ -21,9 +23,10 @@ async function initMap() {
 
     const initialFocus = { lat: 49.283538582494636, lng: -123.11521188465825 }
 
-    const map = new Map(mapContainer, {
+    map = new Map(mapContainer, {
         center: initialFocus,
         zoom: 12,
+        mapId: "depots_map"
     });
 
     await loadDepots();
@@ -70,13 +73,24 @@ async function seedDepots() {
 async function loadDepots() {
     const depotsRef = collection(db, "depots");
     const querySnapshot = await getDocs(depotsRef);
+    const { AdvancedMarkerElement } = await importLibrary("marker")
 
     if (querySnapshot.empty) {
         console.warn("No depots found in Firestore.");
         return;
     } else {
         querySnapshot.forEach((depot) => {
-            console.log("Depot data: ", depot.data)
+            console.log("Depot data: ", depot._document.data.value.mapValue.fields)
+            const data = depot._document.data.value.mapValue.fields
+            const { address } = data
+            const name = data.name.stringValue
+            const lat = data.lat.doubleValue
+            const lng = data.lng.doubleValue
+            const marker = new AdvancedMarkerElement({
+                map: map,
+                position: { lat, lng },
+                title: name
+            })
         });
     }
 

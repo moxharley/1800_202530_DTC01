@@ -1,6 +1,9 @@
 import { onAuthReady } from "./authentication.js";
 import { db } from "./firebaseConfig.js";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, doc } from "firebase/firestore";
+
+let goBack = document.getElementById("backDiv");
+goBack.addEventListener("click", () => history.back());
 
 function addScheduleData() {
   onAuthReady(async (user) => {

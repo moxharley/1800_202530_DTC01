@@ -99,8 +99,6 @@ async function displayScheduleData() {
     } else {
       scheduleRepeatString = "none";
     }
-
-    // localStorage.removeItem("scheduleDocId");
   } catch (error) {
     console.log(error);
     alert("Sorry, something went wrong :(");
@@ -159,6 +157,8 @@ document.getElementById("submit").addEventListener("click", () => {
   const scheduleDocId = localStorage.getItem("scheduleDocId");
   if (scheduleDocId) {
     updateScheduleData();
+    // remove the doc id after editing
+    localStorage.removeItem("scheduleDocId");
   } else {
     addScheduleData();
   }

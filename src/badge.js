@@ -1,7 +1,6 @@
 import { auth, db } from "./firebaseConfig.js";
+import { doc, getDoc } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
-import { collection, doc, getDoc } from "firebase/firestore";
-import { ref } from "firebase/database";
 
 //0 - Not Unlocked
 //1 - Bronze
@@ -9,16 +8,17 @@ import { ref } from "firebase/database";
 //3 - Gold
 //4 - Platinum
 
-async function toggleBadges() {
+async function toggleBadges(user) {
+    const userDoc = await getDoc(doc(db, "users", user.uid));
 
-    const greenRef = 1
-    const lumberjackRef = 1
-    const polymerRef = 0
-    const fragileRef = 0
-    const scrappyRef = 0
-    const electricRef = 0
-    const thriftyRef = 0
-    const esotericRef = 0
+    const greenRef = userDoc.data().badges.green;
+    const lumberjackRef = userDoc.data().badges.lumberjack;
+    const polymerRef = userDoc.data().badges.polymer;
+    const fragileRef = userDoc.data().badges.fragile;
+    const scrappyRef = userDoc.data().badges.scrappy;
+    const electricRef = userDoc.data().badges.electric;
+    const thriftyRef = userDoc.data().badges.thrifty;
+    const esotericRef = userDoc.data().badges.esoteric;
 
     console.log(greenRef)
 
@@ -55,4 +55,12 @@ async function toggleBadges() {
         document.getElementById('esoteric').classList.toggle('brightness-[50%]')
     }
 }
-toggleBadges();
+
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        toggleBadges(user);
+    } 
+    else {
+        console.log('User = Null')
+    }
+});

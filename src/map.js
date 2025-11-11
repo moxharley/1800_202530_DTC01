@@ -41,10 +41,17 @@ async function initMap() {
         return;
     }
 
-    const initialFocus = { lat: 49.283538582494636, lng: -123.11521188465825 }
+    const defaultCenter = { lat: 49.283538582494636, lng: -123.11521188465825 }
+    let mapCenter = defaultCenter
+
+    try {
+        mapCenter = await getUserLocation();
+    } catch (err) {
+        console.warn("Using default location:", err.message);
+    }
 
     map = new Map(mapContainer, {
-        center: initialFocus,
+        center: mapCenter,
         zoom: 12,
         mapId: "depots_map"
     });
@@ -53,6 +60,26 @@ async function initMap() {
 
     await loadDepots(selectedFilters);
 }
+
+function getUserLocation() {
+    return new Promise((resolve, reject) => {
+        if (!navigator.geolocation) {
+            reject(new Error("Geolocation not supported"));
+        } else {
+            navigator.geolocation.getCurrentPosition(
+                position => {
+                    const { latitude, longitude } = position.coords;
+                    resolve({ lat: latitude, lng: longitude });
+                },
+                error => {
+                    reject(error);
+                },
+                { enableHighAccuracy: false, timeout: 5000, maximumAge: 0 }
+            );
+        }
+    });
+}
+
 
 function addDepotsData() {
     const depotsRef = collection(db, "depots");

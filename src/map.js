@@ -1,11 +1,29 @@
 import { setOptions, importLibrary } from "@googlemaps/js-api-loader";
 import { db } from "./firebaseConfig"
-import { doc, onSnapshot, getDoc, collection, getDocs, addDoc, serverTimestamp } from "firebase/firestore";
+import { doc, onSnapshot, getDoc, collection, getDocs, addDoc, serverTimestamp, query, where } from "firebase/firestore";
 
 const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 
 let map;
 let infoWindow;
+let filter_form;
+let markers = []
+let AdvancedMarkerElement;
+
+window.addEventListener("DOMContentLoaded", async () => {
+    filter_form = document.getElementById("filter_form");
+
+    await initMap();
+
+    filter_form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const selectedFilters = getSelectedFilters();
+
+        // clearDepotMarkers();
+
+        await loadDepots(selectedFilters);
+    });
+});
 
 setOptions({
     key: apiKey,
@@ -15,6 +33,7 @@ setOptions({
 
 async function initMap() {
     const { Map } = await importLibrary("maps");
+    ({ AdvancedMarkerElement } = await importLibrary("marker"))
 
     const mapContainer = document.getElementById("map");
     if (!mapContainer) {
@@ -30,34 +49,68 @@ async function initMap() {
         mapId: "depots_map"
     });
 
-    await loadDepots();
+    const selectedFilters = getSelectedFilters();
+
+    await loadDepots(selectedFilters);
 }
 
 function addDepotsData() {
     const depotsRef = collection(db, "depots");
     console.log("Adding sample depot data...");
+
     addDoc(depotsRef, {
-        name: "Mt Pleasant Return-It Depot", city: "Vancouver",
+        name: "Mt Pleasant Return-It Depot",
+        city: "Vancouver",
         address: "501 E Broadway, Vancouver",
         phone: "(604)-874-9223",
-        lat: 49.2638, lng: -123.0985,
-        accepts: ["Beverage Containers", "Electronics", "Flexible Plastic Packaging", "Glass Packaging", "Paper Packaging", "Metal Packaging", "Rigid Plastic Packaging", "Printed Paper", "Small Appliances"],
+        lat: 49.2638,
+        lng: -123.0985,
+        accepts: [
+            "soft_plastic",
+            "paper_and_cardboard",
+            "containers",
+            "glass_containers",
+            "foam_packaging",
+            "electronics",
+            "scrap_metal"
+        ],
         last_updated: serverTimestamp()
     });
+
     addDoc(depotsRef, {
-        name: "Powell Street Return-It Depot", city: "Vancouver",
+        name: "Powell Street Return-It Depot",
+        city: "Vancouver",
         address: "1856 Powell St, Vancouver",
-        lat: 49.2831, lng: -123.0955,
+        lat: 49.2831,
+        lng: -123.0955,
         phone: "(604) 253-4987",
-        accepts: ["Beverage Containers", "Electronics", "Flexible Plastic Packaging", "Glass Packaging", "Paper Packaging", "Metal Packaging", "Rigid Plastic Packaging", "Printed Paper", "Small Appliances"],
+        accepts: [
+            "soft_plastic",
+            "paper_and_cardboard",
+            "containers",
+            "glass_containers",
+            "foam_packaging",
+            "electronics",
+            "scrap_metal"
+        ],
         last_updated: serverTimestamp()
     });
+
     addDoc(depotsRef, {
-        name: "North Shore Recycling and Waste Centre", city: "North Vancouver",
+        name: "North Shore Recycling and Waste Centre",
+        city: "North Vancouver",
         address: "30 Riverside Dr W, North Vancouver",
         phone: "(604) 681-5600",
-        lat: 49.319343, lng: -123.011467,
-        accepts: ["Beverage Containers", "Electronics", "Flexible Plastic Packaging", "Glass Packaging", "Paper Packaging", "Metal Packaging", "Rigid Plastic Packaging", "Printed Paper", "Small Appliances"],
+        lat: 49.319343,
+        lng: -123.011467,
+        accepts: [
+            "paper_and_cardboard",
+            "containers",
+            "glass_containers",
+            "foam_packaging",
+            "electronics",
+            "scrap_metal"
+        ],
         last_updated: serverTimestamp()
     });
 }
@@ -74,27 +127,36 @@ async function seedDepots() {
     }
 }
 
-async function loadDepots() {
-    const depotsRef = collection(db, "depots");
-    const querySnapshot = await getDocs(depotsRef);
+async function loadDepots(selectedFilters) {
+    if (markers.length != 0) {
+        markers.forEach(marker => marker.setMap(null));
+        markers = [];
+    }
 
+    const depotsRef = collection(db, "depots");
+    let firebaseQuery;
+
+    if (selectedFilters.length != 0) {
+        firebaseQuery = query(depotsRef, where("accepts", "array-contains-any", selectedFilters));
+    } else {
+        return
+    }
+    const querySnapshot = await getDocs(firebaseQuery);
+
+    infoWindow = new google.maps.InfoWindow();
 
     if (querySnapshot.empty) {
         console.warn("No depots found in Firestore.");
         return;
     } else {
         querySnapshot.forEach((depot) => {
-            createDepotMarker(depot)
+            const newMarker = createDepotMarker(depot)
+            markers.push(newMarker)
         });
     }
-    infoWindow = new google.maps.InfoWindow();
-
 }
 
-async function createDepotMarker(depot) {
-    const { AdvancedMarkerElement } = await importLibrary("marker")
-    console.log("Depot data: ", depot._document.data.value.mapValue.fields)
-
+function createDepotMarker(depot) {
     const data = depot._document.data.value.mapValue.fields
     const name = data.name.stringValue
     const lat = data.lat.doubleValue
@@ -114,6 +176,8 @@ async function createDepotMarker(depot) {
         infoWindow.setContent(infoWindowContent)
         infoWindow.open({ anchor: marker, map })
     })
+
+    return marker;
 }
 
 function createInfoWindowContent({ name, address, phone, accepts, lat, lng }) {
@@ -137,6 +201,12 @@ function createInfoWindowContent({ name, address, phone, accepts, lat, lng }) {
             </a>
         </div>
     `;
+}
+
+function getSelectedFilters() {
+    return Array.from(filter_form.querySelectorAll("input[type='checkbox']:checked")).map((input) => {
+        return input.name
+    })
 }
 
 seedDepots();

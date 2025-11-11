@@ -27,34 +27,38 @@
             </div>
         </div>
         <div class="flex flex-col items-center">
-            <form class="flex flex-col border-2 border-[#386641] bg-[#a7c957] items-center p-2">
+            <form id="filter_form" class="flex flex-col border-2 border-[#386641] bg-[#a7c957] items-center p-2">
                 <h1 class="font-semibold pb-2">Filters</h1>
                 <div class="flex flex-row">
                     <div class="flex flex-col">
                         <div class="flex">
-                            <input type="checkbox" name="bottles_and_cans" />
-                            <label for="bottles_and_cans" class="px-2">Bottles/Cans</label>
-                        </div>
-                        <div class="flex">
-                            <input type="checkbox" name="paper_and_cardboard" />
+                            <input type="checkbox" name="paper_and_cardboard" checked />
                             <label for="paper_and_cardboard" class="px-2">Paper/Cardboard</label>
                         </div>
                         <div class="flex">
-                            <input type="checkbox" name="electronics" />
-                            <label for="electronics" class="px-2">Electronics</label>
+                            <input type="checkbox" name="containers" checked />
+                            <label for="containers" class="px-2">Containers</label>
+                        </div>
+                        <div class="flex">
+                            <input type="checkbox" name="glass_containers" checked />
+                            <label for="glass_containers" class="px-2">Glass Containers</label>
+                        </div>
+                        <div class="flex">
+                            <input type="checkbox" name="foam_packaging" checked />
+                            <label for="foam_packaging" class="px-2">Foam Packaging</label>
                         </div>
                     </div>
                     <div class="flex flex-col">
                         <div class="flex">
-                            <input type="checkbox" name="hard_plastic" />
-                            <label for="hard_plastic" class="px-2">Hard Plastic</label>
-                        </div>
-                        <div class="flex">
-                            <input type="checkbox" name="soft_plastic" />
+                            <input type="checkbox" name="soft_plastic" checked />
                             <label for="soft_plastic" class="px-2">Soft Plastic</label>
                         </div>
                         <div class="flex">
-                            <input type="checkbox" name="scrap_metal" />
+                            <input type="checkbox" name="electronics" checked />
+                            <label for="electronics" class="px-2">Electronics</label>
+                        </div>
+                        <div class="flex">
+                            <input type="checkbox" name="scrap_metal" checked />
                             <label for="scrap_metal" class="px-2">Scrap Metal</label>
                         </div>
                     </div>

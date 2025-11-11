@@ -1,6 +1,6 @@
 import { setOptions, importLibrary } from "@googlemaps/js-api-loader";
 import { db } from "./firebaseConfig"
-import { doc, onSnapshot, getDoc, collection, getDocs, addDoc, serverTimestamp, query, where } from "firebase/firestore";
+import { collection, getDocs, addDoc, serverTimestamp, query, where } from "firebase/firestore";
 
 const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 
@@ -18,8 +18,6 @@ window.addEventListener("DOMContentLoaded", async () => {
     filter_form.addEventListener("submit", async (e) => {
         e.preventDefault();
         const selectedFilters = getSelectedFilters();
-
-        // clearDepotMarkers();
 
         await loadDepots(selectedFilters);
     });
@@ -149,8 +147,6 @@ async function seedDepots() {
     if (querySnapshot.empty) {
         console.log("Depots collection is empty. Seeding data...");
         addDepotsData();
-    } else {
-        console.log("Depots collection already contains data. Skipping seed.");
     }
 }
 

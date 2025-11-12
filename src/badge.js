@@ -1,44 +1,66 @@
 import { auth, db } from "./firebaseConfig.js";
+import { doc, getDoc } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
-import { collection, getDocs } from "firebase/firestore";
 
-//Set badge to dim.
-function setDimmed(element, dim) {
-  element.classList.toggle("grayscale", dim);
-  element.classList.toggle("brightness-[50%]", dim);
-}
+//0 - Not Unlocked
+//1 - Bronze
+//2 - Silver
+//3 - Gold
+//4 - Platinum
 
-//Acquire the elements of the badge using a map (kinda like a dictionary in python).
-function getBadgeElements() {
-  //insert code here??
-}
+async function toggleBadges(user) {
+    const userDoc = await getDoc(doc(db, "users", user.uid));
 
-//Acquire user badge data.
-async function fetchUserBadges(uid) {
-  const snapshot = await getDocs(collection(db, "users", uid, "userStats", "badges"));
-  const badges = {};
-  snapshot.forEach(doc => {
-    badges[doc.id] = doc.data()?.assigned ?? 0;
-  });
-  return badges;
-}
+    const greenRef = userDoc.data().badges.green;
+    const lumberjackRef = userDoc.data().badges.lumberjack;
+    const polymerRef = userDoc.data().badges.polymer;
+    const fragileRef = userDoc.data().badges.fragile;
+    const scrappyRef = userDoc.data().badges.scrappy;
+    const electricRef = userDoc.data().badges.electric;
+    const thriftyRef = userDoc.data().badges.thrifty;
+    const esotericRef = userDoc.data().badges.esoteric;
 
-//Apply the dimmed style when auth state changed.
-onAuthStateChanged(auth, async (user) => {
-  const badgeElements = getBadgeElements();
+    console.log(greenRef)
 
-  //If you aren't signed in all are dimmed.
-  if (!user) {
-    badgeElements.forEach(element => setDimmed(element, true));
-    return;
-  }
-
-  try {
-    const badges = await fetchUserBadges(user.uid);
-      // dim if unearned
+    if (greenRef === 0) {
+        document.getElementById('green').classList.toggle('grayscale')
+        document.getElementById('green').classList.toggle('brightness-[50%]')
     }
-   catch (error) {
-    console.error("Error loading badges:", error);
-    badgeElements.forEach(element => setDimmed(element, true));
-  }
+    if (lumberjackRef === 0) {
+        document.getElementById('lumberjack').classList.toggle('grayscale')
+        document.getElementById('lumberjack').classList.toggle('brightness-[50%]')
+    }
+    if (polymerRef === 0) {
+        document.getElementById('polymer').classList.toggle('grayscale')
+        document.getElementById('polymer').classList.toggle('brightness-[50%]')
+    }
+    if (fragileRef === 0) {
+        document.getElementById('fragile').classList.toggle('grayscale')
+        document.getElementById('fragile').classList.toggle('brightness-[50%]')
+    }
+    if (scrappyRef === 0) {
+        document.getElementById('scrappy').classList.toggle('grayscale')
+        document.getElementById('scrappy').classList.toggle('brightness-[50%]')
+    }
+    if (electricRef === 0) {
+        document.getElementById('electric').classList.toggle('grayscale')
+        document.getElementById('electric').classList.toggle('brightness-[50%]')
+    }
+    if (thriftyRef === 0) {
+        document.getElementById('thrifty').classList.toggle('grayscale')
+        document.getElementById('thrifty').classList.toggle('brightness-[50%]')
+    }
+    if (esotericRef === 0) {
+        document.getElementById('esoteric').classList.toggle('grayscale')
+        document.getElementById('esoteric').classList.toggle('brightness-[50%]')
+    }
+}
+
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        toggleBadges(user);
+    } 
+    else {
+        console.log('User = Null')
+    }
 });

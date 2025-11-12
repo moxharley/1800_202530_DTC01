@@ -56,11 +56,12 @@ class SiteNavbar extends HTMLElement {
                     <a class="block p-2 hover:bg-[#386641]" href="/src/pages/recyclingForm.html">Log</a>
                     <a class="block p-2 hover:bg-[#386641]" href="/src/pages/calendar.html">Calendar</a>
                     <a class="block p-2 hover:bg-[#386641]" href="/src/pages/profile.html">Profile</a>
+                    <a class="block p-2 hover:bg-[#386641]" href="/src/pages/badge.html">Badges</a>
                     <a class="block p-2 hover:bg-[#386641] rounded-b" id="signOutBtn" href="#">Log out</a>
                   </div>
                 </div>
                 <div id="authControls" class="flex bg-[#386641] items-center rounded-full w-18">
-                  <a class="w-full text-center text-[#f2e8cf]" href="/login.html">Login</a>
+                  <a class="w-full text-center text-[#f2e8cf]" href="/src/pages/loginSignup.html">Login</a>
                 </div>
               </div>
             </nav>
@@ -92,7 +93,7 @@ class SiteNavbar extends HTMLElement {
         authControls.classList.add("hidden");
         userDropdown.classList.add("hidden");
       } else {
-        authControls.innerHTML = `<a class="w-full text-center text-[#f2e8cf]" href="/login.html">Login</a>`;
+        authControls.innerHTML = `<a class="w-full text-center text-[#f2e8cf]" href="/src/pages/loginSignup.html">Login</a>`;
         userDropdown.classList.add("hidden");
       }
     });

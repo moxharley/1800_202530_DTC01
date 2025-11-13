@@ -17,10 +17,6 @@ function initAuthUI() {
     const googleSignInBtn = document.getElementById('googleSignInBtn');
     const redirectUrl = 'index.html';
 
-    // Toggle element visibility
-    function setVisible(el, visible) {
-        el.classList.toggle('hidden', !visible);
-    }
 
     // Show error message with accessibility and auto-hide
     let errorTimeout;
@@ -49,16 +45,16 @@ function initAuthUI() {
     toSignupBtn?.addEventListener('click', (e) => {
         e.preventDefault();
         hideError();
-        setVisible(loginView, false);
-        setVisible(signupView, true);
+        loginView.style.display = "none";
+        signupView.style.display = "flex";
         signupView?.querySelector('input')?.focus();
     });
 
     toLoginBtn?.addEventListener('click', (e) => {
         e.preventDefault();
         hideError();
-        setVisible(signupView, false);
-        setVisible(loginView, true);
+        signupView.style.display = "none";
+        loginView.style.display = "flex";
         loginView?.querySelector('input')?.focus();
     });
 

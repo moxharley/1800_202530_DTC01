@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>My BCIT Project</title>
-    <meta name="comp1800 template" content="My 1800 App" />
+    <title>Green Scouts</title>
+    <meta name="green Scouts" content="Green Scouts App" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script
       src="https://kit.fontawesome.com/2043d6ea2c.js"
@@ -12,12 +13,17 @@
     ></script>
     <script type="module" src="/src/components/site-navbar.js"></script>
     <script type="module" src="/src/components/site-footer.js"></script>
-    <!-- color-code
+
+    <style>
+      /* 
+        color-code
         #386641 - Dark Green
         #6a994e - Medium Green
         #a7c957 - Light Green
         #f2e8cf - Off-White
-        #bc4749 - Red  -->
+        #bc4749 - Red 
+      */
+    </style>
   </head>
 
   <body class="bg-[#f2e8cf]">
@@ -27,53 +33,34 @@
 
     <main class="mx-6 md:mx-16 text-[#386642]">
       <section id="userProfileSection">
-        <!-- User profile View -->
-        <div id="profileView" class="mt-10 mb-10 flex flex-col items-center md:flex-row md:gap-6">
-          <img
-            id="profilePictureElement"
-            class="w-40 h-40 rounded-full object-cover mb-6"
-            src="/images/AM01.jpg"
-            alt="user profile picture"
-          />
-          <div class="flex flex-col items-center md:items-start mb-6">
-            <h1 id="usernameElement" class="font-semibold text-3xl mb-2"></h1>
-            <p id="bioElement"></p>
-            <a><img
-              id="toEditProfile"
-              class="w-10 h-10 cursor-pointer"
-              src="/images/edit_pencil.png"
-              alt="icon button to edit user profile"
-            /></a>
-          </div>
-        </div>
 
-        <!-- Edit User Profile View -->
-        <div id="editProfileView" class="mx-6 md:mb-16 md:mx-16 text-[#386642] flex flex-col hidden">
-          <h3 class="text-3xl md:text-4xl font-bold my-8">Edit Profile</h3>
-          <form id="editProfileForm" novalidate>
-            <div class="flex justify-around gap-4">
-              <div class="flex flex-col items-start space-y-2 text-center basis-1/3">
-                <input type="file" id="photoInput" accept="image/*" class="hidden">
-                <label for="photoInput"
-                  class="bg-[#386641] text-[#f2e8cf] px-4 py-2 rounded-md cursor-pointer hover:bg-[#4a7c59] w-full">
-                  Upload Profile Picture
-                </label>
-                <div id="fileName" class="text-sm text-[#386641]">No file chosen</div>
-              </div>
-              <textarea id="bioInput" placeholder="Write an interesting bio" class="basis-1/3 border-[#386641] border-1 rounded-sm"></textarea>
-              <input type="text" id="usernameInput" placeholder="Change your username"
-                class="basis-1/3 border-[#386641] border-1 rounded-md">
-            </div>
-            <button id="saveProfileBtn" type="submit"
-              class="w-full bg-[#386641] py-2 rounded-lg mt-6 text-[#f2e8cf] cursor-default hover:cursor-pointer">Save Profile</button>
-          </form>
+      <!-- User profile -->
+      <div class="my-10 flex flex-col items-center md:flex-row md:gap-6">
+        <div id="feedbackBanner" class="hidden mb-3 text-xs"></div>
+      
+        <img id="profilePictureElement" class="w-40 h-40 rounded-full object-cover mb-6" src="" alt="user profile picture" />
+      
+        <div class="flex flex-col items-center md:items-start mb-6 gap-2">
+          <div class="flex gap-3 items-center">
+            <h1 id="usernameElement" class="md:text-3xl text-2xl font-bold"></h1>
+            <div class="w-9 h-9 bg-[#a7c957] rounded-full text-center leading-[2] text-lg text-[#386641]">XP</div>
+            <!-- Show edit profile next to XP & before bio on md screens -->
+            <a href="/src/pages/editProfile.html"
+              class="hidden md:inline-block text-xs bg-[#386641] px-3 py-2 rounded-2xl text-[#f2e8cf] ml-3">Edit Profile</a>
+        </div>
+    
+        <p id="bioElement"></p>
+    
+        <!-- Show edit profile button after bio on default -->
+        <a href="/src/pages/editProfile.html"
+          class="md:hidden text-xs bg-[#386641] px-3 py-2 rounded-2xl text-[#f2e8cf] mt-2">Edit Profile</a>
         </div>
       </section>
 
       <!-- Achievements section -->
-      <section class="flex flex-col items-center md:items-start">
-        <h2 class="font-bold text-4xl mb-6">Achievements</h2>
-        <div class="flex gap-2 mb-6">
+      <section class="flex flex-col items-center md:items-start mt-10">
+        <h2 class="md:text-3xl text-2xl font-bold">Badges</h2>
+        <div class="flex gap-2 my-6 flex-wrap justify-center">
           <img class="w-11 h-11" src="/images/AM01.jpg" alt="" /><img
             class="w-11 h-11"
             src="/images/AM01.jpg"
@@ -82,19 +69,15 @@
             class="w-11 h-11"
             src="/images/AM01.jpg"
             alt=""
-          /><img class="w-11 h-11" src="/images/AM01.jpg" alt="" /><img
-            class="w-11 h-11"
-            src="/images/AM01.jpg"
-            alt=""
-          /><img class="w-11 h-11" src="/images/AM01.jpg" alt="" />
+          />
         </div>
       </section>
 
       <!-- Recycling history section -->
       <section class="flex flex-col items-center md:items-start mt-10">
-        <h2 class="font-bold text-4xl mb-6">History</h2>
+        <h2 class="md:text-3xl text-2xl font-bold">History</h2>
         <table
-          class="w-full border-separate border-spacing-x-16 border-spacing-y-2 text-left md:border-collapse"
+          class="w-full my-6 border-separate border-spacing-x-16 border-spacing-y-2 text-left md:border-collapse"
         >
           <thead>
             <tr>
@@ -112,11 +95,8 @@
       </section>
     </main>
     <site-footer></site-footer>
-    <!---------------------------------------------->
-    <!-- Your own JavaScript functions go here    -->
-    <!---------------------------------------------->
 
-    <!-- Link to scripts of your own -->
+    <!-- Link to profile.js -->
     <script type="module" src="/src/profile.js"></script>
   </body>
 </html>

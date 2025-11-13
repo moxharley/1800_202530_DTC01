@@ -39,7 +39,7 @@ export async function signupUser(username, email, password) {
             scrappy: 0, 
             esoteric: 0, 
             fragile: 0, 
-            thrifty: 0, 
+            cargo: 0, 
             electric: 0,}
         });
         console.log("User added to Firestore.");

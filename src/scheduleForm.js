@@ -39,6 +39,16 @@ function emptyTitleAlert() {
   scheduleTitle.after(alertDiv);
 }
 
+function emptyDateAlert() {
+  scheduleDate.focus();
+  scheduleDate.classList.add("outline-2", "outline-[#bc4749]");
+  let alertDiv = document.createElement("div");
+  alertDiv.classList.add("m-0", "p-0", "-mt-2", "text-[#bc4749]");
+  let alertMsg = "Please select date";
+  alertDiv.innerText = alertMsg;
+  scheduleDate.after(alertDiv);
+}
+
 // add new schedule
 async function addScheduleData() {
   const userUid = sessionStorage.getItem("uid");
@@ -63,6 +73,8 @@ async function addScheduleData() {
 
   if (!scheduleTitleValue) {
     emptyTitleAlert();
+  } else if (scheduleRepeatInt && !scheduleDateValue) {
+    emptyDateAlert();
   } else {
     const scheduleRef = collection(db, "schedules");
 
@@ -146,6 +158,8 @@ async function updateScheduleData() {
 
   if (!scheduleTitleValue) {
     emptyTitleAlert();
+  } else if (scheduleRepeatInt && !scheduleDateValue) {
+    emptyDateAlert();
   } else {
     try {
       await updateDoc(scheduleRef, {

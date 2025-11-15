@@ -29,6 +29,16 @@ const scheduleTime = document.getElementById("time");
 const scheduleMemo = document.getElementById("memo");
 const scheduleRepeatString = document.getElementById("repeat");
 
+function emptyTitleAlert() {
+  scheduleTitle.focus();
+  scheduleTitle.classList.add("outline-2", "outline-[#bc4749]");
+  let alertDiv = document.createElement("div");
+  alertDiv.classList.add("m-0", "p-0", "-mt-7", "text-[#bc4749]");
+  let alertMsg = "Please fill out the title";
+  alertDiv.innerText = alertMsg;
+  scheduleTitle.after(alertDiv);
+}
+
 // add new schedule
 async function addScheduleData() {
   const userUid = sessionStorage.getItem("uid");
@@ -52,7 +62,7 @@ async function addScheduleData() {
   }
 
   if (!scheduleTitleValue) {
-    alert("title is empty");
+    emptyTitleAlert();
   } else {
     const scheduleRef = collection(db, "schedules");
 
@@ -98,7 +108,7 @@ async function displayScheduleData() {
     } else if (scheduleRepeatInt == 30) {
       scheduleRepeatString.value = "monthly";
     } else {
-      scheduleRepeatString = "none";
+      scheduleRepeatString.value = "none";
     }
   } catch (error) {
     console.log(error);
@@ -135,7 +145,7 @@ async function updateScheduleData() {
   const scheduleRef = doc(db, "schedules", scheduleDocId);
 
   if (!scheduleTitleValue) {
-    alert("title is empty");
+    emptyTitleAlert();
   } else {
     try {
       await updateDoc(scheduleRef, {

@@ -63,6 +63,31 @@ async function displayScheduleDynamically() {
 
 displayScheduleDynamically();
 
+function addCancelBtn() {
+  let cancelBtn = document.createElement("button");
+  cancelBtn.id = "cancleBtn";
+  cancelBtn.classList.add(
+    "mt-2",
+    "w-full",
+    "bg-[#bc4749]",
+    "text-[#f2e8cf]",
+    "px-1",
+    "rounded",
+    "hover:cursor-pointer"
+  );
+  cancelBtn.innerText = "Cancel";
+  let scheduleDiv = document.getElementById("schedulesDiv");
+  scheduleDiv.after(cancelBtn);
+
+  cancelBtn.addEventListener("click", () => {
+    let scheduleLists = document.getElementsByName("scheduleList");
+    for (let i = scheduleLists.length - 1; i >= 0; i--) {
+      scheduleLists[i].remove();
+    }
+    cancelBtn.remove();
+  });
+}
+
 let editBtn = document.getElementById("editBtn");
 editBtn.addEventListener("click", () => {
   // check if the buttons are activated
@@ -101,6 +126,7 @@ editBtn.addEventListener("click", () => {
       radio.classList.add("mr-1");
       schedule.prepend(radio);
     }
+    addCancelBtn();
   }
 });
 
@@ -149,6 +175,7 @@ delBtn.addEventListener("click", async () => {
       checkBox.classList.add("mr-1");
       schedule.prepend(checkBox);
     }
+    addCancelBtn();
   }
 });
 

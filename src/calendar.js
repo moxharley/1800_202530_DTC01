@@ -347,12 +347,25 @@ displayWeek();
 
 let toggleCalendarBtn = document.getElementById("toggleCalendar");
 toggleCalendarBtn.addEventListener("click", () => {
+  // toggle calendar
   let calendarTable = document.getElementById("calendarTable");
   calendarTable.classList.toggle("hidden");
 
   let weekTable = document.getElementById("weekTable");
   weekTable.classList.toggle("hidden");
 
+  // change the label
+  let arrowLabel = toggleCalendarBtn.querySelector("span");
+  let monthlyViewText = "Change to monthly view";
+  let weeklyViewText = "Change to weekly view";
+  let arrowLabelText = arrowLabel.innerText;
+  if (arrowLabelText == weeklyViewText) {
+    arrowLabel.innerText = monthlyViewText;
+  } else {
+    arrowLabel.innerText = weeklyViewText;
+  }
+
+  // change the arrow's direction
   let arrowIcon = toggleCalendarBtn.querySelector("i");
   arrowIcon.classList.toggle("fa-chevron-up");
   arrowIcon.classList.toggle("fa-chevron-down");

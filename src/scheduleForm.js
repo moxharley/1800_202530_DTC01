@@ -5,9 +5,9 @@ import { collection, doc, addDoc, getDoc, updateDoc } from "firebase/firestore";
 // check if user logged in
 onAuthReady((user) => {
   if (!user) {
-    alert("need to login");
-    location.href = "/login.html";
-    return;
+    location.href = "/src/pages/loginSignup.html";
+  } else {
+    sessionStorage.setItem("uid", user.uid);
   }
 });
 
@@ -31,7 +31,8 @@ const scheduleRepeatString = document.getElementById("repeat");
 
 // add new schedule
 async function addScheduleData() {
-  const userUid = user.uid;
+  const userUid = sessionStorage.getItem("uid");
+
   let scheduleTitleValue = scheduleTitle.value;
   let scheduleDateValue = scheduleDate.value;
   let scheduleTimeValue = scheduleTime.value;

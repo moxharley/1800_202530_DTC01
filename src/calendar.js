@@ -9,58 +9,58 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 
-function displayScheduleDynamically() {
-  onAuthReady(async (user) => {
-    if (!user) {
-      // If no user is signed in → redirect back to login page.
-      alert("need to login");
-      location.href = "/login.html";
-      return;
-    } else {
-      try {
-        // get user's uid
-        const userUid = user.uid;
+onAuthReady((user) => {
+  if (!user) {
+    location.href = "/src/pages/loginSignup.html";
+  } else {
+    sessionStorage.setItem("uid", user.uid);
+  }
+});
 
-        // firestore query to compare uid
-        const scheduleQuery = query(
-          collection(db, "schedules"),
-          where("userUid", "==", userUid)
-        );
+async function displayScheduleDynamically() {
+  try {
+    // get user's uid
+    const userUid = sessionStorage.getItem("uid");
 
-        const querySnapshot = await getDocs(scheduleQuery);
+    // firestore query to compare uid
+    const scheduleQuery = query(
+      collection(db, "schedules"),
+      where("userUid", "==", userUid)
+    );
 
-        // Schedule Template
-        let scheduleTemplate = document.getElementById("scheduleTemplate");
+    const querySnapshot = await getDocs(scheduleQuery);
 
-        querySnapshot.forEach((doc) => {
-          let newSchedule = scheduleTemplate.content.cloneNode(true);
+    // Schedule Template
+    let scheduleTemplate = document.getElementById("scheduleTemplate");
 
-          const schedule = doc.data();
+    querySnapshot.forEach((doc) => {
+      let newSchedule = scheduleTemplate.content.cloneNode(true);
 
-          // set each data to the template
-          newSchedule.querySelector(".group").id = doc.id;
-          newSchedule.querySelector("#title").textContent = schedule.title;
-          newSchedule.querySelector("#memo").textContent = schedule.memo;
-          newSchedule.querySelector("#date").textContent = schedule.date;
-          newSchedule.querySelector("#time").textContent = schedule.time;
+      const schedule = doc.data();
 
-          document.getElementById("schedulesDiv").appendChild(newSchedule);
-        });
+      // set each data to the template
+      newSchedule.querySelector(".group").id = doc.id;
+      newSchedule.querySelector("#title").textContent = schedule.title;
+      newSchedule.querySelector("#memo").textContent = schedule.memo;
+      newSchedule.querySelector("#date").textContent = schedule.date;
+      newSchedule.querySelector("#time").textContent = schedule.time;
 
-        // add click event for memo tooltip
-        let scheduleDivs = document.getElementsByClassName("schedule");
-        for (let scheduleDiv of scheduleDivs) {
-          scheduleDiv.addEventListener("click", () => {
-            scheduleDiv.querySelector("#memo").classList.toggle("hidden");
-          });
-        }
-      } catch (error) {
-        let errorHtml = `<div class="font-bold text-center">Nothing to display</div>`;
-        document.getElementById("schedulesDiv").innerHTML = errorHtml;
-      }
+      document.getElementById("schedulesDiv").appendChild(newSchedule);
+    });
+
+    // add click event for memo tooltip
+    let scheduleDivs = document.getElementsByClassName("schedule");
+    for (let scheduleDiv of scheduleDivs) {
+      scheduleDiv.addEventListener("click", () => {
+        scheduleDiv.querySelector("#memo").classList.toggle("hidden");
+      });
     }
-  });
+  } catch (error) {
+    let errorHtml = `<div class="font-bold text-center">Nothing to display</div>`;
+    document.getElementById("schedulesDiv").innerHTML = errorHtml;
+  }
 }
+
 displayScheduleDynamically();
 
 let editBtn = document.getElementById("editBtn");

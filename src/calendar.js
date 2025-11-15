@@ -40,10 +40,32 @@ async function displayScheduleDynamically() {
 
       // set each data to the template
       newSchedule.querySelector(".group").id = doc.id;
-      newSchedule.querySelector("#title").textContent = schedule.title;
+
+      newSchedule.querySelector("#memoTitle").textContent = schedule.title;
+
+      if (schedule.title.length < 8) {
+        newSchedule.querySelector("#title").textContent = schedule.title;
+      } else {
+        let titleStr = schedule.title;
+        newSchedule.querySelector("#title").textContent =
+          titleStr.slice(0, 7) + "...";
+      }
+
       newSchedule.querySelector("#memo").textContent = schedule.memo;
       newSchedule.querySelector("#date").textContent = schedule.date;
-      newSchedule.querySelector("#time").textContent = schedule.time;
+
+      if (schedule.time) {
+        newSchedule.querySelector("#time").textContent = schedule.time;
+      } else {
+        newSchedule.querySelector("#time").textContent = "";
+        newSchedule.querySelector("#date").classList.add("mr-[46px]");
+      }
+
+      if (schedule.repeat === "none") {
+        newSchedule.querySelector("#repeat").textContent = "";
+      } else {
+        newSchedule.querySelector("#repeat").textContent = schedule.repeat;
+      }
 
       document.getElementById("schedulesDiv").appendChild(newSchedule);
     });
@@ -52,10 +74,11 @@ async function displayScheduleDynamically() {
     let scheduleDivs = document.getElementsByClassName("schedule");
     for (let scheduleDiv of scheduleDivs) {
       scheduleDiv.addEventListener("click", () => {
-        scheduleDiv.querySelector("#memo").classList.toggle("hidden");
+        scheduleDiv.querySelector("#memoDiv").classList.toggle("hidden");
       });
     }
   } catch (error) {
+    console.log(error);
     let errorHtml = `<div class="font-bold text-center">Nothing to display</div>`;
     document.getElementById("schedulesDiv").innerHTML = errorHtml;
   }

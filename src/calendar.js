@@ -21,53 +21,6 @@ onAuthReady((user) => {
   }
 });
 
-// function repeationTest() {
-//   const scheduleRepeatInt = schedule.repeat;
-//   if (scheduleRepeatInt) {
-//     let scheduleDate = new Date(schedule.date);
-//     scheduleDate.setDate(scheduleDate.getDate() + 1);
-
-//     let lastDate = new Date(
-//       scheduleDate.getFullYear(),
-//       scheduleDate.getMonth() + 1,
-//       0
-//     ).getDate();
-
-//     let newSchedule = schedule;
-//     console.log(newSchedule.date);
-
-//     if (scheduleRepeatInt == 1) {
-//       for (
-//         let i = scheduleDate.getDate() + scheduleRepeatInt;
-//         i <= lastDate;
-//         i++
-//       ) {
-//         newSchedule.date = changeDateforRepeatition(newSchedule, i);
-//         drawSchedule(doc.id, newSchedule);
-//       }
-//     } else if (scheduleRepeatInt == 7) {
-//       for (
-//         let i = scheduleDate.getDate() + scheduleRepeatInt;
-//         i <= lastDate;
-//         i += scheduleRepeatInt
-//       ) {
-//         newSchedule.date = changeDateforRepeatition(newSchedule, i);
-//         drawSchedule(doc.id, newSchedule);
-//       }
-//     } else if (scheduleRepeatInt == 14) {
-//       for (
-//         let i = scheduleDate.getDate() + scheduleRepeatInt;
-//         i <= lastDate;
-//         i += scheduleRepeatInt
-//       ) {
-//         newSchedule.date = changeDateforRepeatition(newSchedule, i);
-//         drawSchedule(doc.id, newSchedule);
-//       }
-//     } else {
-//     }
-//   }
-// }
-
 function drawSchedules(scheduleId, schedule) {
   // Schedule Template
   let scheduleTemplate = document.getElementById("scheduleTemplate");
@@ -143,68 +96,115 @@ async function scheduleQuery(userUid, onePageSchedule, currentPage) {
   }
 }
 
+async function schedulePagination(userUid, onePageSchedule) {
+  let currentPage = 1;
+
+  const scheduleNumQuery = query(
+    collection(db, "schedules"),
+    where("userUid", "==", userUid)
+  );
+  const queryCount = await getCountFromServer(scheduleNumQuery);
+
+  // total schedules
+  const scheduleCount = queryCount.data().count;
+  const totalPage = Math.ceil(scheduleCount / onePageSchedule);
+
+  let pageTemplate = document.getElementById("pageNumTemplate");
+
+  // draw page numbers
+  let onePageMaxNum = 5;
+  if (totalPage < 6) {
+    onePageMaxNum = totalPage;
+  }
+  for (let i = 0; i < onePageMaxNum; i++) {
+    let newPage = pageTemplate.content.cloneNode(true);
+    newPage.querySelector(".pageNum").textContent = i + 1;
+    newPage.querySelector(".pageNum").id = i + 1;
+    document.getElementById("pageNumDiv").appendChild(newPage);
+  }
+  let focusedPage = document.getElementById("1");
+  focusedPage.classList.remove("text-[#6a994e]");
+  focusedPage.classList.add("font-bold");
+
+  // add click event for pages
+  let pageNums = document.getElementsByClassName("pageNum");
+  for (let pageNum of pageNums) {
+    pageNum.addEventListener("click", async (self) => {
+      let temp = document.getElementsByClassName("schedule");
+      if (temp) {
+        for (let i = temp.length - 1; i >= 0; i--) {
+          temp[i].remove();
+        }
+      }
+
+      currentPage = parseInt(self.target.id);
+
+      try {
+        await scheduleQuery(userUid, onePageSchedule, currentPage);
+      } catch (error) {
+        console.log(error);
+      }
+
+      focusedPage = self.target;
+      let siblings = focusedPage.parentElement.children;
+      for (let sibling of siblings) {
+        sibling.classList.add("text-[#6a994e]");
+        sibling.classList.remove("font-bold");
+      }
+
+      focusedPage.classList.remove("text-[#6a994e]");
+      focusedPage.classList.add("font-bold");
+    });
+  }
+
+  // add click event for arrow btns
+  let pageArrows = document.getElementsByClassName("pageBtn");
+  for (let pageArrow of pageArrows) {
+    pageArrow.addEventListener("click", async (self) => {
+      let temp = document.getElementsByClassName("schedule");
+      if (temp) {
+        for (let i = temp.length - 1; i >= 0; i--) {
+          temp[i].remove();
+        }
+      }
+
+      let arrowId = self.target.parentElement.id;
+      if (arrowId == "prevPage") {
+        if (currentPage != 1) {
+          currentPage -= 1;
+        }
+      } else {
+        if (currentPage != totalPage) {
+          currentPage += 1;
+        }
+      }
+      try {
+        await scheduleQuery(userUid, onePageSchedule, currentPage);
+      } catch (error) {
+        console.log(error);
+      }
+
+      focusedPage = document.getElementById(currentPage);
+      let siblings = focusedPage.parentElement.children;
+      for (let sibling of siblings) {
+        sibling.classList.add("text-[#6a994e]");
+        sibling.classList.remove("font-bold");
+      }
+
+      focusedPage.classList.remove("text-[#6a994e]");
+      focusedPage.classList.add("font-bold");
+    });
+  }
+}
+
 async function displayScheduleDynamically() {
   try {
     // get user's uid
     const userUid = sessionStorage.getItem("uid");
-
-    // paginatioin
-    let currentPage = 1;
     const onePageSchedule = 5;
-    const scheduleNumQuery = query(
-      collection(db, "schedules"),
-      where("userUid", "==", userUid)
-    );
-    const queryCount = await getCountFromServer(scheduleNumQuery);
 
-    // total schedules
-    const scheduleCount = queryCount.data().count;
-    const totalPage = Math.ceil(scheduleCount / onePageSchedule);
-
-    let pageTemplate = document.getElementById("pageNumTemplate");
-
-    // draw page numbers
-    let onePageMaxNum = 5;
-    if (totalPage < 6) {
-      onePageMaxNum = totalPage;
-    }
-    for (let i = 0; i < onePageMaxNum; i++) {
-      let newPage = pageTemplate.content.cloneNode(true);
-      newPage.querySelector(".pageNum").textContent = i + 1;
-      newPage.querySelector(".pageNum").id = i + 1;
-      document.getElementById("pageNumDiv").appendChild(newPage);
-    }
-    let focusedPage = document.getElementById(currentPage);
-    focusedPage.classList.remove("text-[#6a994e]");
-    focusedPage.classList.add("font-bold");
-
-    // add click event for pages
-    let pageNums = document.getElementsByClassName("pageNum");
-    for (let pageNum of pageNums) {
-      pageNum.addEventListener("click", async (self) => {
-        let temp = document.getElementsByClassName("schedule");
-        if (temp) {
-          for (let i = temp.length - 1; i >= 0; i--) {
-            temp[i].remove();
-          }
-        }
-
-        let pageNum = self.target.id;
-        await scheduleQuery(userUid, onePageSchedule, pageNum);
-
-        focusedPage = self.target;
-        let siblings = focusedPage.parentElement.children;
-        for (let sibling of siblings) {
-          sibling.classList.add("text-[#6a994e]");
-          sibling.classList.remove("font-bold");
-        }
-
-        focusedPage.classList.remove("text-[#6a994e]");
-        focusedPage.classList.add("font-bold");
-      });
-    }
-
-    await scheduleQuery(userUid, onePageSchedule, currentPage);
+    await schedulePagination(userUid, onePageSchedule);
+    await scheduleQuery(userUid, onePageSchedule, 1);
   } catch (error) {
     console.log(error);
     let errorHtml = `<div class="font-bold text-center">Nothing to display</div>`;

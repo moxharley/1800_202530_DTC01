@@ -7,6 +7,8 @@ import {
   where,
   getDocs,
   deleteDoc,
+  limit,
+  getCountFromServer,
 } from "firebase/firestore";
 
 onAuthReady((user) => {
@@ -17,15 +19,91 @@ onAuthReady((user) => {
   }
 });
 
+// function repeationTest() {
+//   const scheduleRepeatInt = schedule.repeat;
+//   if (scheduleRepeatInt) {
+//     let scheduleDate = new Date(schedule.date);
+//     scheduleDate.setDate(scheduleDate.getDate() + 1);
+
+//     let lastDate = new Date(
+//       scheduleDate.getFullYear(),
+//       scheduleDate.getMonth() + 1,
+//       0
+//     ).getDate();
+
+//     let newSchedule = schedule;
+//     console.log(newSchedule.date);
+
+//     if (scheduleRepeatInt == 1) {
+//       for (
+//         let i = scheduleDate.getDate() + scheduleRepeatInt;
+//         i <= lastDate;
+//         i++
+//       ) {
+//         newSchedule.date = changeDateforRepeatition(newSchedule, i);
+//         drawSchedule(doc.id, newSchedule);
+//       }
+//     } else if (scheduleRepeatInt == 7) {
+//       for (
+//         let i = scheduleDate.getDate() + scheduleRepeatInt;
+//         i <= lastDate;
+//         i += scheduleRepeatInt
+//       ) {
+//         newSchedule.date = changeDateforRepeatition(newSchedule, i);
+//         drawSchedule(doc.id, newSchedule);
+//       }
+//     } else if (scheduleRepeatInt == 14) {
+//       for (
+//         let i = scheduleDate.getDate() + scheduleRepeatInt;
+//         i <= lastDate;
+//         i += scheduleRepeatInt
+//       ) {
+//         newSchedule.date = changeDateforRepeatition(newSchedule, i);
+//         drawSchedule(doc.id, newSchedule);
+//       }
+//     } else {
+//     }
+//   }
+// }
+
 async function displayScheduleDynamically() {
   try {
     // get user's uid
     const userUid = sessionStorage.getItem("uid");
 
+    // paginatioin
+    const onePageSchedule = 5;
+    const scheduleNumQuery = query(
+      collection(db, "schedules"),
+      where("userUid", "==", userUid)
+    );
+    const queryCount = await getCountFromServer(scheduleNumQuery);
+    const scheduleCount = queryCount.data().count;
+    console.log(scheduleCount);
+    const totalPage = Math.ceil(scheduleCount / onePageSchedule);
+    console.log(totalPage);
+
+    let pageTemplate = document.getElementById("pageNumTemplate");
+
+    let onePageMaxNum = 5;
+    if (totalPage < 6) {
+      onePageMaxNum = totalPage;
+    }
+    for (let i = 0; i < onePageMaxNum; i++) {
+      let newPage = pageTemplate.content.cloneNode(true);
+      newPage.querySelector(".pageNum").textContent = i + 1;
+      newPage.querySelector(".pageNum").id = i + 1;
+      document.getElementById("pageNumDiv").appendChild(newPage);
+    }
+    let focusedPage = document.getElementById("1");
+    focusedPage.classList.toggle("text-[#6a994e]");
+    focusedPage.classList.add("font-bold");
+
     // firestore query to compare uid
     const scheduleQuery = query(
       collection(db, "schedules"),
-      where("userUid", "==", userUid)
+      where("userUid", "==", userUid),
+      limit(onePageSchedule)
     );
 
     const querySnapshot = await getDocs(scheduleQuery);

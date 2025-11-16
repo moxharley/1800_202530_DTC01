@@ -9,6 +9,8 @@ import {
   deleteDoc,
   limit,
   getCountFromServer,
+  orderBy,
+  startAt,
 } from "firebase/firestore";
 
 onAuthReady((user) => {
@@ -66,25 +68,102 @@ onAuthReady((user) => {
 //   }
 // }
 
+function drawSchedules(scheduleId, schedule) {
+  // Schedule Template
+  let scheduleTemplate = document.getElementById("scheduleTemplate");
+  let newSchedule = scheduleTemplate.content.cloneNode(true);
+
+  // set each data to the template
+  newSchedule.querySelector(".group").id = scheduleId;
+  newSchedule.querySelector("#memoTitle").textContent = schedule.title;
+
+  if (schedule.title.length < 8) {
+    newSchedule.querySelector("#title").textContent = schedule.title;
+  } else {
+    let titleStr = schedule.title;
+    newSchedule.querySelector("#title").textContent =
+      titleStr.slice(0, 7) + "...";
+  }
+
+  newSchedule.querySelector("#memo").textContent = schedule.memo;
+  newSchedule.querySelector("#date").textContent = schedule.date;
+
+  if (schedule.time) {
+    newSchedule.querySelector("#time").textContent = schedule.time;
+  } else {
+    newSchedule.querySelector("#time").textContent = "";
+    newSchedule.querySelector("#date").classList.add("mr-[46px]");
+  }
+
+  if (schedule.repeat === "none") {
+    newSchedule.querySelector("#repeat").textContent = "";
+  } else {
+    newSchedule.querySelector("#repeat").textContent = schedule.repeat;
+  }
+
+  document.getElementById("schedulesDiv").appendChild(newSchedule);
+}
+
+async function scheduleQuery(userUid, onePageSchedule, currentPage) {
+  // base schedule query for pagination
+  const baseScheduleQuery = query(
+    collection(db, "schedules"),
+    where("userUid", "==", userUid),
+    orderBy("timestamp", "desc")
+  );
+
+  const baseQuerySnapshot = await getDocs(baseScheduleQuery);
+  const scheduleIndex = (currentPage - 1) * onePageSchedule;
+
+  const lastVisible = baseQuerySnapshot.docs[scheduleIndex];
+
+  // firestore query to compare uid
+  const scheduleQuery = query(
+    collection(db, "schedules"),
+    where("userUid", "==", userUid),
+    orderBy("timestamp", "desc"),
+    startAt(lastVisible),
+    limit(onePageSchedule)
+  );
+
+  const querySnapshot = await getDocs(scheduleQuery);
+
+  querySnapshot.forEach((doc) => {
+    const schedule = doc.data();
+    drawSchedules(doc.id, schedule);
+  });
+
+  // add click event for memo tooltip
+  let scheduleDivs = document.getElementsByClassName("schedule");
+
+  for (let scheduleDiv of scheduleDivs) {
+    scheduleDiv.addEventListener("click", () => {
+      scheduleDiv.querySelector("#memoDiv").classList.toggle("hidden");
+    });
+  }
+}
+
 async function displayScheduleDynamically() {
   try {
     // get user's uid
     const userUid = sessionStorage.getItem("uid");
 
     // paginatioin
+    let currentPage = 1;
     const onePageSchedule = 5;
     const scheduleNumQuery = query(
       collection(db, "schedules"),
       where("userUid", "==", userUid)
     );
     const queryCount = await getCountFromServer(scheduleNumQuery);
+
+    // total schedules
     const scheduleCount = queryCount.data().count;
-    console.log(scheduleCount);
     const totalPage = Math.ceil(scheduleCount / onePageSchedule);
-    console.log(totalPage);
 
     let pageTemplate = document.getElementById("pageNumTemplate");
 
+    // draw page numbers
     let onePageMaxNum = 5;
     if (totalPage < 6) {
       onePageMaxNum = totalPage;
@@ -95,73 +174,43 @@ async function displayScheduleDynamically() {
       newPage.querySelector(".pageNum").id = i + 1;
       document.getElementById("pageNumDiv").appendChild(newPage);
     }
-    let focusedPage = document.getElementById("1");
-    focusedPage.classList.toggle("text-[#6a994e]");
+    let focusedPage = document.getElementById(currentPage);
+    focusedPage.classList.remove("text-[#6a994e]");
     focusedPage.classList.add("font-bold");
 
-    // firestore query to compare uid
-    const scheduleQuery = query(
-      collection(db, "schedules"),
-      where("userUid", "==", userUid),
-      limit(onePageSchedule)
-    );
+    // add click event for pages
+    let pageNums = document.getElementsByClassName("pageNum");
+    for (let pageNum of pageNums) {
+      pageNum.addEventListener("click", async (self) => {
+        let temp = document.getElementsByClassName("schedule");
+        if (temp) {
+          for (let i = temp.length - 1; i >= 0; i--) {
+            temp[i].remove();
+          }
+        }
 
-    const querySnapshot = await getDocs(scheduleQuery);
+        let pageNum = self.target.id;
+        await scheduleQuery(userUid, onePageSchedule, pageNum);
 
-    // Schedule Template
-    let scheduleTemplate = document.getElementById("scheduleTemplate");
+        focusedPage = self.target;
+        let siblings = focusedPage.parentElement.children;
+        for (let sibling of siblings) {
+          sibling.classList.add("text-[#6a994e]");
+          sibling.classList.remove("font-bold");
+        }
 
-    querySnapshot.forEach((doc) => {
-      let newSchedule = scheduleTemplate.content.cloneNode(true);
-
-      const schedule = doc.data();
-
-      // set each data to the template
-      newSchedule.querySelector(".group").id = doc.id;
-
-      newSchedule.querySelector("#memoTitle").textContent = schedule.title;
-
-      if (schedule.title.length < 8) {
-        newSchedule.querySelector("#title").textContent = schedule.title;
-      } else {
-        let titleStr = schedule.title;
-        newSchedule.querySelector("#title").textContent =
-          titleStr.slice(0, 7) + "...";
-      }
-
-      newSchedule.querySelector("#memo").textContent = schedule.memo;
-      newSchedule.querySelector("#date").textContent = schedule.date;
-
-      if (schedule.time) {
-        newSchedule.querySelector("#time").textContent = schedule.time;
-      } else {
-        newSchedule.querySelector("#time").textContent = "";
-        newSchedule.querySelector("#date").classList.add("mr-[46px]");
-      }
-
-      if (schedule.repeat === "none") {
-        newSchedule.querySelector("#repeat").textContent = "";
-      } else {
-        newSchedule.querySelector("#repeat").textContent = schedule.repeat;
-      }
-
-      document.getElementById("schedulesDiv").appendChild(newSchedule);
-    });
-
-    // add click event for memo tooltip
-    let scheduleDivs = document.getElementsByClassName("schedule");
-    for (let scheduleDiv of scheduleDivs) {
-      scheduleDiv.addEventListener("click", () => {
-        scheduleDiv.querySelector("#memoDiv").classList.toggle("hidden");
+        focusedPage.classList.remove("text-[#6a994e]");
+        focusedPage.classList.add("font-bold");
       });
     }
+
+    await scheduleQuery(userUid, onePageSchedule, currentPage);
   } catch (error) {
     console.log(error);
     let errorHtml = `<div class="font-bold text-center">Nothing to display</div>`;
     document.getElementById("schedulesDiv").innerHTML = errorHtml;
   }
 }
-
 displayScheduleDynamically();
 
 function addCancelBtn() {

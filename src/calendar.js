@@ -1,154 +1,12 @@
 import { onAuthReady } from "./authentication.js";
 import { db } from "./firebaseConfig.js";
-import {
-  collection,
-  doc,
-  query,
-  where,
-  getDocs,
-  deleteDoc,
-} from "firebase/firestore";
+import { collection, query, and, or, where, getDocs } from "firebase/firestore";
 
-function displayScheduleDynamically() {
-  onAuthReady(async (user) => {
-    if (!user) {
-      // If no user is signed in → redirect back to login page.
-      alert("need to login");
-      location.href = "/login.html";
-      return;
-    } else {
-      try {
-        // get user's uid
-        const userUid = user.uid;
-
-        // firestore query to compare uid
-        const scheduleQuery = query(
-          collection(db, "schedules"),
-          where("userUid", "==", userUid)
-        );
-
-        const querySnapshot = await getDocs(scheduleQuery);
-
-        // Schedule Template
-        let scheduleTemplate = document.getElementById("scheduleTemplate");
-
-        querySnapshot.forEach((doc) => {
-          let newSchedule = scheduleTemplate.content.cloneNode(true);
-
-          const schedule = doc.data();
-
-          // set each data to the template
-          newSchedule.querySelector(".group").id = doc.id;
-          newSchedule.querySelector("#title").textContent = schedule.title;
-          newSchedule.querySelector("#memo").textContent = schedule.memo;
-          newSchedule.querySelector("#date").textContent = schedule.date;
-          newSchedule.querySelector("#time").textContent = schedule.time;
-
-          document.getElementById("schedulesDiv").appendChild(newSchedule);
-        });
-
-        // add click event for memo tooltip
-        let scheduleDivs = document.getElementsByClassName("schedule");
-        for (let scheduleDiv of scheduleDivs) {
-          scheduleDiv.addEventListener("click", () => {
-            scheduleDiv.querySelector("#memo").classList.toggle("hidden");
-          });
-        }
-      } catch (error) {
-        let errorHtml = `<div class="font-bold text-center">Nothing to display</div>`;
-        document.getElementById("schedulesDiv").innerHTML = errorHtml;
-      }
-    }
-  });
-}
-displayScheduleDynamically();
-
-let editBtn = document.getElementById("editBtn");
-editBtn.addEventListener("click", () => {
-  // check if the buttons are activated
-  let checkedRadio = document.querySelector("input[type='radio']:checked");
-  let checkBoxes = document.querySelectorAll("input[type='checkbox']");
-
-  if (checkedRadio) {
-    // user choose to edit the schedule
-    let scheduleId = checkedRadio.nextSibling.nextSibling.id;
-
-    // to avoid doubled items in the local storage
-    if (localStorage.getItem("scheduleDocId")) {
-      localStorage.removeItem("scheduleDocId");
-    }
-
-    localStorage.setItem("scheduleDocId", scheduleId);
-    location.href = "/src/pages/scheduleForm.html";
-  } else if (checkBoxes.length) {
-    // user clicked the delete first, then clicked the edit btn
-    // so change the type of inputs
-    for (let checkbox of checkBoxes) {
-      checkbox.type = "radio";
-    }
+onAuthReady((user) => {
+  if (!user) {
+    location.href = "/src/pages/loginSignup.html";
   } else {
-    // user clicked the edit btn the first time
-    let schedules = document.getElementsByClassName("schedule");
-
-    // set radio button for selection
-    for (let schedule of schedules) {
-      schedule.classList.add("flex");
-      schedule.firstChild.nextSibling.classList.add("basis7/8", "w-full");
-
-      let radio = document.createElement("input");
-      radio.type = "radio";
-      radio.name = "scheduleList";
-      radio.classList.add("mr-1");
-      schedule.prepend(radio);
-    }
-  }
-});
-
-let delBtn = document.getElementById("delBtn");
-delBtn.addEventListener("click", async () => {
-  // check if the buttons are activated
-  let checkBoxes = document.querySelectorAll("input[type='checkbox']");
-  let radios = document.querySelectorAll("input[type='radio']");
-
-  if (checkBoxes.length) {
-    // user choose to delete the schedule
-    for (let checkBox of checkBoxes) {
-      if (checkBox.checked) {
-        // get document id from the div id
-        let scheduleId = checkBox.nextSibling.nextSibling.id;
-        if (confirm("Do you want delete?") == true) {
-          try {
-            // delete the schedule and refresh the page
-            await deleteDoc(doc(db, "schedules", scheduleId));
-            location.reload();
-          } catch (error) {
-            console.log(error);
-            alert("Sorry, something went wrong :(");
-          }
-        }
-      }
-    }
-  } else if (radios.length) {
-    // user clicked the edit first, then clicked the delete btn
-    // so change the type of inputs
-    for (let radio of radios) {
-      radio.type = "checkbox";
-    }
-  } else {
-    // user clicked the delete btn the first time
-    let schedules = document.getElementsByClassName("schedule");
-
-    // set checkboxes for selection
-    for (let schedule of schedules) {
-      schedule.classList.add("flex");
-      schedule.firstChild.nextSibling.classList.add("basis7/8", "w-full");
-
-      let checkBox = document.createElement("input");
-      checkBox.type = "checkbox";
-      checkBox.name = "scheduleList";
-      checkBox.classList.add("mr-1");
-      schedule.prepend(checkBox);
-    }
+    sessionStorage.setItem("uid", user.uid);
   }
 });
 
@@ -175,14 +33,14 @@ function displayCalendar(baseDate) {
   ];
 
   // from Template
-  const dateId = [
-    "sunDate",
-    "monDate",
-    "tueDate",
-    "wedDate",
-    "thuDate",
-    "friDate",
-    "satDate",
+  const dateClass = [
+    "sundays",
+    "mondays",
+    "tuesdays",
+    "wednesdays",
+    "thursdays",
+    "fridays",
+    "saturdays",
   ];
 
   // get month name as a string
@@ -199,7 +57,8 @@ function displayCalendar(baseDate) {
   ).getDate();
 
   // set year and month to the page
-  document.getElementById("year").innerText = baseDate.getFullYear();
+  const currentYear = baseDate.getFullYear();
+  document.getElementById("year").innerText = currentYear;
   document.getElementById("monthName").innerText = month;
 
   // count how many week sections are needed
@@ -220,6 +79,9 @@ function displayCalendar(baseDate) {
   }
 
   let calendarTemplate = document.getElementById("calendarTemplate");
+  const currentMonth = parseInt(baseDate.getMonth()) + 1;
+  const dateStr = "mon-" + currentYear + "-" + currentMonth + "-";
+  let calendarDateClass = "";
   let dateCount = 1;
   for (let i = 0; i < weekNum; i++) {
     let newWeek = calendarTemplate.content.cloneNode(true);
@@ -227,7 +89,13 @@ function displayCalendar(baseDate) {
     if (i == 0) {
       // set the first week
       for (let j = firstDay; j < 7; j++) {
-        newWeek.querySelector("#" + dateId[j]).textContent = dateCount;
+        newWeek.querySelector("." + dateClass[j]).textContent = dateCount;
+
+        calendarDateClass = dateStr + dateCount.toString().padStart(2, "0");
+        newWeek
+          .querySelector("." + dateClass[j])
+          .classList.add(calendarDateClass);
+
         dateCount += 1;
       }
       document.getElementById("calendar").appendChild(newWeek);
@@ -235,18 +103,27 @@ function displayCalendar(baseDate) {
       // set the last week
       let maxNum = lastDate - dateCount;
       for (let j = 0; j <= maxNum; j++) {
-        newWeek.querySelector("#" + dateId[j]).textContent = dateCount;
+        newWeek.querySelector("." + dateClass[j]).textContent = dateCount;
+        calendarDateClass = dateStr + dateCount.toString().padStart(2, "0");
+        newWeek
+          .querySelector("." + dateClass[j])
+          .classList.add(calendarDateClass);
         dateCount += 1;
       }
       document.getElementById("calendar").appendChild(newWeek);
     } else {
       for (let j = 0; j < 7; j++) {
-        newWeek.querySelector("#" + dateId[j]).textContent = dateCount;
+        newWeek.querySelector("." + dateClass[j]).textContent = dateCount;
+        calendarDateClass = dateStr + dateCount.toString().padStart(2, "0");
+        newWeek
+          .querySelector("." + dateClass[j])
+          .classList.add(calendarDateClass);
         dateCount += 1;
       }
       document.getElementById("calendar").appendChild(newWeek);
     }
   }
+  monthlyScheduleQuery("calendar", currentYear, currentMonth);
 }
 // initial setting
 displayCalendar(new Date());
@@ -318,14 +195,14 @@ todayBtn.addEventListener("click", () => displayCalendar(new Date()));
 
 function displayWeek() {
   // from Template
-  const dateId = [
-    "sunDate",
-    "monDate",
-    "tueDate",
-    "wedDate",
-    "thuDate",
-    "friDate",
-    "satDate",
+  const dateClass = [
+    "sundays",
+    "mondays",
+    "tuesdays",
+    "wednesdays",
+    "thursdays",
+    "fridays",
+    "saturdays",
   ];
 
   let today = new Date();
@@ -337,23 +214,205 @@ function displayWeek() {
   // Weekly Template
   let weekTemplate = document.getElementById("weekTemplate");
   let newDate = weekTemplate.content.cloneNode(true);
+  const year = today.getFullYear();
+  const month = today.getMonth() + 1;
+  const dateStr = "week-" + year + "-" + month + "-";
+  let calendarDateClass = "";
   for (let i = 0; i < 7; i++) {
-    newDate.querySelector("#" + dateId[i]).textContent = sunday + i;
+    let date = sunday + i;
+    newDate.querySelector("." + dateClass[i]).textContent = date;
+    calendarDateClass = dateStr + date.toString().padStart(2, "0");
+    newDate.querySelector("." + dateClass[i]).classList.add(calendarDateClass);
   }
   document.getElementById("week").appendChild(newDate);
+  monthlyScheduleQuery("week", year, month);
 }
 // set initial weekly calendar
 displayWeek();
 
 let toggleCalendarBtn = document.getElementById("toggleCalendar");
 toggleCalendarBtn.addEventListener("click", () => {
+  // toggle calendar
   let calendarTable = document.getElementById("calendarTable");
   calendarTable.classList.toggle("hidden");
 
   let weekTable = document.getElementById("weekTable");
   weekTable.classList.toggle("hidden");
 
+  // change the label
+  let arrowLabel = toggleCalendarBtn.querySelector("span");
+  let monthlyViewText = "Change to monthly view";
+  let weeklyViewText = "Change to weekly view";
+  let arrowLabelText = arrowLabel.innerText;
+  if (arrowLabelText == weeklyViewText) {
+    arrowLabel.innerText = monthlyViewText;
+  } else {
+    arrowLabel.innerText = weeklyViewText;
+  }
+
+  // change the arrow's direction
   let arrowIcon = toggleCalendarBtn.querySelector("i");
   arrowIcon.classList.toggle("fa-chevron-up");
   arrowIcon.classList.toggle("fa-chevron-down");
 });
+
+function drawScheduleOnCaledar(elementId, schedule) {
+  const baseView = document.getElementById(elementId);
+
+  let prefix = "";
+  if (elementId == "calendar") {
+    prefix = "mon-";
+  } else {
+    prefix = "week-";
+  }
+
+  const scheduleDate = schedule.date;
+
+  let calendarDates = baseView.querySelectorAll("." + prefix + scheduleDate);
+
+  for (let calendarDate of calendarDates) {
+    let calendarCell = calendarDate.parentElement;
+    let scheduleElement = document.createElement("p");
+    scheduleElement.textContent = schedule.title;
+    scheduleElement.classList.add(
+      "bg-[#386641]",
+      "text-[#f2e8cf]",
+      "w-full",
+      "text-xs"
+    );
+
+    calendarCell.append(scheduleElement);
+  }
+}
+
+async function monthlyScheduleQuery(elementId, year, month) {
+  // get user uid from session
+  const userUid = sessionStorage.getItem("uid");
+
+  const yearMonthStr = year + "-" + month;
+
+  // basic query
+  const scheduleQuery = query(
+    collection(db, "schedules"),
+    and(
+      where("userUid", "==", userUid),
+      or(
+        and(
+          where("date", ">=", yearMonthStr),
+          where("date", "<=", yearMonthStr + "\uf8ff")
+        ),
+        where("repeat", "!=", "none")
+      )
+    )
+  );
+
+  try {
+    const querySnapshot = await getDocs(scheduleQuery);
+
+    querySnapshot.forEach((doc) => {
+      const schedule = doc.data();
+
+      if (schedule.date.slice(5, 7) == month) {
+        drawScheduleOnCaledar(elementId, schedule);
+      }
+
+      if (schedule.repeat != "none") {
+        scheduleRepeat(elementId, schedule, year, month);
+      }
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function scheduleRepeat(elementId, schedule, year, month) {
+  const scheduleRepeatStr = schedule.repeat;
+  let scheduleDate = new Date(schedule.date);
+
+  scheduleDate.setFullYear(year);
+  scheduleDate.setMonth(month - 1);
+  scheduleDate.setDate(scheduleDate.getDate() + 1);
+
+  let lastDate = new Date(
+    scheduleDate.getFullYear(),
+    scheduleDate.getMonth() + 1,
+    0
+  ).getDate();
+
+  let newSchedule = structuredClone(schedule);
+  let repeatedDate = year + "-" + month + "-";
+
+  if (scheduleRepeatStr == "monthly") {
+    repeatedDate += scheduleDate.getDate();
+    newSchedule.date = repeatedDate;
+
+    if (repeatedDate != schedule.date) {
+      drawScheduleOnCaledar(elementId, newSchedule);
+    }
+  } else if (scheduleRepeatStr == "biweekly") {
+    let baseDate = scheduleDate.getDate();
+
+    if (baseDate / 14 > 1) {
+      if (baseDate % 14 == 0) {
+        scheduleDate.setDate(14);
+      } else {
+        scheduleDate.setDate(baseDate % 14);
+      }
+    }
+
+    for (let i = scheduleDate.getDate(); i <= lastDate; i += 14) {
+      scheduleDate.setDate(i);
+
+      repeatedDate =
+        year +
+        "-" +
+        month +
+        "-" +
+        scheduleDate.getDate().toString().padStart(2, "0");
+
+      newSchedule.date = repeatedDate;
+      if (repeatedDate != schedule.date) {
+        drawScheduleOnCaledar(elementId, newSchedule);
+      }
+    }
+  } else if (scheduleRepeatStr == "weekly") {
+    let baseDate = scheduleDate.getDate();
+
+    if (baseDate / 7 > 1) {
+      if (baseDate % 7 == 0) {
+        scheduleDate.setDate(7);
+      } else {
+        scheduleDate.setDate(scheduleDate.getDate() % 7);
+      }
+    }
+    for (let i = scheduleDate.getDate(); i <= lastDate; i += 7) {
+      scheduleDate.setDate(i);
+      repeatedDate =
+        year +
+        "-" +
+        month +
+        "-" +
+        scheduleDate.getDate().toString().padStart(2, "0");
+
+      newSchedule.date = repeatedDate;
+      if (repeatedDate != schedule.date) {
+        drawScheduleOnCaledar(elementId, newSchedule);
+      }
+    }
+  } else {
+    for (let i = 1; i <= lastDate; i++) {
+      scheduleDate.setDate(i);
+      repeatedDate =
+        year +
+        "-" +
+        month +
+        "-" +
+        scheduleDate.getDate().toString().padStart(2, "0");
+
+      newSchedule.date = repeatedDate;
+      if (repeatedDate != schedule.date) {
+        drawScheduleOnCaledar(elementId, newSchedule);
+      }
+    }
+  }
+}

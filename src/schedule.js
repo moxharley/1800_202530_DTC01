@@ -309,20 +309,28 @@ delBtn.addEventListener("click", async () => {
   let radios = document.querySelectorAll("input[type='radio']");
 
   if (checkBoxes.length) {
+    console.log(checkBoxes.length);
     // user choose to delete the schedule
+    let checkedIds = [];
     for (let checkBox of checkBoxes) {
       if (checkBox.checked) {
         // get document id from the div id
         let scheduleId = checkBox.nextSibling.nextSibling.id;
-        if (confirm("Do you want delete?") == true) {
-          try {
-            // delete the schedule and refresh the page
-            await deleteDoc(doc(db, "schedules", scheduleId));
-            location.reload();
-          } catch (error) {
-            console.log(error);
-            alert("Sorry, something went wrong :(");
+        checkedIds.push(scheduleId);
+      }
+    }
+
+    if (checkedIds.length != 0) {
+      if (confirm("Do you want delete?") == true) {
+        try {
+          // delete the schedule and refresh the page
+          for (let checkedId of checkedIds) {
+            await deleteDoc(doc(db, "schedules", checkedId));
           }
+          location.reload();
+        } catch (error) {
+          console.log(error);
+          alert("Sorry, something went wrong :(");
         }
       }
     }

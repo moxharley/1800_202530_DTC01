@@ -20,7 +20,7 @@ class SiteNavbar extends HTMLElement {
               </div>
               <div class="flex bg-[#386641] justify-around w-full fixed z-10 bottom-0 md:static md:top-0 md:px-20">
                 <div class="mx-4 my-10 text-center">
-                  <a href="/src/pages/recycleInfo.html">
+                  <a href="/src/pages/recycle.html">
                   <div class="md:hidden">
                   <i class="fa-solid fa-recycle text-3xl"></i>
                   </div>

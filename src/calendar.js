@@ -312,10 +312,12 @@ async function monthlyScheduleQuery(elementId, year, month) {
     querySnapshot.forEach((doc) => {
       const schedule = doc.data();
 
-      scheduleRepeat(elementId, schedule, year, month);
-
       if (schedule.date.slice(5, 7) == month) {
         drawScheduleOnCaledar(elementId, schedule);
+      }
+
+      if (schedule.repeat != "none") {
+        scheduleRepeat(elementId, schedule, year, month);
       }
     });
   } catch (error) {
@@ -398,6 +400,19 @@ function scheduleRepeat(elementId, schedule, year, month) {
       }
     }
   } else {
-    console.log("hi");
+    for (let i = 1; i <= lastDate; i++) {
+      scheduleDate.setDate(i);
+      repeatedDate =
+        year +
+        "-" +
+        month +
+        "-" +
+        scheduleDate.getDate().toString().padStart(2, "0");
+
+      newSchedule.date = repeatedDate;
+      if (repeatedDate != schedule.date) {
+        drawScheduleOnCaledar(elementId, newSchedule);
+      }
+    }
   }
 }

@@ -21,6 +21,7 @@
     <script type="module" src="/src/components/site-footer.js"></script>
 
     <script type="module" src="/src/calendar.js"></script>
+    <script type="module" src="/src/schedule.js"></script>
     <style>
       /* 
         color-code
@@ -103,46 +104,33 @@
             <!-- Calendar Template -->
             <template id="calendarTemplate">
               <tr class="md:h-[80px] h-[50px]">
-                <td class="border px-2 pb-2 align-top">
+                <td class="border px-0.5 pb-2 align-top">
+                  <h3 class="sundays mt-0 text-right md:text-base text-sm"></h3>
+                </td>
+                <td class="border px-0.5 pb-2 align-top">
+                  <h3 class="mondays mt-0 text-right md:text-base text-sm"></h3>
+                </td>
+                <td class="border px-0.5 pb-2 align-top">
                   <h3
-                    id="sunDate"
-                    class="mt-0 text-right md:text-base text-sm"
+                    class="tuesdays mt-0 text-right md:text-base text-sm"
                   ></h3>
                 </td>
-                <td class="border px-2 pb-2 align-top">
+                <td class="border px-0.5 pb-2 align-top">
                   <h3
-                    id="monDate"
-                    class="mt-0 text-right md:text-base text-sm"
+                    class="wednesdays mt-0 text-right md:text-base text-sm"
                   ></h3>
                 </td>
-                <td class="border px-2 pb-2 align-top">
+                <td class="border px-0.5 pb-2 align-top">
                   <h3
-                    id="tueDate"
-                    class="mt-0 text-right md:text-base text-sm"
+                    class="thursdays mt-0 text-right md:text-base text-sm"
                   ></h3>
                 </td>
-                <td class="border px-2 pb-2 align-top">
-                  <h3
-                    id="wedDate"
-                    class="mt-0 text-right md:text-base text-sm"
-                  ></h3>
+                <td class="border px-0.5 pb-2 align-top">
+                  <h3 class="fridays mt-0 text-right md:text-base text-sm"></h3>
                 </td>
-                <td class="border px-2 pb-2 align-top">
+                <td class="border px-0.5 pb-2 align-top">
                   <h3
-                    id="thuDate"
-                    class="mt-0 text-right md:text-base text-sm"
-                  ></h3>
-                </td>
-                <td class="border px-2 pb-2 align-top">
-                  <h3
-                    id="friDate"
-                    class="mt-0 text-right md:text-base text-sm"
-                  ></h3>
-                </td>
-                <td class="border px-2 pb-2 align-top">
-                  <h3
-                    id="satDate"
-                    class="mt-0 text-right md:text-base text-sm"
+                    class="saturdays mt-0 text-right md:text-base text-sm"
                   ></h3>
                 </td>
               </tr>
@@ -178,46 +166,33 @@
             <!-- Weekly Template -->
             <template id="weekTemplate">
               <tr class="md:h-[80px] h-[50px]">
-                <td class="border px-2 pb-2 align-top">
+                <td class="border px-0.5 pb-2 align-top">
+                  <h3 class="sundays mt-0 text-right md:text-base text-sm"></h3>
+                </td>
+                <td class="border px-0.5 pb-2 align-top">
+                  <h3 class="mondays mt-0 text-right md:text-base text-sm"></h3>
+                </td>
+                <td class="border px-0.5 pb-2 align-top">
                   <h3
-                    id="sunDate"
-                    class="mt-0 text-right md:text-base text-sm"
+                    class="tuesdays mt-0 text-right md:text-base text-sm"
                   ></h3>
                 </td>
-                <td class="border px-2 pb-2 align-top">
+                <td class="border px-0.5 pb-2 align-top">
                   <h3
-                    id="monDate"
-                    class="mt-0 text-right md:text-base text-sm"
+                    class="wednesdays mt-0 text-right md:text-base text-sm"
                   ></h3>
                 </td>
-                <td class="border px-2 pb-2 align-top">
+                <td class="border px-0.5 pb-2 align-top">
                   <h3
-                    id="tueDate"
-                    class="mt-0 text-right md:text-base text-sm"
+                    class="thursdays mt-0 text-right md:text-base text-sm"
                   ></h3>
                 </td>
-                <td class="border px-2 pb-2 align-top">
-                  <h3
-                    id="wedDate"
-                    class="mt-0 text-right md:text-base text-sm"
-                  ></h3>
+                <td class="border px-0.5 pb-2 align-top">
+                  <h3 class="fridays mt-0 text-right md:text-base text-sm"></h3>
                 </td>
-                <td class="border px-2 pb-2 align-top">
+                <td class="border px-0.5 pb-2 align-top">
                   <h3
-                    id="thuDate"
-                    class="mt-0 text-right md:text-base text-sm"
-                  ></h3>
-                </td>
-                <td class="border px-2 pb-2 align-top">
-                  <h3
-                    id="friDate"
-                    class="mt-0 text-right md:text-base text-sm"
-                  ></h3>
-                </td>
-                <td class="border px-2 pb-2 align-top">
-                  <h3
-                    id="satDate"
-                    class="mt-0 text-right md:text-base text-sm"
+                    class="saturdays mt-0 text-right md:text-base text-sm"
                   ></h3>
                 </td>
               </tr>
@@ -227,6 +202,7 @@
         <!-- Monthly/Weekly Toggle -->
         <div class="mb-5 text-right">
           <button id="toggleCalendar" class="hover:cursor-pointer">
+            <span class="text-sm font-bold">Change to weekly view</span>
             <i class="fa-solid fa-chevron-up"></i>
           </button>
         </div>
@@ -264,8 +240,11 @@
             class="bg-[#386642] text-[#f2e8cf] border rounded flex justify-between p-2 mb-3"
           >
             <h3 class="ml-3 font-bold">Title</h3>
-            <div class="space-x-10">
-              <span>Date</span><span class="mr-1">Time</span>
+
+            <div class="space-x-8">
+              <span>Repeat</span>
+              <span>Date</span>
+              <span class="mr-1">Time</span>
             </div>
           </div>
           <div id="schedulesDiv" class="space-y-3">
@@ -275,17 +254,28 @@
                 <div class="group flex justify-between p-2 border rounded">
                   <h3 id="title" class="font-bold">Title</h3>
                   <div
-                    id="memo"
-                    class="bg-[#6a994e] text-[#f2e8cf] w-40 h-20 p-2 absolute mt-7 ml-8 rounded group-hover:block hidden"
+                    id="memoDiv"
+                    class="outline-2 outline-[#386641] bg-[#a7c957] text-[#386641] w-40 h-20 p-2 absolute mt-3 ml-12 rounded group-hover:block hidden"
                   >
-                    Memo
+                    <h3 id="memoTitle" class="font-bold">Memo Title</h3>
+                    <p id="memo">Memo</p>
                   </div>
                   <div class="space-x-2">
+                    <span id="repeat">Repeat</span>
                     <span id="date">Date</span><span id="time">Time</span>
                   </div>
                 </div>
               </div>
             </template>
+          </div>
+          <div class="flex justify-center items-end p-1">
+            <div id="pageNumDiv">
+              <template id="pageNumTemplate">
+                <button class="pageNum text-[#6a994e] hover:cursor-pointer">
+                  1
+                </button>
+              </template>
+            </div>
           </div>
         </div>
       </section>

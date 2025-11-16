@@ -1,13 +1,20 @@
 import { onAuthReady } from "./authentication.js";
 import { db } from "./firebaseConfig.js";
-import { collection, doc, addDoc, getDoc, updateDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  addDoc,
+  getDoc,
+  updateDoc,
+  serverTimestamp,
+} from "firebase/firestore";
 
 // check if user logged in
 onAuthReady((user) => {
   if (!user) {
-    alert("need to login");
-    location.href = "/login.html";
-    return;
+    location.href = "/src/pages/loginSignup.html";
+  } else {
+    sessionStorage.setItem("uid", user.uid);
   }
 });
 
@@ -29,29 +36,41 @@ const scheduleTime = document.getElementById("time");
 const scheduleMemo = document.getElementById("memo");
 const scheduleRepeatString = document.getElementById("repeat");
 
+function emptyTitleAlert() {
+  scheduleTitle.focus();
+  scheduleTitle.classList.add("outline-2", "outline-[#bc4749]");
+  let alertDiv = document.createElement("div");
+  alertDiv.classList.add("m-0", "p-0", "-mt-7", "text-[#bc4749]");
+  let alertMsg = "Please fill out the title";
+  alertDiv.innerText = alertMsg;
+  scheduleTitle.after(alertDiv);
+}
+
+function emptyDateAlert() {
+  scheduleDate.focus();
+  scheduleDate.classList.add("outline-2", "outline-[#bc4749]");
+  let alertDiv = document.createElement("div");
+  alertDiv.classList.add("m-0", "p-0", "-mt-2", "text-[#bc4749]");
+  let alertMsg = "Please select date";
+  alertDiv.innerText = alertMsg;
+  scheduleDate.after(alertDiv);
+}
+
 // add new schedule
 async function addScheduleData() {
-  const userUid = user.uid;
+  const userUid = sessionStorage.getItem("uid");
+
   let scheduleTitleValue = scheduleTitle.value;
   let scheduleDateValue = scheduleDate.value;
   let scheduleTimeValue = scheduleTime.value;
   let scheduleMemoValue = scheduleMemo.value;
 
   let scheduleRepeatStringValue = scheduleRepeatString.value;
-  let scheduleRepeatInt = 0;
-
-  if (scheduleRepeatStringValue === "daily") {
-    scheduleRepeatInt = 1;
-  } else if (scheduleRepeatStringValue === "weekly") {
-    scheduleRepeatInt = 7;
-  } else if (scheduleRepeatStringValue === "biweekly") {
-    scheduleRepeatInt = 14;
-  } else if (scheduleRepeatStringValue === "monthly") {
-    scheduleRepeatInt = 30;
-  }
 
   if (!scheduleTitleValue) {
-    alert("title is empty");
+    emptyTitleAlert();
+  } else if (scheduleRepeatStringValue != "none" && !scheduleDateValue) {
+    emptyDateAlert();
   } else {
     const scheduleRef = collection(db, "schedules");
 
@@ -61,8 +80,9 @@ async function addScheduleData() {
         title: scheduleTitleValue,
         date: scheduleDateValue,
         time: scheduleTimeValue,
-        repeat: scheduleRepeatInt,
+        repeat: scheduleRepeatStringValue,
         memo: scheduleMemoValue,
+        timestamp: serverTimestamp(),
       });
       location.href = "/src/pages/calendar.html";
     } catch (error) {
@@ -85,20 +105,7 @@ async function displayScheduleData() {
     scheduleDate.value = schedule.date;
     scheduleTime.value = schedule.time;
     scheduleMemo.value = schedule.memo;
-
-    let scheduleRepeatInt = schedule.repeat;
-
-    if (scheduleRepeatInt == 1) {
-      scheduleRepeatString.value = "daily";
-    } else if (scheduleRepeatInt == 7) {
-      scheduleRepeatString.value = "weekly";
-    } else if (scheduleRepeatInt == 14) {
-      scheduleRepeatString.value = "biweekly";
-    } else if (scheduleRepeatInt == 30) {
-      scheduleRepeatString.value = "monthly";
-    } else {
-      scheduleRepeatString = "none";
-    }
+    scheduleRepeatString.value = schedule.repeat;
   } catch (error) {
     console.log(error);
     alert("Sorry, something went wrong :(");
@@ -118,31 +125,23 @@ async function updateScheduleData() {
   let scheduleMemoValue = scheduleMemo.value;
 
   let scheduleRepeatStringValue = scheduleRepeatString.value;
-  let scheduleRepeatInt = 0;
-
-  if (scheduleRepeatStringValue === "daily") {
-    scheduleRepeatInt = 1;
-  } else if (scheduleRepeatStringValue === "weekly") {
-    scheduleRepeatInt = 7;
-  } else if (scheduleRepeatStringValue === "biweekly") {
-    scheduleRepeatInt = 14;
-  } else if (scheduleRepeatStringValue === "monthly") {
-    scheduleRepeatInt = 30;
-  }
 
   const scheduleDocId = localStorage.getItem("scheduleDocId");
   const scheduleRef = doc(db, "schedules", scheduleDocId);
 
   if (!scheduleTitleValue) {
-    alert("title is empty");
+    emptyTitleAlert();
+  } else if (scheduleRepeatStringValue != "none" && !scheduleDateValue) {
+    emptyDateAlert();
   } else {
     try {
       await updateDoc(scheduleRef, {
         title: scheduleTitleValue,
         date: scheduleDateValue,
         time: scheduleTimeValue,
-        repeat: scheduleRepeatInt,
+        repeat: scheduleRepeatStringValue,
         memo: scheduleMemoValue,
+        timestamp: serverTimestamp(),
       });
 
       location.href = "/src/pages/calendar.html";

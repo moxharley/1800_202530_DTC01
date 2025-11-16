@@ -125,6 +125,7 @@ function displayCalendar(baseDate) {
       document.getElementById("calendar").appendChild(newWeek);
     }
   }
+  monthlyScheduleQuery(currentYear, currentMonth);
 }
 // initial setting
 displayCalendar(new Date());
@@ -261,7 +262,6 @@ async function monthlyScheduleQuery(year, month) {
   const userUid = sessionStorage.getItem("uid");
 
   const yearMonthStr = year + "-" + month;
-  console.log(yearMonthStr);
 
   // basic query
   const scheduleQuery = query(
@@ -275,9 +275,19 @@ async function monthlyScheduleQuery(year, month) {
 
   querySnapshot.forEach((doc) => {
     const schedule = doc.data();
-    console.log(schedule);
-    // const scheduleMonth = schedule.date.slice(5, 7);
-    // console.log(scheduleMonth);
+
+    const scheduleDate = schedule.date;
+    let calendarCell = document.getElementById(scheduleDate).parentElement;
+
+    let scheduleElement = document.createElement("p");
+    scheduleElement.textContent = schedule.title;
+    scheduleElement.classList.add(
+      "bg-[#386641]",
+      "text-[#f2e8cf]",
+      "w-full",
+      "text-xs"
+    );
+
+    calendarCell.append(scheduleElement);
   });
 }
-monthlyScheduleQuery(2025, 11);

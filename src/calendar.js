@@ -41,14 +41,14 @@ function displayCalendar(baseDate) {
   ];
 
   // from Template
-  const dateId = [
-    "sunDate",
-    "monDate",
-    "tueDate",
-    "wedDate",
-    "thuDate",
-    "friDate",
-    "satDate",
+  const dateClass = [
+    "sundays",
+    "mondays",
+    "tuesdays",
+    "wednesdays",
+    "thursdays",
+    "fridays",
+    "saturdays",
   ];
 
   // get month name as a string
@@ -65,7 +65,8 @@ function displayCalendar(baseDate) {
   ).getDate();
 
   // set year and month to the page
-  document.getElementById("year").innerText = baseDate.getFullYear();
+  const currentYear = baseDate.getFullYear();
+  document.getElementById("year").innerText = currentYear;
   document.getElementById("monthName").innerText = month;
 
   // count how many week sections are needed
@@ -86,6 +87,9 @@ function displayCalendar(baseDate) {
   }
 
   let calendarTemplate = document.getElementById("calendarTemplate");
+  const currentMonth = parseInt(baseDate.getMonth()) + 1;
+  const dateStr = currentYear + "-" + currentMonth + "-";
+  let calendarId = "";
   let dateCount = 1;
   for (let i = 0; i < weekNum; i++) {
     let newWeek = calendarTemplate.content.cloneNode(true);
@@ -93,7 +97,11 @@ function displayCalendar(baseDate) {
     if (i == 0) {
       // set the first week
       for (let j = firstDay; j < 7; j++) {
-        newWeek.querySelector("#" + dateId[j]).textContent = dateCount;
+        newWeek.querySelector("." + dateClass[j]).textContent = dateCount;
+
+        calendarId = dateStr + dateCount.toString().padStart(2, "0");
+        newWeek.querySelector("." + dateClass[j]).id = calendarId;
+
         dateCount += 1;
       }
       document.getElementById("calendar").appendChild(newWeek);
@@ -101,13 +109,17 @@ function displayCalendar(baseDate) {
       // set the last week
       let maxNum = lastDate - dateCount;
       for (let j = 0; j <= maxNum; j++) {
-        newWeek.querySelector("#" + dateId[j]).textContent = dateCount;
+        newWeek.querySelector("." + dateClass[j]).textContent = dateCount;
+        calendarId = dateStr + dateCount.toString().padStart(2, "0");
+        newWeek.querySelector("." + dateClass[j]).id = calendarId;
         dateCount += 1;
       }
       document.getElementById("calendar").appendChild(newWeek);
     } else {
       for (let j = 0; j < 7; j++) {
-        newWeek.querySelector("#" + dateId[j]).textContent = dateCount;
+        newWeek.querySelector("." + dateClass[j]).textContent = dateCount;
+        calendarId = dateStr + dateCount.toString().padStart(2, "0");
+        newWeek.querySelector("." + dateClass[j]).id = calendarId;
         dateCount += 1;
       }
       document.getElementById("calendar").appendChild(newWeek);
@@ -184,14 +196,14 @@ todayBtn.addEventListener("click", () => displayCalendar(new Date()));
 
 function displayWeek() {
   // from Template
-  const dateId = [
-    "sunDate",
-    "monDate",
-    "tueDate",
-    "wedDate",
-    "thuDate",
-    "friDate",
-    "satDate",
+  const dateClass = [
+    "sundays",
+    "mondays",
+    "tuesdays",
+    "wednesdays",
+    "thursdays",
+    "fridays",
+    "saturdays",
   ];
 
   let today = new Date();
@@ -203,8 +215,15 @@ function displayWeek() {
   // Weekly Template
   let weekTemplate = document.getElementById("weekTemplate");
   let newDate = weekTemplate.content.cloneNode(true);
+  const year = today.getFullYear();
+  const month = today.getMonth() + 1;
+  const dateStr = year + "-" + month + "-";
+  let calendarId = "";
   for (let i = 0; i < 7; i++) {
-    newDate.querySelector("#" + dateId[i]).textContent = sunday + i;
+    let date = sunday + i;
+    newDate.querySelector("." + dateClass[i]).textContent = date;
+    calendarId = dateStr + date.toString().padStart(2, "0");
+    newDate.querySelector("." + dateClass[i]).id = calendarId;
   }
   document.getElementById("week").appendChild(newDate);
 }
@@ -236,3 +255,29 @@ toggleCalendarBtn.addEventListener("click", () => {
   arrowIcon.classList.toggle("fa-chevron-up");
   arrowIcon.classList.toggle("fa-chevron-down");
 });
+
+async function monthlyScheduleQuery(year, month) {
+  // get user uid from session
+  const userUid = sessionStorage.getItem("uid");
+
+  const yearMonthStr = year + "-" + month;
+  console.log(yearMonthStr);
+
+  // basic query
+  const scheduleQuery = query(
+    collection(db, "schedules"),
+    where("userUid", "==", userUid),
+    where("date", ">=", yearMonthStr),
+    where("date", "<=", yearMonthStr + "\uf8ff")
+  );
+
+  const querySnapshot = await getDocs(scheduleQuery);
+
+  querySnapshot.forEach((doc) => {
+    const schedule = doc.data();
+    console.log(schedule);
+    // const scheduleMonth = schedule.date.slice(5, 7);
+    // console.log(scheduleMonth);
+  });
+}
+monthlyScheduleQuery(2025, 11);

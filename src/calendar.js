@@ -1,14 +1,6 @@
 import { onAuthReady } from "./authentication.js";
 import { db } from "./firebaseConfig.js";
-import {
-  collection,
-  doc,
-  query,
-  where,
-  getDocs,
-  deleteDoc,
-  orderBy,
-} from "firebase/firestore";
+import { collection, query, and, or, where, getDocs } from "firebase/firestore";
 
 onAuthReady((user) => {
   if (!user) {
@@ -264,10 +256,7 @@ toggleCalendarBtn.addEventListener("click", () => {
   arrowIcon.classList.toggle("fa-chevron-down");
 });
 
-async function monthlyScheduleQuery(elementId, year, month) {
-  // get user uid from session
-  const userUid = sessionStorage.getItem("uid");
-
+function drawScheduleOnCaledar(elementId, schedule) {
   const baseView = document.getElementById(elementId);
 
   let prefix = "";
@@ -277,36 +266,138 @@ async function monthlyScheduleQuery(elementId, year, month) {
     prefix = "week-";
   }
 
+  const scheduleDate = schedule.date;
+
+  let calendarDates = baseView.querySelectorAll("." + prefix + scheduleDate);
+
+  for (let calendarDate of calendarDates) {
+    let calendarCell = calendarDate.parentElement;
+    let scheduleElement = document.createElement("p");
+    scheduleElement.textContent = schedule.title;
+    scheduleElement.classList.add(
+      "bg-[#386641]",
+      "text-[#f2e8cf]",
+      "w-full",
+      "text-xs"
+    );
+
+    calendarCell.append(scheduleElement);
+  }
+}
+
+async function monthlyScheduleQuery(elementId, year, month) {
+  // get user uid from session
+  const userUid = sessionStorage.getItem("uid");
+
   const yearMonthStr = year + "-" + month;
 
   // basic query
   const scheduleQuery = query(
     collection(db, "schedules"),
-    where("userUid", "==", userUid),
-    where("date", ">=", yearMonthStr),
-    where("date", "<=", yearMonthStr + "\uf8ff")
+    and(
+      where("userUid", "==", userUid),
+      or(
+        and(
+          where("date", ">=", yearMonthStr),
+          where("date", "<=", yearMonthStr + "\uf8ff")
+        ),
+        where("repeat", "!=", "none")
+      )
+    )
   );
 
-  const querySnapshot = await getDocs(scheduleQuery);
+  try {
+    const querySnapshot = await getDocs(scheduleQuery);
 
-  querySnapshot.forEach((doc) => {
-    const schedule = doc.data();
+    querySnapshot.forEach((doc) => {
+      const schedule = doc.data();
 
-    const scheduleDate = schedule.date;
+      scheduleRepeat(elementId, schedule, year, month);
 
-    let calendarDates = baseView.querySelectorAll("." + prefix + scheduleDate);
+      if (schedule.date.slice(5, 7) == month) {
+        drawScheduleOnCaledar(elementId, schedule);
+      }
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
 
-    for (let calendarDate of calendarDates) {
-      let calendarCell = calendarDate.parentElement;
-      let scheduleElement = document.createElement("p");
-      scheduleElement.textContent = schedule.title;
-      scheduleElement.classList.add(
-        "bg-[#386641]",
-        "text-[#f2e8cf]",
-        "w-full",
-        "text-xs"
-      );
-      calendarCell.append(scheduleElement);
+function scheduleRepeat(elementId, schedule, year, month) {
+  const scheduleRepeatStr = schedule.repeat;
+  let scheduleDate = new Date(schedule.date);
+
+  scheduleDate.setFullYear(year);
+  scheduleDate.setMonth(month - 1);
+  scheduleDate.setDate(scheduleDate.getDate() + 1);
+
+  let lastDate = new Date(
+    scheduleDate.getFullYear(),
+    scheduleDate.getMonth() + 1,
+    0
+  ).getDate();
+
+  let newSchedule = structuredClone(schedule);
+  let repeatedDate = year + "-" + month + "-";
+
+  if (scheduleRepeatStr == "monthly") {
+    repeatedDate += scheduleDate.getDate();
+    newSchedule.date = repeatedDate;
+
+    if (repeatedDate != schedule.date) {
+      drawScheduleOnCaledar(elementId, newSchedule);
     }
-  });
+  } else if (scheduleRepeatStr == "biweekly") {
+    let baseDate = scheduleDate.getDate();
+
+    if (baseDate / 14 > 1) {
+      if (baseDate % 14 == 0) {
+        scheduleDate.setDate(14);
+      } else {
+        scheduleDate.setDate(baseDate % 14);
+      }
+    }
+
+    for (let i = scheduleDate.getDate(); i <= lastDate; i += 14) {
+      scheduleDate.setDate(i);
+
+      repeatedDate =
+        year +
+        "-" +
+        month +
+        "-" +
+        scheduleDate.getDate().toString().padStart(2, "0");
+
+      newSchedule.date = repeatedDate;
+      if (repeatedDate != schedule.date) {
+        drawScheduleOnCaledar(elementId, newSchedule);
+      }
+    }
+  } else if (scheduleRepeatStr == "weekly") {
+    let baseDate = scheduleDate.getDate();
+
+    if (baseDate / 7 > 1) {
+      if (baseDate % 7 == 0) {
+        scheduleDate.setDate(7);
+      } else {
+        scheduleDate.setDate(scheduleDate.getDate() % 7);
+      }
+    }
+    for (let i = scheduleDate.getDate(); i <= lastDate; i += 7) {
+      scheduleDate.setDate(i);
+      repeatedDate =
+        year +
+        "-" +
+        month +
+        "-" +
+        scheduleDate.getDate().toString().padStart(2, "0");
+
+      newSchedule.date = repeatedDate;
+      if (repeatedDate != schedule.date) {
+        drawScheduleOnCaledar(elementId, newSchedule);
+      }
+    }
+  } else {
+    console.log("hi");
+  }
 }

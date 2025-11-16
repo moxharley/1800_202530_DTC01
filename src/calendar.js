@@ -88,8 +88,8 @@ function displayCalendar(baseDate) {
 
   let calendarTemplate = document.getElementById("calendarTemplate");
   const currentMonth = parseInt(baseDate.getMonth()) + 1;
-  const dateStr = currentYear + "-" + currentMonth + "-";
-  let calendarId = "";
+  const dateStr = "mon-" + currentYear + "-" + currentMonth + "-";
+  let calendarDateClass = "";
   let dateCount = 1;
   for (let i = 0; i < weekNum; i++) {
     let newWeek = calendarTemplate.content.cloneNode(true);
@@ -99,8 +99,10 @@ function displayCalendar(baseDate) {
       for (let j = firstDay; j < 7; j++) {
         newWeek.querySelector("." + dateClass[j]).textContent = dateCount;
 
-        calendarId = dateStr + dateCount.toString().padStart(2, "0");
-        newWeek.querySelector("." + dateClass[j]).id = calendarId;
+        calendarDateClass = dateStr + dateCount.toString().padStart(2, "0");
+        newWeek
+          .querySelector("." + dateClass[j])
+          .classList.add(calendarDateClass);
 
         dateCount += 1;
       }
@@ -110,22 +112,26 @@ function displayCalendar(baseDate) {
       let maxNum = lastDate - dateCount;
       for (let j = 0; j <= maxNum; j++) {
         newWeek.querySelector("." + dateClass[j]).textContent = dateCount;
-        calendarId = dateStr + dateCount.toString().padStart(2, "0");
-        newWeek.querySelector("." + dateClass[j]).id = calendarId;
+        calendarDateClass = dateStr + dateCount.toString().padStart(2, "0");
+        newWeek
+          .querySelector("." + dateClass[j])
+          .classList.add(calendarDateClass);
         dateCount += 1;
       }
       document.getElementById("calendar").appendChild(newWeek);
     } else {
       for (let j = 0; j < 7; j++) {
         newWeek.querySelector("." + dateClass[j]).textContent = dateCount;
-        calendarId = dateStr + dateCount.toString().padStart(2, "0");
-        newWeek.querySelector("." + dateClass[j]).id = calendarId;
+        calendarDateClass = dateStr + dateCount.toString().padStart(2, "0");
+        newWeek
+          .querySelector("." + dateClass[j])
+          .classList.add(calendarDateClass);
         dateCount += 1;
       }
       document.getElementById("calendar").appendChild(newWeek);
     }
   }
-  monthlyScheduleQuery(currentYear, currentMonth);
+  monthlyScheduleQuery("calendar", currentYear, currentMonth);
 }
 // initial setting
 displayCalendar(new Date());
@@ -218,15 +224,16 @@ function displayWeek() {
   let newDate = weekTemplate.content.cloneNode(true);
   const year = today.getFullYear();
   const month = today.getMonth() + 1;
-  const dateStr = year + "-" + month + "-";
-  let calendarId = "";
+  const dateStr = "week-" + year + "-" + month + "-";
+  let calendarDateClass = "";
   for (let i = 0; i < 7; i++) {
     let date = sunday + i;
     newDate.querySelector("." + dateClass[i]).textContent = date;
-    calendarId = dateStr + date.toString().padStart(2, "0");
-    newDate.querySelector("." + dateClass[i]).id = calendarId;
+    calendarDateClass = dateStr + date.toString().padStart(2, "0");
+    newDate.querySelector("." + dateClass[i]).classList.add(calendarDateClass);
   }
   document.getElementById("week").appendChild(newDate);
+  monthlyScheduleQuery("week", year, month);
 }
 // set initial weekly calendar
 displayWeek();
@@ -257,9 +264,18 @@ toggleCalendarBtn.addEventListener("click", () => {
   arrowIcon.classList.toggle("fa-chevron-down");
 });
 
-async function monthlyScheduleQuery(year, month) {
+async function monthlyScheduleQuery(elementId, year, month) {
   // get user uid from session
   const userUid = sessionStorage.getItem("uid");
+
+  const baseView = document.getElementById(elementId);
+
+  let prefix = "";
+  if (elementId == "calendar") {
+    prefix = "mon-";
+  } else {
+    prefix = "week-";
+  }
 
   const yearMonthStr = year + "-" + month;
 
@@ -277,17 +293,20 @@ async function monthlyScheduleQuery(year, month) {
     const schedule = doc.data();
 
     const scheduleDate = schedule.date;
-    let calendarCell = document.getElementById(scheduleDate).parentElement;
 
-    let scheduleElement = document.createElement("p");
-    scheduleElement.textContent = schedule.title;
-    scheduleElement.classList.add(
-      "bg-[#386641]",
-      "text-[#f2e8cf]",
-      "w-full",
-      "text-xs"
-    );
+    let calendarDates = baseView.querySelectorAll("." + prefix + scheduleDate);
 
-    calendarCell.append(scheduleElement);
+    for (let calendarDate of calendarDates) {
+      let calendarCell = calendarDate.parentElement;
+      let scheduleElement = document.createElement("p");
+      scheduleElement.textContent = schedule.title;
+      scheduleElement.classList.add(
+        "bg-[#386641]",
+        "text-[#f2e8cf]",
+        "w-full",
+        "text-xs"
+      );
+      calendarCell.append(scheduleElement);
+    }
   });
 }

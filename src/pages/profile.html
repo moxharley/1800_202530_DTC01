@@ -33,9 +33,10 @@
 
     <main class="mx-6 md:mx-16 text-[#386642]">
       <section id="userProfileSection">
+      <div class="border-2 p-8 rounded-xl mt-4">
 
       <!-- User profile -->
-      <div class="my-10 flex flex-col items-center md:flex-row md:gap-6">
+      <div class="flex flex-col items-center md:flex-row md:gap-6">
         <div id="feedbackBanner" class="hidden mb-3 text-xs"></div>
       
         <img id="profilePictureElement" class="w-40 h-40 rounded-full object-cover mb-6" src="" alt="user profile picture" />
@@ -55,11 +56,16 @@
         <a href="/src/pages/editProfile.html"
           class="md:hidden text-xs bg-[#386641] px-3 py-2 rounded-2xl text-[#f2e8cf] mt-2">Edit Profile</a>
         </div>
+      </div>  
       </section>
 
-      <!-- Achievements section -->
-      <section class="flex flex-col items-center md:items-start mt-10">
-        <h2 class="md:text-3xl text-2xl font-bold">Badges</h2>
+      <!-- Badges section -->
+      <section class="flex flex-col items-center md:items-start mt-10 w-full">
+        <div class="border-2 p-8 md:pt-20 rounded-xl w-full">
+          <h1 class="w-fit -mt-13 md:-mt-26 px-2 bg-[#f2e8cf] mb-5 md:text-3xl text-2xl font-bold">
+            Badges
+          </h1>
+
         <div class="flex gap-2 my-6 flex-wrap justify-center">
           <img class="w-11 h-11" src="/images/AM01.jpg" alt="" /><img
             class="w-11 h-11"
@@ -70,6 +76,8 @@
             src="/images/AM01.jpg"
             alt=""
           />
+          <img class="w-11 h-11" src="/images/AM01.jpg" alt="" /><img class="w-11 h-11" src="/images/AM01.jpg" alt="" />
+        </div>
         </div>
       </section>
     </main>

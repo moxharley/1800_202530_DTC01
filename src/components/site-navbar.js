@@ -54,6 +54,7 @@ class SiteNavbar extends HTMLElement {
                   <i class="fa-solid fa-user md:text-2xl text-3xl hover:cursor-pointer"></i>
                   <div id="dropdownContents" class="group-hover:block hidden bg-[#6a994e] text-[#f2e8cf] rounded-b absolute md:min-w-[100px] min-w-[60px] z-10 md:mt-10 md:-ml-15 -ml-12 md:text-center text-right">
                     <a class="block p-2 hover:bg-[#386641]" href="/src/pages/profile.html">Profile</a>
+                    <a class="block p-2 hover:bg-[#386641]" href="/src/pages/calendar.html">Calendar</a>
                     <a class="block p-2 hover:bg-[#386641]" href="/src/pages/badge.html">Badges</a>
                     <a class="block p-2 hover:bg-[#386641] rounded-b" id="signOutBtn" href="#">Log out</a>
                   </div>

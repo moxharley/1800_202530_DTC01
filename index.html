@@ -4,19 +4,14 @@
     <title>My BCIT Project</title>
     <meta name="comp1800 template" content="My 1800 App" />
 
-    <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- Other libraries go here -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script
       src="https://kit.fontawesome.com/2043d6ea2c.js"
       crossorigin="anonymous"
     ></script>
-    <!-- Link to styles of your own -->
-    <!-- <link rel="stylesheet" href="./styles/style.css"> -->
-    <!-- Web Components for shared navbar and footer layout -->
     <script type="module" src="/src/components/site-navbar.js"></script>
     <script type="module" src="/src/components/site-footer.js"></script>
     <style>
@@ -31,31 +26,24 @@
     </style>
   </head>
   <body class="bg-[#f2e8cf]">
-    <!------------------------------>
-    <!-- Your HTML Layout go here -->
     <header>
       <site-navbar></site-navbar>
     </header>
-    <!------------------------------>
-    <!-- Stuff for body goes here -->
-    <main class="mx-16 text-[#386642]">
+
+    <main class="mx-6 md:mx-16 text-[#386642]">
       <section class="md:mt-20 mt-10">
-        <h1 class="text-3xl font-bold">What is Green Scouts?</h1>
-        <p class="">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum enim,
-          quo, quia soluta ut distinctio adipisci ducimus ipsa vitae quae
-          laudantium nobis ab laborum voluptas! Provident ipsam facere rem
-          recusandae non! Qui esse vitae ratione illo quidem nulla. Doloribus,
-          dolorum suscipit debitis quos tempore labore!
+        <div class="border-2 p-8 md:px-20 md:pt-20 rounded-xl">
+          <h1 class="w-fit -mt-13 md:-mt-26 px-2 bg-[#f2e8cf] mb-5 md:text-3xl text-2xl font-bold">
+            Green Scouts
+          </h1>
+        <p class="mt-6">
+          Welcome to Green Scouts! A recycling companion app with information about what you can recycle and where you can recycle. 
+          <br><br>
+          Document your recycling journey and earn fun badges when completing certain milestones.
         </p>
       </section>
     </main>
-    <site-footer></site-footer>
-    <!---------------------------------------------->
-    <!-- Your own JavaScript functions go here    -->
-    <!---------------------------------------------->
 
-    <!-- Link to scripts of your own -->
-    <!-- <script type="module" src="./src/main.js"></script> -->
+    <site-footer></site-footer>
   </body>
 </html>

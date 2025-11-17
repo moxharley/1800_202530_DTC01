@@ -25,14 +25,15 @@
     <site-navbar></site-navbar>
 
     <main>
-      <div id="authAlert" class="alert alert-danger d-none" role="alert"></div>
+      <div id="authAlert" class="alert alert-danger" role="alert"></div>
+
       <!-- Login -->
       <div
         id="loginView"
-        class="mx-6 md:mx-16 text-[#386642] flex flex-col items-center"
+        class="mx-6 md:mx-16 text-[#386642] flex flex-col items-center text-center"
       >
         <h2 class="text-3xl md:text-4xl font-bold my-8">Welcome back!</h2>
-        <form id="loginForm" class="text-center" novalidate>
+        <form id="loginForm" class="w-full max-w-md" novalidate>
           <input
             class="bg-[#a7c957] rounded-lg px-4 py-2 mb-2 w-full"
             type="email"
@@ -55,7 +56,7 @@
           >
             Login
           </button>
-          <div class="mt-2">
+          <div class="mt-2 text-sm">
             Don't have an account?
             <a class="text-[#6a994e]" id="toSignup" href="#">Sign up.</a>
           </div>
@@ -76,11 +77,11 @@
 
       <!-- Signup -->
       <div
-        id="signupView"
-        class="mx-6 md:mx-16 text-[#386642] flex flex-col items-center hidden"
+        id="signupView" style="display: none"
+        class="mx-6 md:mx-16 text-[#386642] flex flex-col items-center"
       >
         <h3 class="text-3xl md:text-4xl font-bold my-8">Sign Up</h3>
-        <form id="signupForm" novalidate>
+        <form id="signupForm" class="w-full max-w-md" novalidate>
           <input
             class="bg-[#a7c957] rounded-lg px-4 py-2 mb-2 w-full"
             type="text"
@@ -110,7 +111,7 @@
             Create Account
           </button>
         </form>
-        <div class="mt-2">
+        <div class="mt-2 text-sm">
           Already have an account?
           <a class="text-[#6a994e]" href="#" id="toLogin">Login.</a>
         </div>
@@ -118,9 +119,6 @@
     </main>
 
     <site-footer></site-footer>
-    <!---------------------------------------------->
-    <!-- Your own JavaScript functions go here    -->
-    <!---------------------------------------------->
 
     <script type="module" src="/src/firebaseConfig.js"></script>
     <script type="module" src="/src/authentication.js"></script>

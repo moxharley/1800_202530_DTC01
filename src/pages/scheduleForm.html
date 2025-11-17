@@ -38,23 +38,29 @@
     </header>
     <!------------------------------>
     <!-- Stuff for body goes here -->
-    <main class="mx-16 text-[#386642]">
-      <section class="md:mt-20 mt-10">
-        <div class="border-2 p-8 md:px-20 md:pt-20 rounded-xl">
+    <main class="max-w-[1400px] md:mx-16 mx-7 text-[#386642]">
+      <section class="md:mt-8 mt-0">
+        <div id="backDiv" class="mt-2 md:mb-10 mb-8 -ml-3 hover:cursor-pointer">
+          <i class="fa-solid fa-chevron-left"></i>
+          <span class="md:text-xl font-bold">Back</span>
+        </div>
+        <div class="border-2 md:p-8 p-3 md:px-20 md:pt-20 rounded-xl">
           <h1
-            class="w-fit -mt-13 md:-mt-26 px-2 bg-[#f2e8cf] mb-5 text-3xl font-bold"
+            class="w-fit -mt-8 md:-mt-26 px-2 bg-[#f2e8cf] md:mb-10 mb-8 md:text-3xl text-2xl font-bold"
           >
             Schedule
           </h1>
           <div>
-            <form onsubmit="return false" class="pt-2 space-y-7">
+            <form onsubmit="return false" class="md:pt-2 space-y-7">
               <label class="font-bold" for="title">Title</label>
               <input
                 id="title"
                 class="w-full bg-white border border-[#386642] rounded p-1 focus-within:outline"
                 type="text"
               />
-              <div class="flex justify-between">
+              <div
+                class="flex md:flex-row flex-col md:justify-between space-y-2"
+              >
                 <label class="font-bold -mr-3" for="date">Date</label>
                 <input id="date" class="focus:outline-none" type="date" />
                 <label class="font-bold -mr-3" for="time">Time</label>

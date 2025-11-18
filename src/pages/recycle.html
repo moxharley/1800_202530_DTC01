@@ -33,13 +33,13 @@
   <main class="max-w-[1400px] md:mx-16 mx-7 text-[#386642]">
 
     <!-- Recycling Form -->
-    <section id="recyclingForm" class="hidden md:mt-20 mt-10">
+    <section id="recyclingTracker" class="hidden md:mt-20 mt-10">
       <div class="border-2 p-8 md:px-20 md:pt-20 rounded-xl">
         <h1 class="w-fit -mt-13 md:-mt-26 px-2 bg-[#f2e8cf] mb-5 md:text-3xl text-2xl font-bold">
           Tracker
         </h1>
         <p class="text-sm">Record what you recycled today.</p>
-        <form class="pt-4 space-y-7">
+        <form id="recyclingForm" class="pt-4 space-y-7">
           <div class="flex flex-col">
             <div>
               <input type="checkbox" name="Paper/Cardboard" />
@@ -69,8 +69,13 @@
               <input type="checkbox" name="Flexible Plastics" />
               <label for="Flexible Plastics">Flexible Plastics</label>
             </div>
+            <div>
+              <input type="checkbox" name="Other" />
+              <label for="Other">Other</label>
+            </div>
           </div>
-          <input class="w-[80%] ml-[10%] py-1 rounded bg-[#386642] text-[#f2e8cf]" type="submit" value="Submit" />
+          <input class="w-[80%] ml-[10%] py-1 rounded bg-[#386642] text-[#f2e8cf] hover:cursor-pointer" type="submit" value="Submit" />
+          <div id="feedbackBanner" class="text-sm hidden"></div>
         </form>
       </div>
     </section>

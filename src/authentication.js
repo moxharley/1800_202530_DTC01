@@ -40,7 +40,16 @@ export async function signupUser(username, email, password) {
             esoteric: 0, 
             fragile: 0, 
             cargo: 0, 
-            electric: 0,}
+            electric: 0,},
+            playerStats: {
+            items: 0,
+            paper: 0,
+            plastic: 0,
+            metal: 0,
+            other: 0,
+            glass: 0,
+            contianers: 0,
+            electronics: 0}
         });
         console.log("User added to Firestore.");
     } catch (error) {

@@ -328,10 +328,12 @@ async function monthlyScheduleQuery(elementId, year, month) {
 function scheduleRepeat(elementId, schedule, year, month) {
   const scheduleRepeatStr = schedule.repeat;
   let scheduleDate = new Date(schedule.date);
+  scheduleDate.setDate(scheduleDate.getDate() + 1);
+
+  const scheduleDay = scheduleDate.getDay();
 
   scheduleDate.setFullYear(year);
   scheduleDate.setMonth(month - 1);
-  scheduleDate.setDate(scheduleDate.getDate() + 1);
 
   let lastDate = new Date(
     scheduleDate.getFullYear(),
@@ -376,16 +378,19 @@ function scheduleRepeat(elementId, schedule, year, month) {
       }
     }
   } else if (scheduleRepeatStr == "weekly") {
-    let baseDate = scheduleDate.getDate();
+    const firstDay = new Date(year, month - 1, 1).getDay();
+    const firstDate = new Date(year, month - 1, 1).getDate();
 
-    if (baseDate / 7 > 1) {
-      if (baseDate % 7 == 0) {
-        scheduleDate.setDate(7);
-      } else {
-        scheduleDate.setDate(scheduleDate.getDate() % 7);
-      }
+    let basedate = 1;
+    if (scheduleDay >= firstDay) {
+      basedate = scheduleDay - firstDay + firstDate;
+    } else if (scheduleDay == firstDay - firstDate) {
+      basedate = 7;
+    } else {
+      basedate = scheduleDay - firstDay + scheduleDay;
     }
-    for (let i = scheduleDate.getDate(); i <= lastDate; i += 7) {
+
+    for (let i = basedate; i <= lastDate; i += 7) {
       scheduleDate.setDate(i);
       repeatedDate =
         year +

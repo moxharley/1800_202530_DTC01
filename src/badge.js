@@ -17,7 +17,7 @@ async function toggleBadges(user) {
     const fragileRef = userDoc.data().badges.fragile;
     const scrappyRef = userDoc.data().badges.scrappy;
     const electricRef = userDoc.data().badges.electric;
-    const thriftyRef = userDoc.data().badges.thrifty;
+    const cargoRef = userDoc.data().badges.cargo;
     const esotericRef = userDoc.data().badges.esoteric;
 
     console.log(greenRef)
@@ -46,9 +46,9 @@ async function toggleBadges(user) {
         document.getElementById('electric').classList.toggle('grayscale')
         document.getElementById('electric').classList.toggle('brightness-[50%]')
     }
-    if (thriftyRef === 0) {
-        document.getElementById('thrifty').classList.toggle('grayscale')
-        document.getElementById('thrifty').classList.toggle('brightness-[50%]')
+    if (cargoRef === 0) {
+        document.getElementById('cargo').classList.toggle('grayscale')
+        document.getElementById('cargo').classList.toggle('brightness-[50%]')
     }
     if (esotericRef === 0) {
         document.getElementById('esoteric').classList.toggle('grayscale')

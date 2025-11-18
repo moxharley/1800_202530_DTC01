@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Green Scouts</title>
-    <meta name="green Scouts" content="Green Scouts App" />
+    <title>Green Scouts - Profile</title>
+    <link rel="icon" href="/images/placeholder_logo.png" type="image.png">
+    <meta name="comp1800 template" content="My 1800 App" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -33,9 +34,10 @@
 
     <main class="mx-6 md:mx-16 text-[#386642]">
       <section id="userProfileSection">
+      <div class="border-2 p-8 rounded-xl mt-4">
 
       <!-- User profile -->
-      <div class="my-10 flex flex-col items-center md:flex-row md:gap-6">
+      <div class="flex flex-col items-center md:flex-row md:gap-6">
         <div id="feedbackBanner" class="hidden mb-3 text-xs"></div>
       
         <img id="profilePictureElement" class="w-40 h-40 rounded-full object-cover mb-6" src="" alt="user profile picture" />
@@ -55,11 +57,16 @@
         <a href="/src/pages/editProfile.html"
           class="md:hidden text-xs bg-[#386641] px-3 py-2 rounded-2xl text-[#f2e8cf] mt-2">Edit Profile</a>
         </div>
+      </div>  
       </section>
 
-      <!-- Achievements section -->
-      <section class="flex flex-col items-center md:items-start mt-10">
-        <h2 class="md:text-3xl text-2xl font-bold">Badges</h2>
+      <!-- Badges section -->
+      <section class="flex flex-col items-center md:items-start mt-10 w-full">
+        <div class="border-2 p-8 md:pt-20 rounded-xl w-full">
+          <h1 class="w-fit -mt-13 md:-mt-26 px-2 bg-[#f2e8cf] mb-5 md:text-3xl text-2xl font-bold">
+            Badges
+          </h1>
+
         <div class="flex gap-2 my-6 flex-wrap justify-center">
           <img class="w-11 h-11" src="/images/AM01.jpg" alt="" /><img
             class="w-11 h-11"
@@ -70,28 +77,9 @@
             src="/images/AM01.jpg"
             alt=""
           />
+          <img class="w-11 h-11" src="/images/AM01.jpg" alt="" /><img class="w-11 h-11" src="/images/AM01.jpg" alt="" />
         </div>
-      </section>
-
-      <!-- Recycling history section -->
-      <section class="flex flex-col items-center md:items-start mt-10">
-        <h2 class="md:text-3xl text-2xl font-bold">History</h2>
-        <table
-          class="w-full my-6 border-separate border-spacing-x-16 border-spacing-y-2 text-left md:border-collapse"
-        >
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Item</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>27/10/2025</td>
-              <td>Cans</td>
-            </tr>
-          </tbody>
-        </table>
+        </div>
       </section>
     </main>
     <site-footer></site-footer>

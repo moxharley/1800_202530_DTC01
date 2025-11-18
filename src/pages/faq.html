@@ -1,24 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>My BCIT Project</title>
+    <title>Green Scouts - FAQ</title>
     <meta name="comp1800 template" content="My 1800 App" />
+    <link rel="icon" href="/images/placeholder_logo.png" type="image.png">
 
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- Other libraries go here -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script
       src="https://kit.fontawesome.com/2043d6ea2c.js"
       crossorigin="anonymous"
     ></script>
-    <!-- Link to styles of your own -->
-    <!-- <link rel="stylesheet" href="./styles/style.css"> -->
-    <!-- Web Components for shared navbar and footer layout -->
     <script type="module" src="/src/components/site-navbar.js"></script>
     <script type="module" src="/src/components/site-footer.js"></script>
+    <script type="module" src="/src/faq.js"></script>
     <style>
       /* 
         color-code
@@ -30,104 +28,174 @@
       */
     </style>
   </head>
+
+
   <body class="bg-[#f2e8cf]">
-    <!------------------------------>
-    <!-- Your HTML Layout go here -->
+
     <header>
       <site-navbar></site-navbar>
     </header>
-    <!------------------------------>
-    <!-- Stuff for body goes here -->
-    <main class="mx-16 text-[#386642]">
-      <section class="md:mt-20 mt-10 border-3 border-[#386641] rounded-lg">
-        <h1 class="text-center text-3xl font-bold translate py-4">────── What is Green Scouts? ──────</h1>
-        <p class="text-center max-w-xl justify-self-center"><i>
-          Green Scouts is a recycling companion app that provides useful information about 
-          what you can recycle, where you can recycle and other interesting facts about 
-          recycling. You are able to document your recycling history and earn fun badges when 
-          completing certain milestones. We hope to motivate people to recycle consistently 
-          as well as keep people informed.
-        </i></p>
 
-        <h1 class="text-center text-3xl font-bold translate pt-4">───── FAQ ─────</h1>
-
-        <div class="p-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
-
-        <!--FAQ Entry Card-->
-          <div class="p-4 bg-[#a7c957] border-2 border-[#386641] rounded-md shadow-lg">
-            <h1 class="font-bold">How do I find what I can recycle?</h1>
-            <p class="">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum enim,
-              quo, quia soluta ut distinctio adipisci ducimus ipsa vitae quae
-              laudantium nobis ab laborum voluptas! Provident ipsam facere rem
-              recusandae non! Qui esse vitae ratione illo quidem nulla. Doloribus,
-              dolorum suscipit debitis quos tempore labore!
-            </p>
-          </div>
-        <!--FAQ Entry Card-->
-          <div class="p-4 bg-[#a7c957] border-2 border-[#386641] rounded-md shadow-lg">
-            <h1 class="font-bold">How do I use the Map?</h1>
-            <p class="">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum enim,
-              quo, quia soluta ut distinctio adipisci ducimus ipsa vitae quae
-              laudantium nobis ab laborum voluptas! Provident ipsam facere rem
-              recusandae non! Qui esse vitae ratione illo quidem nulla. Doloribus,
-              dolorum suscipit debitis quos tempore labore!
-            </p>
-          </div>
-        <!--FAQ Entry Card-->
-          <div class="p-4 bg-[#a7c957] border-2 border-[#386641] rounded-md shadow-lg">
-            <h1 class="font-bold">How do I unlock badges?</h1>
-            <p class="">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum enim,
-              quo, quia soluta ut distinctio adipisci ducimus ipsa vitae quae
-              laudantium nobis ab laborum voluptas! Provident ipsam facere rem
-              recusandae non! Qui esse vitae ratione illo quidem nulla. Doloribus,
-              dolorum suscipit debitis quos tempore labore!
-            </p>
-          </div>
-        <!--FAQ Entry Card-->
-          <div class="p-4 bg-[#a7c957] border-2 border-[#386641] rounded-md shadow-lg">
-            <h1 class="font-bold">How do I edit my profile?</h1>
-            <p class="">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum enim,
-              quo, quia soluta ut distinctio adipisci ducimus ipsa vitae quae
-              laudantium nobis ab laborum voluptas! Provident ipsam facere rem
-              recusandae non! Qui esse vitae ratione illo quidem nulla. Doloribus,
-              dolorum suscipit debitis quos tempore labore!
-            </p>
-          </div>
-        <!--FAQ Entry Card-->
-          <div class="p-4 bg-[#a7c957] border-2 border-[#386641] rounded-md shadow-lg">
-            <h1 class="font-bold">How do I access all my badge progress?</h1>
-            <p class="">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum enim,
-              quo, quia soluta ut distinctio adipisci ducimus ipsa vitae quae
-              laudantium nobis ab laborum voluptas! Provident ipsam facere rem
-              recusandae non! Qui esse vitae ratione illo quidem nulla. Doloribus,
-              dolorum suscipit debitis quos tempore labore!
-            </p>
-          </div>
-        <!--FAQ Entry Card-->
-          <div class="p-4 bg-[#a7c957] border-2 border-[#386641] rounded-md shadow-lg">
-            <h1 class="font-bold">How do I see the leaderboard?</h1>
-            <p class="">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum enim,
-              quo, quia soluta ut distinctio adipisci ducimus ipsa vitae quae
-              laudantium nobis ab laborum voluptas! Provident ipsam facere rem
-              recusandae non! Qui esse vitae ratione illo quidem nulla. Doloribus,
-              dolorum suscipit debitis quos tempore labore!
-            </p>
+    <main class="max-w-[1400px] md:mx-16 mx-7 text-[#386642]">
+      <section class="md:mt-20 mt-10 min-w-[183px]">
+        <div class="border-2 p-8 md:pt-20 rounded-xl">
+          <h1 class="w-fit -mt-13 md:-mt-26 px-2 bg-[#f2e8cf] mb-5 md:text-3xl text-2xl font-bold">
+            FAQ
+          </h1>
+  
+        <!-- What can I recycle? -->
+        <div class="dropdown mt-4 p-4 bg-[#a7c957] border-2 border-[#386641] rounded-md shadow-lg flex justify-between hover:cursor-pointer">
+          <div class="font-bold">What can I recycle?</div>
+          <div>
+            <i class="fa fa-angle-up"></i>
           </div>
         </div>
+        
+        <div class="hidden! p-2">
+
+          <!-- Recyclable items icons -->
+          <div class="px-5 mt-4 grid md:grid-cols-6 grid-cols-3 gap-5 mb-5 text-l font-bold text-center">
+            <!-- Paper -->
+            <a class="" href="#paper">
+              <div class="flex flex-col justify-center space-y-1">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" transform="rotate(0)matrix(-1, 0, 0, 1, 0, 0)"
+                  height="50px">
+                  <g>
+                    <path
+                      d="M52,64c2.206,0,4-1.794,4-4V4c0-2.206-1.794-4-4-4H26c-1.638,0-3.668,0.841-4.828,2L10,13.171C8.841,14.33,8,16.36,8,18v42 c0,2.206,1.794,4,4,4H52z M52,4l0,56h0H12V18h10c2.206,0,4-1.794,4-4V4H52z M22,6.828V14h-7.172L22,6.828z">
+                    </path>
+                    <path d="M32,16h12c1.104,0,2-0.896,2-2s-0.896-2-2-2H32c-1.104,0-2,0.896-2,2S30.896,16,32,16z"></path>
+                    <path d="M44,22H20c-1.104,0-2,0.896-2,2s0.896,2,2,2h24c1.104,0,2-0.896,2-2S45.104,22,44,22z"></path>
+                    <path d="M44,32H20c-1.104,0-2,0.896-2,2s0.896,2,2,2h24c1.104,0,2-0.896,2-2S45.104,32,44,32z"></path>
+                    <path d="M44,42H20c-1.104,0-2,0.896-2,2s0.896,2,2,2h24c1.104,0,2-0.896,2-2S45.104,42,44,42z"></path>
+                    <path d="M44,52H20c-1.104,0-2,0.896-2,2s0.896,2,2,2h24c1.104,0,2-0.896,2-2S45.104,52,44,52z"></path>
+                  </g>
+                </svg>
+                <p>Paper</p>
+              </div>
+            </a>
+            <!-- Glass -->
+            <a class="" href="#glass">
+              <div class="flex flex-col justify-center space-y-1">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" stroke="#000000" stroke-width="1" height="50px">
+                  <path id="wine_1_"
+                    d="M26,31.36h-7v-0.72h3.14v-6.291c-2.512-0.186-4.5-2.296-4.5-4.864l1.005-6.539 C18.671,12.77,18.822,12.64,19,12.64h7c0.178,0,0.329,0.129,0.355,0.305l1,6.484c0.004,2.62-1.983,4.733-4.495,4.919v6.291H26V31.36 z M18.384,19.36l-0.028,0.179c0.005,2.238,1.861,4.103,4.145,4.103s4.14-1.864,4.14-4.157l-0.019-0.124h-8.238V19.36z M18.494,18.64 h8.015l-0.817-5.28h-6.383L18.494,18.64z M12.493,31.36H6.508c-1.03,0-1.868-0.757-1.868-1.688V14.439 c0-2.61,1.064-3.825,1.919-4.802C7.163,8.949,7.64,8.404,7.64,7.528V1c0-0.199,0.161-0.36,0.36-0.36h3c0.199,0,0.36,0.161,0.36,0.36 v6.528c0,0.876,0.477,1.421,1.081,2.11c0.855,0.976,1.92,2.191,1.92,4.801v15.233C14.361,30.604,13.523,31.36,12.493,31.36z M5.36,27.36v2.312c0,0.533,0.515,0.967,1.148,0.967h5.985c0.633,0,1.148-0.434,1.148-0.967V14.439c0-2.339-0.925-3.395-1.742-4.327 c-0.648-0.739-1.259-1.437-1.259-2.584V1.36H8.36v6.168c0,1.147-0.611,1.845-1.259,2.584C6.285,11.044,5.36,12.1,5.36,14.439v2.201 H11c0.199,0,0.36,0.161,0.36,0.36v10c0,0.199-0.161,0.36-0.36,0.36H5.36z M5.36,26.64h5.28v-9.28H5.36V26.64z">
+                  </path>
+                </svg>
+                <p>Glass</p>
+              </div>
+            </a>
+            <!-- Electronics -->
+            <a class="" href="#electronics">
+              <div class="flex flex-col justify-center space-y-1">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49.833 49.833" height="50px">
+                  <path
+                    d="M49.833,24.917c0,13.739-11.178,24.917-24.916,24.917c-0.828,0-1.5-0.671-1.5-1.5V36.259c-5.606-0.739-9.952-5.537-9.952-11.342c0-0.829,0.672-1.5,1.5-1.5h3.073V13.94c0-0.829,0.672-1.5,1.5-1.5c0.828,0,1.5,0.671,1.5,1.5v9.477h7.757V13.94c0-0.829,0.672-1.5,1.5-1.5c0.828,0,1.5,0.671,1.5,1.5v9.477h3.074c0.828,0,1.5,0.671,1.5,1.5c0,5.805-4.346,10.603-9.952,11.342v10.524c11.388-0.773,20.416-10.285,20.416-21.866C46.833,12.832,37.002,3,24.917,3C12.832,3,3,12.832,3,24.917c0,4.599,1.408,9,4.071,12.727c0.481,0.674,0.325,1.611-0.349,2.092c-0.675,0.482-1.611,0.326-2.093-0.348C1.602,35.148,0,30.145,0,24.917C0,11.178,11.178,0,24.917,0C38.655,0,49.833,11.178,49.833,24.917z" />
+                </svg>
+                <p>Electronics</p>
+              </div>
+            </a>
+            <!-- Plastic -->
+            <a class="" href="#plastic">
+              <div class="flex flex-col justify-center space-y-1">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48.13 122.88" stroke="#000000" stroke-width="2.8"
+                  height="50px">
+                  <title>plastic-bottle</title>
+                  <path
+                    d="M34.56,15.27v5.34c.11.67,1.51,1.61,3.27,2.79,5.22,3.48,12.78,8.54,9.5,22.87a1.81,1.81,0,0,1-1,1.22,2.07,2.07,0,0,0-.8,1.35,4.74,4.74,0,0,0-.1,1.64,3.87,3.87,0,0,0,.37,1.37c.12.23.23.38.31.4A1.8,1.8,0,0,1,47.5,54h0V85.77a1.82,1.82,0,0,1-1.13,1.68,1.39,1.39,0,0,0-.56.61,4.35,4.35,0,0,0-.41,2,5.62,5.62,0,0,0,.45,2.23,1.85,1.85,0,0,0,.68.92,1.82,1.82,0,0,1,1,1.6h0v19.66a2.58,2.58,0,0,1,0,.39,8.84,8.84,0,0,1-5.85,7.29,9.16,9.16,0,0,1-3.69.49,8.57,8.57,0,0,1-3.55-1,7.66,7.66,0,0,1-2.33-2,9.54,9.54,0,0,1-4,2.52,12.88,12.88,0,0,1-8,0,9.41,9.41,0,0,1-3.94-2.5,7.63,7.63,0,0,1-2.31,1.92,8.57,8.57,0,0,1-3.54,1h0a9.28,9.28,0,0,1-3.64-.5h0a8.81,8.81,0,0,1-5.86-7.43,1.94,1.94,0,0,1,0-.24h0V94.85a1.81,1.81,0,0,1,1-1.63,2.1,2.1,0,0,0,.63-.89,5.62,5.62,0,0,0,.45-2.23,4.48,4.48,0,0,0-.41-2,1.41,1.41,0,0,0-.61-.64A1.78,1.78,0,0,1,.62,85.77V54A1.8,1.8,0,0,1,2,52.24a1.19,1.19,0,0,0,.27-.39,4.09,4.09,0,0,0,.38-1.37,5.28,5.28,0,0,0-.1-1.64,2.08,2.08,0,0,0-.86-1.38,1.85,1.85,0,0,1-.92-1.2h0c-3.28-14.33,4.28-19.39,9.5-22.88,1.79-1.2,3.21-2.15,3.27-2.81h0V15.27a2.65,2.65,0,0,1-1.47-.74c0-.06-.11-.12-.15-.18a2.6,2.6,0,0,1-.62-1.69V5a4.85,4.85,0,0,1,.37-1.85,4.77,4.77,0,0,1,1-1.56l.11-.12A5,5,0,0,1,16.33,0H31.79A5.08,5.08,0,0,1,33.7.38a4.92,4.92,0,0,1,1.62,1.09l.12.13A5,5,0,0,1,36.79,5v7.66A2.62,2.62,0,0,1,36,14.52h0a2.63,2.63,0,0,1-1.45.74ZM4.23,80H43.9V59.79H4.23V80ZM43.9,83.54H4.23v1.25a5.28,5.28,0,0,1,1.26,1.59,8.14,8.14,0,0,1,.83,3.73,9.63,9.63,0,0,1-.75,3.68,6.09,6.09,0,0,1-1.34,1.95V114.4a5.32,5.32,0,0,0,3.47,4.39,5.58,5.58,0,0,0,2.22.3h0A5,5,0,0,0,12,118.5a4.06,4.06,0,0,0,2.05-3.93v0a1.8,1.8,0,0,1,3.6-.09v.21a4.68,4.68,0,0,0,3.49,4.18,8.83,8.83,0,0,0,2.86.45,8.94,8.94,0,0,0,2.87-.46c1.95-.67,3.48-2.07,3.58-4.18v-.2a1.8,1.8,0,1,1,3.59.13,4.07,4.07,0,0,0,2.06,3.93,4.92,4.92,0,0,0,2.05.59,5.86,5.86,0,0,0,2.27-.3,5.34,5.34,0,0,0,3.46-4.39V95.74a5.94,5.94,0,0,1-1.34-1.95,9.45,9.45,0,0,1-.75-3.68,8,8,0,0,1,.82-3.73,5.47,5.47,0,0,1,1.27-1.59V83.54ZM4.23,56.25H43.9V55.07a4.64,4.64,0,0,1-1.26-1.56,7.46,7.46,0,0,1-.77-2.67A8.57,8.57,0,0,1,42.05,48,5.89,5.89,0,0,1,44,44.78c2.34-11.4-3.84-15.53-8.13-18.39-2.62-1.76-4.7-3.15-4.87-5.57a1.93,1.93,0,0,1,0-.24V15.3H17.18v5.28h0v0c-.05,2.55-2.18,4-4.87,5.77-4.29,2.87-10.47,7-8.14,18.4A5.74,5.74,0,0,1,6.07,48a8.58,8.58,0,0,1,.19,2.85,7.4,7.4,0,0,1-.77,2.67,4.76,4.76,0,0,1-1.26,1.56v1.18ZM14.94,11.69H33.18V5a1.27,1.27,0,0,0-.1-.52,1.28,1.28,0,0,0-.25-.4L32.77,4a1.31,1.31,0,0,0-1-.41H16.33a1.31,1.31,0,0,0-1,.41l0,0a1.2,1.2,0,0,0-.29.45,1.36,1.36,0,0,0-.1.51v6.69Z" />
+                </svg>
+                <p>Plastic</p>
+              </div>
+            </a>
+            <!-- Metal -->
+            <a class="" href="#metal">
+              <div class="flex flex-col justify-center space-y-1">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330.818 330.818" height="50px">
+                  <g>
+                    <path
+                      d="M272.59,132.159c-13.279-17.203-32.414-38.5-53.881-59.967c-21.467-21.466-42.764-40.602-59.967-53.881C135.766,0.573,124.809-3.608,118.321,2.887c-6.494,6.491-2.313,17.447,15.422,40.424c13.279,17.203,32.416,38.5,53.881,59.967c22.5,22.499,44.881,42.437,62.104,55.505H47.428c-4.142,0-7.5,3.357-7.5,7.5v21.66c0,3.441,2.321,6.335,5.481,7.217v99.281c-3.16,0.882-5.481,3.775-5.481,7.217v21.661c0,4.143,3.358,7.5,7.5,7.5h235.948c4.143,0,7.5-3.357,7.5-7.5v-21.661c0-3.441-2.32-6.334-5.48-7.217v-99.281c3.16-0.883,5.48-3.775,5.48-7.217v-21.66c0-0.021-0.004-0.04-0.004-0.061C291.266,159.321,285.553,148.953,272.59,132.159z M135.442,20.011c14.211,9.167,40.563,30.691,72.66,62.789c31.99,31.99,53.478,58.274,62.697,72.518c-16.939-10.805-44.527-34.605-72.568-62.647C166.133,60.572,144.61,34.221,135.442,20.011z M275.875,315.818H54.928v-6.661h220.948V315.818z M191.078,273.698c4.143,0,7.5-3.358,7.5-7.5v-42.797c0-4.143-3.357-7.5-7.5-7.5H60.409v-20.459h209.986v98.715H60.409v-20.459H191.078zM60.409,258.698v-27.797h123.169v27.797H60.409z M275.875,180.442H54.928v-6.66h220.948V180.442z" />
+                  </g>
+                </svg>
+                <p>Metal</p>
+              </div>
+            </a>
+            <!-- Fabric -->
+            <a class="" href="#fabric">
+              <div class="flex flex-col justify-center space-y-1">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.88 99.43" height="50px">
+                  <g>
+                    <path
+                      d="M78.36,4.61H44.51c0.17,1.87,0.64,3.65,1.37,5.3c0.85,1.94,2.06,3.69,3.54,5.17c1.57,1.57,3.44,2.83,5.51,3.69 c2,0.83,4.19,1.28,6.5,1.28c2.31,0,4.5-0.46,6.5-1.28c2.07-0.86,3.94-2.12,5.51-3.69c1.48-1.48,2.69-3.23,3.54-5.17 C77.72,8.26,78.2,6.48,78.36,4.61L78.36,4.61z M9.28,37.06l16.57,0.72l0.02,0c0.61,0.03,1.15,0.3,1.54,0.7 c0.37,0.38,0.6,0.9,0.64,1.46c0.01,0.04,0.01,0.09,0.01,0.13v54.75h67.35V39.68c0-0.63,0.26-1.21,0.68-1.63l0,0l0,0l0,0 c0.42-0.42,0.99-0.67,1.62-0.67c0.01,0,0.02,0,0.09,0l0.01,0l0.07,0l16.26-0.18l3.78-17.59l-35-14.29 c-0.24,2.31-0.85,4.52-1.76,6.56c-1.09,2.43-2.6,4.62-4.45,6.46c-1.99,1.99-4.37,3.59-7.02,4.69c-2.55,1.06-5.34,1.64-8.26,1.64 s-5.71-0.58-8.26-1.64c-2.65-1.1-5.03-2.7-7.02-4.69c-1.82-1.82-3.32-3.97-4.4-6.35c-0.91-2-1.52-4.16-1.78-6.43L5.01,19.97 L9.28,37.06L9.28,37.06z M23.45,42.28l-15.98-0.7c-0.52,0-1.01-0.17-1.4-0.47c-0.02-0.02-0.04-0.03-0.06-0.05 c-0.37-0.3-0.65-0.72-0.78-1.22L0.07,19.16c-0.01-0.03-0.01-0.05-0.02-0.08c-0.11-0.52-0.03-1.06,0.2-1.51 c0.24-0.48,0.65-0.87,1.18-1.09l39.4-16.24c0.15-0.08,0.31-0.13,0.49-0.18v0C41.5,0.02,41.68,0,41.86,0h0.3h38.56h0.9 c0.03,0,0.07,0,0.1,0.01c0.12,0,0.23,0.02,0.34,0.04l0,0v0c0.14,0.03,0.28,0.07,0.42,0.13l0,0l0,0l38.96,15.9 c0.02,0.01,0.04,0.02,0.06,0.03c0.48,0.21,0.87,0.58,1.11,1.03c0.24,0.46,0.33,1.01,0.22,1.56l-4.57,21.27 c-0.01,0.03-0.01,0.06-0.02,0.09c-0.12,0.48-0.4,0.91-0.78,1.21c-0.39,0.32-0.89,0.51-1.43,0.52l-16,0.17v55.18 c0,0.63-0.26,1.21-0.68,1.63l0,0c-0.42,0.42-0.99,0.68-1.63,0.68H25.76c-0.63,0-1.21-0.26-1.63-0.68l0,0 c-0.42-0.42-0.68-0.99-0.68-1.63V42.28L23.45,42.28z" />
+                  </g>
+                </svg>
+                <p>Fabric</p>
+              </div>
+            </a>
+          </div>
+
+          <ul class="list-disc list-inside">
+            <li>Paper & Cardboard: including newspaper, flyers, magazines, paper bags.</li>
+            <li>Containers: including plastic bottles, plastic containers, metal cans, and metal containers.</li>
+            <li>Glass: including glass bottles, glass jars, broken glass, and ceramics.</li>
+            <li>Foam packaging: including meat trays and styrofoam containers.</li>
+            <li>Electronics: including lightbulbs, computer/computer parts, phone/phone parts, TV/TV parts, and other small appliances.</li>
+            <li>Scrap Metal: including sheet metal.</li>
+            <li>Flexible Plastics: plastic bags, plastic wrap, and plastic food bags.</li>
+          </ul>
+        </div>
+
+        <!-- How do I use the map? -->
+        <div class="dropdown mt-4 p-4 bg-[#a7c957] border-2 border-[#386641] rounded-md shadow-lg flex justify-between hover:cursor-pointer">
+          <div class="font-bold">How do I use the map?</div>
+          <div>
+            <i class="fa fa-angle-up"></i>
+          </div>
+        </div>
+        
+        <div class="hidden! p-2">
+          Turn on your location services to see recycling depots near you. Click on a pin to learn more about the recycling depot it represents. You can also use the filter search next to the map to only show depots that accept the items you are looking to recycle.
+        </div>
+
+        <!-- How do I unlock badges? -->
+        <div class="dropdown mt-4 p-4 bg-[#a7c957] border-2 border-[#386641] rounded-md shadow-lg flex justify-between hover:cursor-pointer">
+          <div class="font-bold">How do I unlock badges?</div>
+          <div>
+            <i class="fa fa-angle-up"></i>
+          </div>
+        </div>
+        
+        <div class="hidden! p-2">
+          Keep track of what you recycle by submitting the form on the <a class="underline font-semibold" href="/src/pages/recycle.html">recycle</a> page. You can watch your progress grow on the <a class="underline font-semibold" href="/src/pages/badge.html">badges</a> page each time you recycle.
+        </div>
+        
+        <!-- Where can I see my badge progress? -->
+        <div class="dropdown mt-4 p-4 bg-[#a7c957] border-2 border-[#386641] rounded-md shadow-lg flex justify-between hover:cursor-pointer">
+          <div class="font-bold">Where can I see all my badges?</div>
+          <div>
+            <i class="fa fa-angle-up"></i>
+          </div>
+        </div>
+        
+        <div class="hidden! p-2">
+          Find all the badges you've collected on your <a class="underline font-semibold" href="/src/pages/profile.html">profile</a>!
+        </div>
+        
+        <!-- Where can I see the leaderboard? -->
+        <div class="dropdown mt-4 p-4 bg-[#a7c957] border-2 border-[#386641] rounded-md shadow-lg flex justify-between hover:cursor-pointer">
+          <div class="font-bold">Where can I see the leaderboard?</div>
+          <div>
+            <i class="fa fa-angle-up"></i>
+          </div>
+        </div>
+        
+        <div class="hidden! p-2">
+          Find the <a class="underline font-semibold" href="/src/pages/leaderboard.html">leaderboard</a> using the podium icon on the top right corner of every page. See how much other users are recycling and where you stand among them!
+        </div>
+        
+        
       </section>
     </main>
-    <site-footer></site-footer>
-    <!---------------------------------------------->
-    <!-- Your own JavaScript functions go here    -->
-    <!---------------------------------------------->
 
-    <!-- Link to scripts of your own -->
-    <!-- <script type="module" src="./src/main.js"></script> -->
+    <site-footer></site-footer>
   </body>
 </html>

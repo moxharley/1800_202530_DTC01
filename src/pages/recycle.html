@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>My BCIT Project</title>
+  <meta name="comp1800 template" content="My 1800 App" />
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://kit.fontawesome.com/2043d6ea2c.js" crossorigin="anonymous"></script>
+  <script type="module" src="/src/components/site-navbar.js"></script>
+  <script type="module" src="/src/components/site-footer.js"></script>
+  <script type="module" src="/src/recycle.js"></script>
+  <style>
+    /* 
+        color-code
+        #386641 - Dark Green
+        #6a994e - Medium Green
+        #a7c957 - Light Green
+        #f2e8cf - Off-White
+        #bc4749 - Red 
+      */
+  </style>
+</head>
+
+<body class="bg-[#f2e8cf]">
+  <header>
+    <site-navbar></site-navbar>
+  </header>
+
+  <main class="max-w-[1400px] md:mx-16 mx-7 text-[#386642]">
+
+    <!-- Recycling Form -->
+    <section id="recyclingForm" class="hidden md:mt-20 mt-10">
+      <div class="border-2 p-8 md:px-20 md:pt-20 rounded-xl">
+        <h1 class="w-fit -mt-13 md:-mt-26 px-2 bg-[#f2e8cf] mb-5 md:text-3xl text-2xl font-bold">
+          Tracker
+        </h1>
+        <p class="text-sm">Record what you recycled today.</p>
+        <form class="pt-4 space-y-7">
+          <div class="flex flex-col">
+            <div>
+              <input type="checkbox" name="Paper/Cardboard" />
+              <label for="Paper/Cardboard">Paper</label>
+            </div>
+            <div>
+              <input type="checkbox" name="Containers" />
+              <label for="Containers">Containers</label>
+            </div>
+            <div>
+              <input type="checkbox" name="Glass" />
+              <label for="Glass">Glass</label>
+            </div>
+            <div>
+              <input type="checkbox" name="Foam Packaging" />
+              <label for="Foam Packaging">Foam Packaging</label>
+            </div>
+            <div>
+              <input type="checkbox" name="Electronics" />
+              <label for="Electronics">Electronics</label>
+            </div>
+            <div>
+              <input type="checkbox" name="Scrap Metal" />
+              <label for="Scrap Metal">Scrap Metal</label>
+            </div>
+            <div>
+              <input type="checkbox" name="Flexible Plastics" />
+              <label for="Flexible Plastics">Flexible Plastics</label>
+            </div>
+          </div>
+          <input class="w-[80%] ml-[10%] py-1 rounded bg-[#386642] text-[#f2e8cf]" type="submit" value="Submit" />
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <site-footer></site-footer>
+</body>
+
+</html>

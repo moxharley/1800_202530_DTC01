@@ -38,6 +38,25 @@ function updateBadgeIcon(level, htmlID) {
     img.src = map[badgeStatus];
 }
 
+function getMaxForLevel(level) {
+    if (level >= 40) return 40;
+    if (level >= 20) return 40;
+    if (level >= 10) return 20;
+    if (level >= 5)  return 10;
+    return 5;
+}
+
+function updateBadgeProgress(level, htmlID) {
+    const badgeElement = document.getElementById(htmlID);
+    if (!badgeElement) return;
+
+    const bTag = badgeElement.querySelector("b");
+    if (!bTag) return;
+
+    const maxValue = getMaxForLevel(level);
+    bTag.textContent = `${level}/${maxValue}`;
+}
+
 
 async function toggleBadges(user) {
     const userDoc = await getDoc(doc(db, "users", user.uid));
@@ -61,6 +80,16 @@ async function toggleBadges(user) {
     updateBadgeIcon(electricRef, "electric");
     updateBadgeIcon(cargoRef, "cargo");
     updateBadgeIcon(esotericRef, "esoteric");
+
+    updateBadgeProgress(greenRef, "green");
+    updateBadgeProgress(lumberjackRef, "lumberjack");
+    updateBadgeProgress(polymerRef, "polymer");
+    updateBadgeProgress(fragileRef, "fragile");
+    updateBadgeProgress(scrappyRef, "scrappy");
+    updateBadgeProgress(electricRef, "electric");
+    updateBadgeProgress(cargoRef, "cargo");
+    updateBadgeProgress(esotericRef, "esoteric");
+
 
     if (greenRef < 5) {
         document.getElementById('green').classList.toggle('grayscale')

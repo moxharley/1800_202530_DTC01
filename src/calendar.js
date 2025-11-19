@@ -325,17 +325,35 @@ async function monthlyScheduleQuery(elementId, year, month) {
   }
 }
 
+function getFirstDateOfDay(baseDay, firstDay, firstDate) {
+  let targetDate = 0;
+  if (baseDay >= firstDay) {
+    targetDate = baseDay - firstDay + firstDate;
+  } else if (baseDay == firstDay - firstDate) {
+    targetDate = 7;
+  } else {
+    targetDate = baseDay - firstDay + baseDay;
+  }
+
+  return targetDate;
+}
+
 function scheduleRepeat(elementId, schedule, year, month) {
   const scheduleRepeatStr = schedule.repeat;
   let scheduleDate = new Date(schedule.date);
-
-  scheduleDate.setFullYear(year);
-  scheduleDate.setMonth(month - 1);
   scheduleDate.setDate(scheduleDate.getDate() + 1);
+  const scheduleDay = scheduleDate.getDay();
 
-  let lastDate = new Date(
-    scheduleDate.getFullYear(),
-    scheduleDate.getMonth() + 1,
+  let targetDate = new Date(schedule.date);
+  targetDate.setDate(scheduleDate.getDate() + 1);
+  targetDate.setFullYear(year);
+  targetDate.setMonth(month - 1);
+
+  const firstDay = new Date(year, month - 1, 1).getDay();
+  const firstDate = new Date(year, month - 1, 1).getDate();
+  const lastDate = new Date(
+    targetDate.getFullYear(),
+    targetDate.getMonth() + 1,
     0
   ).getDate();
 
@@ -343,32 +361,33 @@ function scheduleRepeat(elementId, schedule, year, month) {
   let repeatedDate = year + "-" + month + "-";
 
   if (scheduleRepeatStr == "monthly") {
-    repeatedDate += scheduleDate.getDate();
+    repeatedDate += targetDate.getDate();
     newSchedule.date = repeatedDate;
 
     if (repeatedDate != schedule.date) {
       drawScheduleOnCaledar(elementId, newSchedule);
     }
   } else if (scheduleRepeatStr == "biweekly") {
-    let baseDate = scheduleDate.getDate();
+    let baseDate = getFirstDateOfDay(scheduleDay, firstDay, firstDate);
+    targetDate.setDate(baseDate);
 
-    if (baseDate / 14 > 1) {
-      if (baseDate % 14 == 0) {
-        scheduleDate.setDate(14);
-      } else {
-        scheduleDate.setDate(baseDate % 14);
-      }
+    let biweekDiff = Math.ceil(
+      Math.abs(targetDate - scheduleDate) / (14 * 24 * 60 * 60 * 100)
+    );
+
+    if (biweekDiff % 10 != 0) {
+      baseDate += 7;
     }
 
-    for (let i = scheduleDate.getDate(); i <= lastDate; i += 14) {
-      scheduleDate.setDate(i);
+    for (let i = baseDate; i <= lastDate; i += 14) {
+      targetDate.setDate(i);
 
       repeatedDate =
         year +
         "-" +
         month +
         "-" +
-        scheduleDate.getDate().toString().padStart(2, "0");
+        targetDate.getDate().toString().padStart(2, "0");
 
       newSchedule.date = repeatedDate;
       if (repeatedDate != schedule.date) {
@@ -376,23 +395,16 @@ function scheduleRepeat(elementId, schedule, year, month) {
       }
     }
   } else if (scheduleRepeatStr == "weekly") {
-    let baseDate = scheduleDate.getDate();
+    let basedate = getFirstDateOfDay(scheduleDay, firstDay, firstDate);
 
-    if (baseDate / 7 > 1) {
-      if (baseDate % 7 == 0) {
-        scheduleDate.setDate(7);
-      } else {
-        scheduleDate.setDate(scheduleDate.getDate() % 7);
-      }
-    }
-    for (let i = scheduleDate.getDate(); i <= lastDate; i += 7) {
-      scheduleDate.setDate(i);
+    for (let i = basedate; i <= lastDate; i += 7) {
+      targetDate.setDate(i);
       repeatedDate =
         year +
         "-" +
         month +
         "-" +
-        scheduleDate.getDate().toString().padStart(2, "0");
+        targetDate.getDate().toString().padStart(2, "0");
 
       newSchedule.date = repeatedDate;
       if (repeatedDate != schedule.date) {
@@ -401,13 +413,13 @@ function scheduleRepeat(elementId, schedule, year, month) {
     }
   } else {
     for (let i = 1; i <= lastDate; i++) {
-      scheduleDate.setDate(i);
+      targetDate.setDate(i);
       repeatedDate =
         year +
         "-" +
         month +
         "-" +
-        scheduleDate.getDate().toString().padStart(2, "0");
+        targetDate.getDate().toString().padStart(2, "0");
 
       newSchedule.date = repeatedDate;
       if (repeatedDate != schedule.date) {

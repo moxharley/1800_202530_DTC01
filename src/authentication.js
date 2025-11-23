@@ -53,7 +53,7 @@ export async function signupUser(username, email, password) {
 // Signs out the currently logged-in user and redirects them back to the login page (index.html).
 export async function logoutUser() {
     await signOut(auth);
-    window.location.href = "index.html";
+    window.location.href = "/index.html";
 }
 
 

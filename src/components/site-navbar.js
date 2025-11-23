@@ -59,7 +59,7 @@ class SiteNavbar extends HTMLElement {
                     <a class="block p-2 hover:bg-[#386641] rounded-b" id="signOutBtn" href="#">Log out</a>
                   </div>
                 </div>
-                <div id="authControls" class="flex bg-[#386641] items-center rounded-full w-18">
+                <div id="authControls" class="flex bg-[#386641] items-center rounded-full w-18 ml-2">
                   <a class="w-full text-center text-[#f2e8cf]" href="/src/pages/loginSignup.html">Login</a>
                 </div>
               </div>

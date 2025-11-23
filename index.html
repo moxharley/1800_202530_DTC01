@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>My BCIT Project</title>
+    <title>Green Scouts - Profile</title>
+    <link rel="icon" href="/images/placeholder_logo.png" type="image.png">
     <meta name="comp1800 template" content="My 1800 App" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -41,9 +44,27 @@
           <br><br>
           Document your recycling journey and earn fun badges when completing certain milestones.
         </p>
+        <div class="bg-[#386641] rounded text-[#f2e8cf] hover:cursor-pointer py-2 mt-6 text-center" >
+          <button id="beginBtn">Begin your journey</button>
+        </div>
       </section>
     </main>
 
     <site-footer></site-footer>
+  
+    <script type="module">
+      import { onAuthReady } from "./src/authentication.js"
+      
+      
+      onAuthReady(async (user) => {
+        const beginBtn = document.getElementById("beginBtn")  
+        
+        if (user) {
+          beginBtn.onclick = () => window.location.href = "/src/pages/recycle.html";
+        } else {
+          beginBtn.onclick = () => window.location.href = "./src/pages/loginSignup.html";
+        }
+      })
+    </script>
   </body>
 </html>

@@ -65,14 +65,8 @@ function initAuthUI() {
       })
       
       await setDoc(userRef, {badges}, {merge: true})
-      
 
-      feedbackBanner.textContent = "Recycling logged! Nice work."
-      feedbackBanner.classList.remove("hidden")
-
-      checkedInputs.forEach(input => input.checked = false);
-
-
+      window.location.href = "/src/pages/badge.html";
     } catch (error) {
         console.error("Error updating badges", error)
 

@@ -18,29 +18,29 @@ class SiteNavbar extends HTMLElement {
               <div class="shrink-0 px-10 py-5">
                 <a href="/index.html"><img class="shrink-0 w-[60px] h-[60px]" src="/images/placeholder_logo.png" /></a>
               </div>
-              <div class="flex bg-[#386641] justify-around w-full fixed z-10 bottom-0 md:static md:top-0 md:px-20">
-                <div class="mx-4 my-10 text-center">
+              <div class="flex bg-[#386641] justify-around w-full fixed z-10 bottom-0 md:static md:top-0 md:px-20 h-20">
+                <div class="my-5 md:my-10 text-center">
                   <a href="/src/pages/recycle.html">
                   <div class="md:hidden">
-                  <i class="fa-solid fa-recycle text-3xl"></i>
+                  <i class="fa-solid fa-recycle text-lg"></i>
                   </div>
-                  <p>Recycle</p>
+                  <p class="text-sm">Recycle</p>
                   </a>
                 </div>
-                <div class="mx-4 my-10 text-center">
+                <div class="my-5 md:my-10 text-center">
                   <a href="/src/pages/map.html">
                   <div class="md:hidden">
-                  <i class="fa-solid fa-map text-3xl"></i>
+                  <i class="fa-solid fa-map text-lg"></i>
                   </div>
-                  <p>Map</p>
+                  <p class="text-sm">Map</p>
                   </a>
                 </div>
-                <div class="mx-4 my-10 text-center">
+                <div class="my-5 md:my-10 text-center">
                   <a href="/src/pages/faq.html">
                   <div class="md:hidden">
-                  <i class="fa-regular fa-circle-question text-3xl"></i>
+                  <i class="fa-regular fa-circle-question text-lg"></i>
                   </div>
-                  <p>FAQ</p>
+                  <p class="text-sm">FAQ</p>
                   </a>
                 </div>
               </div>
@@ -59,7 +59,7 @@ class SiteNavbar extends HTMLElement {
                     <a class="block p-2 hover:bg-[#386641] rounded-b" id="signOutBtn" href="#">Log out</a>
                   </div>
                 </div>
-                <div id="authControls" class="flex bg-[#386641] items-center rounded-full w-18">
+                <div id="authControls" class="flex bg-[#386641] items-center rounded-full w-18 ml-2">
                   <a class="w-full text-center text-[#f2e8cf]" href="/src/pages/loginSignup.html">Login</a>
                 </div>
               </div>

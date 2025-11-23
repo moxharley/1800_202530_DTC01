@@ -17,6 +17,12 @@ function initAuthUI() {
             return;
         }
 
+        // back to previous page
+        let goBack = document.getElementById("backDiv");
+        goBack.addEventListener("click", () => {
+        history.back();
+        });
+
         const userDoc = await getDoc(doc(db, "users", user.uid));
         if (userDoc.exists()) {
             const data = userDoc.data();

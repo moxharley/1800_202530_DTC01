@@ -9,7 +9,7 @@ import {
   orderBy,
 } from "firebase/firestore";
 
-document.addEventListener("DOMContentLoaded", () => {
+function initilize() {
   initialSchedules();
 
   let editBtn = document.getElementById("editBtn");
@@ -17,7 +17,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let delBtn = document.getElementById("delBtn");
   delBtn.addEventListener("click", deleteSchedule);
-});
+}
+initilize();
 
 function removeByClassName(className) {
   let temp = document.getElementsByClassName(className);

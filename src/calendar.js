@@ -1,6 +1,14 @@
 import { onAuthReady } from "./authentication.js";
 import { db } from "./firebaseConfig.js";
-import { collection, query, and, or, where, getDocs } from "firebase/firestore";
+import {
+  collection,
+  query,
+  and,
+  or,
+  where,
+  getDocs,
+  doc,
+} from "firebase/firestore";
 
 document.addEventListener("DOMContentLoaded", () => {
   // check login
@@ -9,33 +17,41 @@ document.addEventListener("DOMContentLoaded", () => {
       location.href = "/src/pages/loginSignup.html";
     } else {
       sessionStorage.setItem("uid", user.uid);
+
+      // initial Calendar setting
+      displayCalendar(user.uid, new Date());
+      // set initial weekly calendar
+      displayWeek();
+
+      // add click event for the monthly arrows
+      let monthBtns = document.getElementsByClassName("monthBtn");
+      for (let monthBtn of monthBtns) {
+        monthBtn.addEventListener("click", () => {
+          changeCalendar(monthBtn);
+        });
+      }
+
+      // easily back to current calendar
+      let todayBtn = document.getElementById("todayBtn");
+      todayBtn.addEventListener("click", () =>
+        displayCalendar(user.uid, new Date())
+      );
+
+      let toggleCalendarBtn = document.getElementById("toggleCalendar");
+      toggleCalendarBtn.addEventListener("click", () => {
+        toggleCalendar(toggleCalendarBtn);
+      });
+
+      // load schedule js file
+      let scheduleScript = document.createElement("script");
+      scheduleScript.type = "module";
+      scheduleScript.src = "/src/schedule.js";
+      document.body.appendChild(scheduleScript);
     }
-  });
-
-  // initial Calendar setting
-  displayCalendar(new Date());
-  // set initial weekly calendar
-  displayWeek();
-
-  // add click event for the monthly arrows
-  let monthBtns = document.getElementsByClassName("monthBtn");
-  for (let monthBtn of monthBtns) {
-    monthBtn.addEventListener("click", () => {
-      changeCalendar(monthBtn);
-    });
-  }
-
-  // easily back to current calendar
-  let todayBtn = document.getElementById("todayBtn");
-  todayBtn.addEventListener("click", () => displayCalendar(new Date()));
-
-  let toggleCalendarBtn = document.getElementById("toggleCalendar");
-  toggleCalendarBtn.addEventListener("click", () => {
-    toggleCalendar(toggleCalendarBtn);
   });
 });
 
-function displayCalendar(baseDate) {
+function displayCalendar(userUid, baseDate) {
   // Reset Calendar
   let temp = document.getElementById("calendar");
   for (let i = temp.children.length - 1; i > 0; i--) {
@@ -148,7 +164,7 @@ function displayCalendar(baseDate) {
       document.getElementById("calendar").appendChild(newWeek);
     }
   }
-  monthlyScheduleQuery("calendar", currentYear, currentMonth);
+  monthlyScheduleQuery(userUid, "calendar", currentYear, currentMonth);
 }
 
 function changeCalendar(monthBtn) {
@@ -204,8 +220,9 @@ function changeCalendar(monthBtn) {
     }
   }
 
+  const userUid = sessionStorage.getItem("uid");
   // change the calendar according to the user's click
-  displayCalendar(baseDate);
+  displayCalendar(userUid, baseDate);
 }
 
 function displayWeek() {
@@ -297,10 +314,7 @@ function drawScheduleOnCaledar(elementId, schedule) {
   }
 }
 
-async function monthlyScheduleQuery(elementId, year, month) {
-  // get user uid from session
-  const userUid = sessionStorage.getItem("uid");
-
+async function monthlyScheduleQuery(userUid, elementId, year, month) {
   const yearMonthStr = year + "-" + month;
 
   // basic query
@@ -358,7 +372,7 @@ function scheduleRepeat(elementId, schedule, year, month) {
   scheduleDate.setDate(scheduleDate.getDate() + 1);
   // get target day
   const scheduleDay = scheduleDate.getDay();
-  // set target date
+  // set
   let targetDate = new Date(schedule.date);
   targetDate.setDate(scheduleDate.getDate() + 1);
   targetDate.setFullYear(year);

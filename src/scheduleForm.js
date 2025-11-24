@@ -16,33 +16,33 @@ document.addEventListener("DOMContentLoaded", () => {
       location.href = "/src/pages/loginSignup.html";
     } else {
       sessionStorage.setItem("uid", user.uid);
-    }
-  });
 
-  // back to previous page
-  let goBack = document.getElementById("backDiv");
-  goBack.addEventListener("click", () => {
-    // if user leaves the page, remove the doc id from the local storage
-    if (localStorage.getItem("scheduleDocId")) {
-      localStorage.removeItem("scheduleDocId");
-    }
+      // back to previous page
+      let goBack = document.getElementById("backDiv");
+      goBack.addEventListener("click", () => {
+        // if user leaves the page, remove the doc id from the local storage
+        if (localStorage.getItem("scheduleDocId")) {
+          localStorage.removeItem("scheduleDocId");
+        }
 
-    history.back();
-  });
+        history.back();
+      });
 
-  // check if the storage have the doc ID
-  if (localStorage.getItem("scheduleDocId")) {
-    displayScheduleData();
-  }
+      // check if the storage have the doc ID
+      if (localStorage.getItem("scheduleDocId")) {
+        displayScheduleData();
+      }
 
-  document.getElementById("submit").addEventListener("click", () => {
-    const scheduleDocId = localStorage.getItem("scheduleDocId");
-    if (scheduleDocId) {
-      updateScheduleData();
-      // remove the doc id after editing
-      localStorage.removeItem("scheduleDocId");
-    } else {
-      addScheduleData();
+      document.getElementById("submit").addEventListener("click", () => {
+        const scheduleDocId = localStorage.getItem("scheduleDocId");
+        if (scheduleDocId) {
+          updateScheduleData();
+          // remove the doc id after editing
+          localStorage.removeItem("scheduleDocId");
+        } else {
+          addScheduleData();
+        }
+      });
     }
   });
 });

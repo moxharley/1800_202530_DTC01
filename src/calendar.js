@@ -2,12 +2,37 @@ import { onAuthReady } from "./authentication.js";
 import { db } from "./firebaseConfig.js";
 import { collection, query, and, or, where, getDocs } from "firebase/firestore";
 
-onAuthReady((user) => {
-  if (!user) {
-    location.href = "/src/pages/loginSignup.html";
-  } else {
-    sessionStorage.setItem("uid", user.uid);
+document.addEventListener("DOMContentLoaded", () => {
+  // check login
+  onAuthReady((user) => {
+    if (!user) {
+      location.href = "/src/pages/loginSignup.html";
+    } else {
+      sessionStorage.setItem("uid", user.uid);
+    }
+  });
+
+  // initial Calendar setting
+  displayCalendar(new Date());
+  // set initial weekly calendar
+  displayWeek();
+
+  // add click event for the monthly arrows
+  let monthBtns = document.getElementsByClassName("monthBtn");
+  for (let monthBtn of monthBtns) {
+    monthBtn.addEventListener("click", () => {
+      changeCalendar(monthBtn);
+    });
   }
+
+  // easily back to current calendar
+  let todayBtn = document.getElementById("todayBtn");
+  todayBtn.addEventListener("click", () => displayCalendar(new Date()));
+
+  let toggleCalendarBtn = document.getElementById("toggleCalendar");
+  toggleCalendarBtn.addEventListener("click", () => {
+    toggleCalendar(toggleCalendarBtn);
+  });
 });
 
 function displayCalendar(baseDate) {
@@ -125,73 +150,63 @@ function displayCalendar(baseDate) {
   }
   monthlyScheduleQuery("calendar", currentYear, currentMonth);
 }
-// initial setting
-displayCalendar(new Date());
 
-// add click event for the monthly arrows
-let monthBtns = document.getElementsByClassName("monthBtn");
-for (let monthBtn of monthBtns) {
-  monthBtn.addEventListener("click", () => {
-    // to convert string to int
-    const monthMap = {
-      January: 0,
-      February: 1,
-      March: 2,
-      April: 3,
-      May: 4,
-      June: 5,
-      July: 6,
-      August: 7,
-      September: 8,
-      October: 9,
-      November: 10,
-      December: 11,
-    };
+function changeCalendar(monthBtn) {
+  // to convert string to int
+  const monthMap = {
+    January: 0,
+    February: 1,
+    March: 2,
+    April: 3,
+    May: 4,
+    June: 5,
+    July: 6,
+    August: 7,
+    September: 8,
+    October: 9,
+    November: 10,
+    December: 11,
+  };
 
-    const btnId = monthBtn.id;
+  const btnId = monthBtn.id;
 
-    let baseDate = new Date();
+  let baseDate = new Date();
 
-    const currentMonthName = document.getElementById("monthName").innerText;
-    // set the month from the calendar
-    baseDate.setMonth(monthMap[currentMonthName]);
-    let month = baseDate.getMonth();
+  const currentMonthName = document.getElementById("monthName").innerText;
+  // set the month from the calendar
+  baseDate.setMonth(monthMap[currentMonthName]);
+  let month = baseDate.getMonth();
 
-    const currentYear = parseInt(document.getElementById("year").innerText);
-    // set the year from the calendar
-    baseDate.setFullYear(currentYear);
+  const currentYear = parseInt(document.getElementById("year").innerText);
+  // set the year from the calendar
+  baseDate.setFullYear(currentYear);
 
-    // change the year when the month is January or December
-    if (month == 0) {
-      if (btnId == "prevMonth") {
-        baseDate.setFullYear(baseDate.getFullYear() - 1);
-        baseDate.setMonth(11);
-      } else {
-        baseDate.setMonth(month + 1);
-      }
-    } else if (month == 11) {
-      if (btnId == "nextMonth") {
-        baseDate.setFullYear(baseDate.getFullYear() + 1);
-        baseDate.setMonth(0);
-      } else {
-        baseDate.setMonth(month - 1);
-      }
+  // change the year when the month is January or December
+  if (month == 0) {
+    if (btnId == "prevMonth") {
+      baseDate.setFullYear(baseDate.getFullYear() - 1);
+      baseDate.setMonth(11);
     } else {
-      if (btnId == "prevMonth") {
-        baseDate.setMonth(month - 1);
-      } else {
-        baseDate.setMonth(month + 1);
-      }
+      baseDate.setMonth(month + 1);
     }
+  } else if (month == 11) {
+    if (btnId == "nextMonth") {
+      baseDate.setFullYear(baseDate.getFullYear() + 1);
+      baseDate.setMonth(0);
+    } else {
+      baseDate.setMonth(month - 1);
+    }
+  } else {
+    if (btnId == "prevMonth") {
+      baseDate.setMonth(month - 1);
+    } else {
+      baseDate.setMonth(month + 1);
+    }
+  }
 
-    // change the calendar according to the user's click
-    displayCalendar(baseDate);
-  });
+  // change the calendar according to the user's click
+  displayCalendar(baseDate);
 }
-
-// easily back to current calendar
-let todayBtn = document.getElementById("todayBtn");
-todayBtn.addEventListener("click", () => displayCalendar(new Date()));
 
 function displayWeek() {
   // from Template
@@ -227,11 +242,8 @@ function displayWeek() {
   document.getElementById("week").appendChild(newDate);
   monthlyScheduleQuery("week", year, month);
 }
-// set initial weekly calendar
-displayWeek();
 
-let toggleCalendarBtn = document.getElementById("toggleCalendar");
-toggleCalendarBtn.addEventListener("click", () => {
+function toggleCalendar(toggleCalendarBtn) {
   // toggle calendar
   let calendarTable = document.getElementById("calendarTable");
   calendarTable.classList.toggle("hidden");
@@ -254,7 +266,7 @@ toggleCalendarBtn.addEventListener("click", () => {
   let arrowIcon = toggleCalendarBtn.querySelector("i");
   arrowIcon.classList.toggle("fa-chevron-up");
   arrowIcon.classList.toggle("fa-chevron-down");
-});
+}
 
 function drawScheduleOnCaledar(elementId, schedule) {
   const baseView = document.getElementById(elementId);
@@ -339,11 +351,14 @@ function getFirstDateOfDay(baseDay, firstDay, firstDate) {
 }
 
 function scheduleRepeat(elementId, schedule, year, month) {
+  // repeat interval
   const scheduleRepeatStr = schedule.repeat;
+  // set base date
   let scheduleDate = new Date(schedule.date);
   scheduleDate.setDate(scheduleDate.getDate() + 1);
+  // get target day
   const scheduleDay = scheduleDate.getDay();
-
+  // set target date
   let targetDate = new Date(schedule.date);
   targetDate.setDate(scheduleDate.getDate() + 1);
   targetDate.setFullYear(year);

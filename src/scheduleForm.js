@@ -9,24 +9,42 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 
-// check if user logged in
-onAuthReady((user) => {
-  if (!user) {
-    location.href = "/src/pages/loginSignup.html";
-  } else {
-    sessionStorage.setItem("uid", user.uid);
-  }
-});
+document.addEventListener("DOMContentLoaded", () => {
+  // check if user logged in
+  onAuthReady((user) => {
+    if (!user) {
+      location.href = "/src/pages/loginSignup.html";
+    } else {
+      sessionStorage.setItem("uid", user.uid);
+    }
+  });
 
-// back to previous page
-let goBack = document.getElementById("backDiv");
-goBack.addEventListener("click", () => {
-  // if user leaves the page, remove the doc id from the local storage
+  // back to previous page
+  let goBack = document.getElementById("backDiv");
+  goBack.addEventListener("click", () => {
+    // if user leaves the page, remove the doc id from the local storage
+    if (localStorage.getItem("scheduleDocId")) {
+      localStorage.removeItem("scheduleDocId");
+    }
+
+    history.back();
+  });
+
+  // check if the storage have the doc ID
   if (localStorage.getItem("scheduleDocId")) {
-    localStorage.removeItem("scheduleDocId");
+    displayScheduleData();
   }
 
-  history.back();
+  document.getElementById("submit").addEventListener("click", () => {
+    const scheduleDocId = localStorage.getItem("scheduleDocId");
+    if (scheduleDocId) {
+      updateScheduleData();
+      // remove the doc id after editing
+      localStorage.removeItem("scheduleDocId");
+    } else {
+      addScheduleData();
+    }
+  });
 });
 
 // make each input constant
@@ -112,11 +130,6 @@ async function displayScheduleData() {
   }
 }
 
-// check if the storage have the doc ID
-if (localStorage.getItem("scheduleDocId")) {
-  displayScheduleData();
-}
-
 // update schedule data
 async function updateScheduleData() {
   let scheduleTitleValue = scheduleTitle.value;
@@ -151,14 +164,3 @@ async function updateScheduleData() {
     }
   }
 }
-
-document.getElementById("submit").addEventListener("click", () => {
-  const scheduleDocId = localStorage.getItem("scheduleDocId");
-  if (scheduleDocId) {
-    updateScheduleData();
-    // remove the doc id after editing
-    localStorage.removeItem("scheduleDocId");
-  } else {
-    addScheduleData();
-  }
-});

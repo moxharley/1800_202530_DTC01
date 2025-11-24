@@ -1,4 +1,3 @@
-import { onAuthReady } from "./authentication.js";
 import { db } from "./firebaseConfig.js";
 import {
   collection,
@@ -10,6 +9,16 @@ import {
   orderBy,
 } from "firebase/firestore";
 
+document.addEventListener("DOMContentLoaded", () => {
+  initialSchedules();
+
+  let editBtn = document.getElementById("editBtn");
+  editBtn.addEventListener("click", editSchedule);
+
+  let delBtn = document.getElementById("delBtn");
+  delBtn.addEventListener("click", deleteSchedule);
+});
+
 function removeByClassName(className) {
   let temp = document.getElementsByClassName(className);
   if (temp) {
@@ -19,7 +28,7 @@ function removeByClassName(className) {
   }
 }
 
-function drawSchedules(scheduleId, schedule) {
+function drawSchedule(scheduleId, schedule) {
   // Schedule Template
   let scheduleTemplate = document.getElementById("scheduleTemplate");
   let newSchedule = scheduleTemplate.content.cloneNode(true);
@@ -65,16 +74,17 @@ async function scheduleQuery(userUid, onePageSchedule, currentPage) {
 
   const baseQuerySnapshot = await getDocs(baseScheduleQuery);
   const scheduleIndex = (currentPage - 1) * onePageSchedule;
+  const schedulesNum = baseQuerySnapshot.docs.length;
 
   let maxIndex = scheduleIndex + onePageSchedule;
 
-  if (maxIndex > baseQuerySnapshot.docs.length) {
-    maxIndex = baseQuerySnapshot.docs.length;
+  if (maxIndex > schedulesNum) {
+    maxIndex = schedulesNum;
   }
 
   for (let i = scheduleIndex; i < maxIndex; i++) {
     const schedule = baseQuerySnapshot.docs[i].data();
-    drawSchedules(baseQuerySnapshot.docs[i].id, schedule);
+    drawSchedule(baseQuerySnapshot.docs[i].id, schedule);
   }
 
   // add click event for memo tooltip
@@ -86,7 +96,7 @@ async function scheduleQuery(userUid, onePageSchedule, currentPage) {
     });
   }
 
-  return baseQuerySnapshot.docs.length;
+  return schedulesNum;
 }
 
 function makePageArrows() {
@@ -140,8 +150,10 @@ function drawSchedulePagination(
     document.getElementById("pageNumDiv").appendChild(newPage);
   }
 
+  // add focussing CSS
   let focusedPage = document.getElementById(currentPage);
-  let siblings = focusedPage.parentElement.children;
+  let siblings = document.getElementById("pageNumDiv").children;
+
   for (let sibling of siblings) {
     sibling.classList.add("text-[#6a994e]");
     sibling.classList.remove("font-bold");
@@ -217,11 +229,10 @@ function drawSchedulePagination(
 }
 
 async function initialSchedules() {
+  // get user's uid
+  const userUid = sessionStorage.getItem("uid");
+  const onePageSchedule = 5;
   try {
-    // get user's uid
-    const userUid = sessionStorage.getItem("uid");
-    const onePageSchedule = 5;
-
     const maxSchedules = await scheduleQuery(userUid, onePageSchedule, 1);
     drawSchedulePagination(userUid, 1, onePageSchedule, maxSchedules);
   } catch (error) {
@@ -230,7 +241,6 @@ async function initialSchedules() {
     document.getElementById("schedulesDiv").innerHTML = errorHtml;
   }
 }
-initialSchedules();
 
 // canceling edit or delete
 function addCancelBtn() {
@@ -260,8 +270,7 @@ function addCancelBtn() {
   });
 }
 
-let editBtn = document.getElementById("editBtn");
-editBtn.addEventListener("click", () => {
+function editSchedule() {
   // check if the buttons are activated
   let checkedRadio = document.querySelector("input[type='radio']:checked");
   let checkBoxes = document.querySelectorAll("input[type='checkbox']");
@@ -300,16 +309,14 @@ editBtn.addEventListener("click", () => {
     }
     addCancelBtn();
   }
-});
+}
 
-let delBtn = document.getElementById("delBtn");
-delBtn.addEventListener("click", async () => {
+async function deleteSchedule() {
   // check if the buttons are activated
   let checkBoxes = document.querySelectorAll("input[type='checkbox']");
   let radios = document.querySelectorAll("input[type='radio']");
 
   if (checkBoxes.length) {
-    console.log(checkBoxes.length);
     // user choose to delete the schedule
     let checkedIds = [];
     for (let checkBox of checkBoxes) {
@@ -357,4 +364,4 @@ delBtn.addEventListener("click", async () => {
     }
     addCancelBtn();
   }
-});
+}

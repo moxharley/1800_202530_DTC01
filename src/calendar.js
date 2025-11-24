@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       sessionStorage.setItem("uid", user.uid);
 
-      // initial Calendar setting
+      // set initial calendar
       displayCalendar(user.uid, new Date());
       // set initial weekly calendar
       displayWeek();
@@ -37,6 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
         displayCalendar(user.uid, new Date())
       );
 
+      // toggle monthly/weekly view
       let toggleCalendarBtn = document.getElementById("toggleCalendar");
       toggleCalendarBtn.addEventListener("click", () => {
         toggleCalendar(toggleCalendarBtn);
@@ -298,19 +299,48 @@ function drawScheduleOnCaledar(elementId, schedule) {
   const scheduleDate = schedule.date;
 
   let calendarDates = baseView.querySelectorAll("." + prefix + scheduleDate);
+  let bodyWidth = document.body.getBoundingClientRect().width;
 
   for (let calendarDate of calendarDates) {
     let calendarCell = calendarDate.parentElement;
-    let scheduleElement = document.createElement("p");
-    scheduleElement.textContent = schedule.title;
-    scheduleElement.classList.add(
-      "bg-[#386641]",
-      "text-[#f2e8cf]",
-      "w-full",
-      "text-xs"
+
+    let scheduleElement = document.createElement("button");
+    scheduleElement.classList.add("text-xs");
+    scheduleElement.textContent = "●";
+
+    let scheduleDiv = document.createElement("div");
+    scheduleDiv.classList.add(
+      "calendarScheduleDivs",
+      "bg-[#a7c957]",
+      "p-1",
+      "border-2",
+      "border-[#386641]",
+      "rounded-sm",
+      "absolute"
     );
 
+    let titleDiv = document.createElement("div");
+    titleDiv.classList.add("font-bold");
+    titleDiv.textContent = schedule.title;
+    let memoDiv = document.createElement("div");
+    memoDiv.textContent = schedule.memo;
+
+    scheduleDiv.append(titleDiv);
+    scheduleDiv.append(memoDiv);
+
+    scheduleElement.addEventListener("click", () => {
+      scheduleDiv.classList.toggle("hidden");
+    });
+
     calendarCell.append(scheduleElement);
+    calendarCell.append(scheduleDiv);
+
+    let rightPosition = scheduleDiv.getBoundingClientRect().right;
+    if (rightPosition > bodyWidth) {
+      scheduleDiv.classList.add("right-3");
+    }
+
+    scheduleDiv.classList.add("hidden");
   }
 }
 

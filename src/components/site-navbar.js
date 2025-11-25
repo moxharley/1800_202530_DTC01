@@ -45,12 +45,6 @@ class SiteNavbar extends HTMLElement {
                 </div>
               </div>
               <div class="flex mx-5 my-8 md:my-10 md:mx-0">
-                
-              <div class="text-[#386641] md:text-[#f2e8cf] my-auto align-middle">
-                  <a href="/src/pages/leaderboard.html">
-                  <i class="fa-solid fa-ranking-star md:text-2xl text-3xl"></i>
-                  </a>
-                </div>
                 <div id="userDropdown" class="group text-[#386641] md:text-[#f2e8cf] my-auto align-middle ml-5 md:mr-0 mr-5 relative">
                   <i class="fa-solid fa-user md:text-2xl text-3xl hover:cursor-pointer"></i>
                   <div id="dropdownContents" class="group-hover:block hidden bg-[#6a994e] text-[#f2e8cf] rounded-b absolute md:min-w-[100px] min-w-[60px] z-10 md:mt-10 md:-ml-15 -ml-12 md:text-center text-right">

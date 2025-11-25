@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <title>Green Scouts - Schedule</title>
+    <link rel="icon" href="/images/placeholder_logo.png" type="image.png" />
     <meta name="comp1800 template" content="My 1800 App" />
 
     <!-- Required meta tags -->
@@ -14,11 +15,13 @@
       src="https://kit.fontawesome.com/2043d6ea2c.js"
       crossorigin="anonymous"
     ></script>
-    <!-- Link to styles of your own -->
-    <!-- <link rel="stylesheet" href="./styles/style.css"> -->
+
     <!-- Web Components for shared navbar and footer layout -->
     <script type="module" src="/src/components/site-navbar.js"></script>
     <script type="module" src="/src/components/site-footer.js"></script>
+
+    <script type="module" src="/src/scheduleForm.js"></script>
+
     <style>
       /* 
         color-code
@@ -31,13 +34,12 @@
     </style>
   </head>
   <body class="bg-[#f2e8cf]">
-    <!------------------------------>
-    <!-- Your HTML Layout go here -->
+    <!-- HEADER -->
     <header>
       <site-navbar></site-navbar>
     </header>
-    <!------------------------------>
-    <!-- Stuff for body goes here -->
+
+    <!-- MAIN -->
     <main class="max-w-[1400px] md:mx-16 mx-7 text-[#386642]">
       <section class="md:mt-8 mt-0">
         <div id="backDiv" class="mt-2 md:mb-10 mb-8 -ml-3 hover:cursor-pointer">
@@ -101,13 +103,7 @@
         </div>
       </section>
     </main>
+    <!-- FOOTER -->
     <site-footer></site-footer>
-    <!---------------------------------------------->
-    <!-- Your own JavaScript functions go here    -->
-    <!---------------------------------------------->
-
-    <!-- Link to scripts of your own -->
-    <script type="module" src="/src/scheduleForm.js"></script>
-    <!-- <script type="module" src="./src/main.js"></script> -->
   </body>
 </html>

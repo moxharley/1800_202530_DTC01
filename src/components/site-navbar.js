@@ -45,7 +45,8 @@ class SiteNavbar extends HTMLElement {
                 </div>
               </div>
               <div class="flex mx-5 my-8 md:my-10 md:mx-0">
-                <div class="text-[#386641] md:text-[#f2e8cf] my-auto align-middle">
+                
+              <div class="text-[#386641] md:text-[#f2e8cf] my-auto align-middle">
                   <a href="/src/pages/leaderboard.html">
                   <i class="fa-solid fa-ranking-star md:text-2xl text-3xl"></i>
                   </a>

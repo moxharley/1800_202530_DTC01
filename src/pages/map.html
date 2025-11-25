@@ -21,52 +21,57 @@
 <body class="bg-[#f2e8cf]">
     <main class="flex flex-col justify-center">
         <site-navbar></site-navbar>
-        <div class="flex justify-center">
-            <div id="map"
-                class="flex justify-center border-2 border-[#386641] p-2 my-2 max-w-80 md:max-w-5xl max-h-[1024px] min-w-[350px] min-h-[350px] md:min-w-[500px] md:min-h-[500px]">
-                map placeholder
+        <div class="border-2 md:p-8 p-3 md:px-20 md:pt-20 rounded-xl border-[#386641] md:mt-10 mx-auto max-w-full">
+            <h1
+                class=" w-fit mx-auto -mt-8 md:-mt-26 px-2 bg-[#f2e8cf] md:mb-10 mb-2 md:text-3xl text-2xl font-bold text-[#386641]">
+                Map
+            </h1>
+
+            <div class="flex justify-center">
+                <div id="map"
+                    class="flex justify-center border-2 border-[#386641] p-2 my-5 max-w-64 md:max-w-5xl max-h-[1024px] min-w-[283px] min-h-[283px] md:min-w-[600px] md:min-h-[600px] rounded-md">
+                    map placeholder
+                </div>
+            </div>
+            <div class="flex flex-col items-center">
+                <form id="filter_form"
+                    class="flex flex-col bg-[#a7c957] items-center px-4 py-2 rounded-md text-sm text-[#386641]">
+                    <h1 class="font-semibold pb-2 text-lg">Filters</h1>
+                    <div class="flex flex-col bg-[#f2e8cf] p-2 rounded-md">
+                        <div class="flex">
+                            <input type="checkbox" name="paper_and_cardboard" />
+                            <label for="paper_and_cardboard" class="p-1 px-2">Paper/Cardboard</label>
+                        </div>
+                        <div class="flex">
+                            <input type="checkbox" name="containers" />
+                            <label for="containers" class="p-1 px-2">Containers</label>
+                        </div>
+                        <div class="flex">
+                            <input type="checkbox" name="glass_containers" />
+                            <label for="glass_containers" class="p-1 px-2">Glass Containers</label>
+                        </div>
+                        <div class="flex">
+                            <input type="checkbox" name="foam_packaging" />
+                            <label for="foam_packaging" class="p-1 px-2">Foam Packaging</label>
+                        </div>
+                        <div class="flex">
+                            <input type="checkbox" name="soft_plastic" />
+                            <label for="soft_plastic" class="p-1 pl-2">Soft Plastic</label>
+                        </div>
+                        <div class="flex">
+                            <input type="checkbox" name="electronics" />
+                            <label for="electronics" class="p-1 pl-2">Electronics</label>
+                        </div>
+                        <div class="flex">
+                            <input type="checkbox" name="scrap_metal" />
+                            <label for="scrap_metal" class="p-1 pl-2">Scrap Metal</label>
+                        </div>
+                    </div>
+                    <button class="bg-blue-600 text-white rounded-sm px-2 pb-1 mt-3 my-1">Search</button>
+                </form>
             </div>
         </div>
-        <div class="flex flex-col items-center">
-            <form id="filter_form" class="flex flex-col border-2 border-[#386641] bg-[#a7c957] items-center p-2">
-                <h1 class="font-semibold pb-2">Filters</h1>
-                <div class="flex flex-row">
-                    <div class="flex flex-col">
-                        <div class="flex">
-                            <input type="checkbox" name="paper_and_cardboard" checked />
-                            <label for="paper_and_cardboard" class="px-2">Paper/Cardboard</label>
-                        </div>
-                        <div class="flex">
-                            <input type="checkbox" name="containers" checked />
-                            <label for="containers" class="px-2">Containers</label>
-                        </div>
-                        <div class="flex">
-                            <input type="checkbox" name="glass_containers" checked />
-                            <label for="glass_containers" class="px-2">Glass Containers</label>
-                        </div>
-                        <div class="flex">
-                            <input type="checkbox" name="foam_packaging" checked />
-                            <label for="foam_packaging" class="px-2">Foam Packaging</label>
-                        </div>
-                    </div>
-                    <div class="flex flex-col">
-                        <div class="flex">
-                            <input type="checkbox" name="soft_plastic" checked />
-                            <label for="soft_plastic" class="px-2">Soft Plastic</label>
-                        </div>
-                        <div class="flex">
-                            <input type="checkbox" name="electronics" checked />
-                            <label for="electronics" class="px-2">Electronics</label>
-                        </div>
-                        <div class="flex">
-                            <input type="checkbox" name="scrap_metal" checked />
-                            <label for="scrap_metal" class="px-2">Scrap Metal</label>
-                        </div>
-                    </div>
-                </div>
-                <button class="border-2 border-blue-800 bg-blue-600 text-white rounded-sm px-2">Search</button>
-            </form>
-        </div>
+
         <site-footer></site-footer>
     </main>
 

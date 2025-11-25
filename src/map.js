@@ -315,7 +315,7 @@ function addDepotsData() {
         name: "Davis Trading and Supply Ltd.",
         city: "Vancouver",
         address: "1100 Grant Street",
-        phone: "phonenumber",
+        phone: "604-255-3111",
         lat: 49.2712096,
         lng: -123.0815806,
         accepts: [
@@ -341,7 +341,7 @@ function addDepotsData() {
         name: "North Star Metal Recycling",
         city: "Vancouver",
         address: "1170 Powell Street",
-        phone: "phonenumber",
+        phone: "604-254-2734",
         lat: 49.2827369,
         lng: -123.0819896,
         accepts: [
@@ -703,25 +703,6 @@ function addDepotsData() {
     });
 
     addDoc(depotsRef, {
-        name: "name",
-        city: "Burnaby",
-        address: "address",
-        phone: "phonenumber",
-        lat: lat,
-        lng: lng,
-        accepts: [
-            "soft_plastic",
-            "paper_and_cardboard",
-            "containers",
-            "glass_containers",
-            "foam_packaging",
-            "electronics",
-            "scrap_metal"
-        ],
-        last_updated: serverTimestamp()
-    });
-
-    addDoc(depotsRef, {
         name: "OK Bottle Depot",
         city: "Richmond",
         address: "#145-5751 Cedarbridge Way",
@@ -824,7 +805,7 @@ async function loadDepots(selectedFilters) {
     if (selectedFilters.length != 0) {
         firebaseQuery = query(depotsRef, where("accepts", "array-contains-any", selectedFilters));
     } else {
-        return
+        firebaseQuery = query(depotsRef)
     }
     const querySnapshot = await getDocs(firebaseQuery);
 

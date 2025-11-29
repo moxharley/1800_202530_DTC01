@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // set initial calendar
       displayCalendar(user.uid, new Date());
       // set initial weekly calendar
-      displayWeek();
+      displayWeek(user.uid);
 
       // add click event for the monthly arrows
       let monthBtns = document.getElementsByClassName("monthBtn");
@@ -226,7 +226,7 @@ function changeCalendar(monthBtn) {
   displayCalendar(userUid, baseDate);
 }
 
-function displayWeek() {
+function displayWeek(userUid) {
   // from Template
   const dateClass = [
     "sundays",
@@ -258,7 +258,9 @@ function displayWeek() {
     newDate.querySelector("." + dateClass[i]).classList.add(calendarDateClass);
   }
   document.getElementById("week").appendChild(newDate);
-  monthlyScheduleQuery("week", year, month);
+  monthlyScheduleQuery(userUid, "week", year, month, () => {
+    document.getElementById("weekTable").classList.add("hidden");
+  });
 }
 
 function toggleCalendar(toggleCalendarBtn) {
@@ -344,7 +346,7 @@ function drawScheduleOnCaledar(elementId, schedule) {
   }
 }
 
-async function monthlyScheduleQuery(userUid, elementId, year, month) {
+async function monthlyScheduleQuery(userUid, elementId, year, month, callback) {
   const yearMonthStr = year + "-" + month;
 
   // basic query
@@ -379,6 +381,7 @@ async function monthlyScheduleQuery(userUid, elementId, year, month) {
   } catch (error) {
     console.log(error);
   }
+  if (callback != undefined) callback();
 }
 
 function getFirstDateOfDay(baseDay, firstDay, firstDate) {

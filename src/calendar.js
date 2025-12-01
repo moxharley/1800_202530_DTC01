@@ -391,7 +391,7 @@ function getFirstDateOfDay(baseDay, firstDay, firstDate) {
   } else if (baseDay == firstDay - firstDate) {
     targetDate = 7;
   } else {
-    targetDate = baseDay - firstDay + baseDay;
+    targetDate = firstDate + 7 - (firstDay - baseDay);
   }
 
   return targetDate;

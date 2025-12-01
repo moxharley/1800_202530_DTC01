@@ -24,7 +24,7 @@ class SiteNavbar extends HTMLElement {
                   <div class="md:hidden">
                   <i class="fa-solid fa-recycle text-lg"></i>
                   </div>
-                  <p class="text-sm">Recycle</p>
+                  <p class="text-sm md:text-2xl md:font-bold">Recycle</p>
                   </a>
                 </div>
                 <div class="my-5 md:my-10 text-center">
@@ -32,7 +32,7 @@ class SiteNavbar extends HTMLElement {
                   <div class="md:hidden">
                   <i class="fa-solid fa-map text-lg"></i>
                   </div>
-                  <p class="text-sm">Map</p>
+                  <p class="text-sm md:text-2xl md:font-bold">Map</p>
                   </a>
                 </div>
                 <div class="my-5 md:my-10 text-center">
@@ -40,7 +40,7 @@ class SiteNavbar extends HTMLElement {
                   <div class="md:hidden">
                   <i class="fa-regular fa-circle-question text-lg"></i>
                   </div>
-                  <p class="text-sm">FAQ</p>
+                  <p class="text-sm md:text-2xl md:font-bold">FAQ</p>
                   </a>
                 </div>
               </div>

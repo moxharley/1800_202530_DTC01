@@ -1,27 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Green Scouts - Badges</title>
-    <link rel="icon" href="/images/placeholder_logo.png" type="image.png" />
-    <meta name="comp1800 template" content="My 1800 App" />
 
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<head>
+  <title>Green Scouts - Badges</title>
+  <link rel="icon" href="/images/placeholder_logo.png" type="image.png" />
+  <meta name="comp1800 template" content="My 1800 App" />
 
-    <!-- Other libraries go here -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script
-      src="https://kit.fontawesome.com/2043d6ea2c.js"
-      crossorigin="anonymous"
-    ></script>
-    <!-- Link to styles of your own -->
-    <!-- <link rel="stylesheet" href="./styles/style.css"> -->
-    <!-- Web Components for shared navbar and footer layout -->
-    <script type="module" src="/src/components/site-navbar.js"></script>
-    <script type="module" src="/src/components/site-footer.js"></script>
-    <style>
-      /* 
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Other libraries go here -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://kit.fontawesome.com/2043d6ea2c.js" crossorigin="anonymous"></script>
+  <!-- Link to styles of your own -->
+  <!-- <link rel="stylesheet" href="./styles/style.css"> -->
+  <!-- Web Components for shared navbar and footer layout -->
+  <script type="module" src="/src/components/site-navbar.js"></script>
+  <script type="module" src="/src/components/site-footer.js"></script>
+  <style>
+    /* 
         color-code
         #386641 - Dark Green
         #6a994e - Medium Green
@@ -29,132 +27,124 @@
         #f2e8cf - Off-White
         #bc4749 - Red 
       */
-    </style>
-  </head>
-  <body class="bg-[#f2e8cf]">
-    <!------------------------------>
-    <!-- Your HTML Layout go here -->
-    <header>
-      <site-navbar></site-navbar>
-    </header>
-    <!------------------------------>
-    <!-- Stuff for body goes here -->
-    <main class="mx-7 md:mx-16 text-[#386642]">
+  </style>
+</head>
+
+<body class="bg-[#f2e8cf]">
+  <!------------------------------>
+  <!-- Your HTML Layout go here -->
+  <header>
+    <site-navbar></site-navbar>
+  </header>
+  <!------------------------------>
+  <!-- Stuff for body goes here -->
+  <main class="mx-7 md:mx-16 text-[#386642] md:mt-4">
+    <div class="max-w-screen-lg h-full py-8 px-6 mx-auto flex flex-col gap-6 bg-[#a7c957] overflow:hidden rounded-3xl">
+      <h1 class="text-3xl font-bold text-center">Badges</h1>
+
       <div
-        class="max-w-screen-lg h-full py-8 px-6 mx-auto flex flex-col gap-6 bg-[#a7c957] overflow:hidden rounded-3xl"
-      >
-        <h1 class="text-3xl font-bold text-center">Badges</h1>
-
-        <div
-          class="badge-card pt-3 pb-3 pl-3 pr-8 w-full max-w-screen-sm mx-auto bg-[#f2e8cf] rounded-full border-4 border-[386641]"
-          id="green"
-        >
-          <div class="flex flex-row gap-2 items-left items-center">
-            <img src="/images/logo-bronze.png" alt="Badge" class="w-12 h-12" />
-            <div class="flex flex-col items-left">
-              <h1 class="font-bold md:text-2xl">Green</h1>
-              <p class="text-[0.6rem]">Recycle <b>0/5</b> items.</p>
-            </div>
-          </div>
-        </div>
-
-        <div
-          class="badge-card pt-3 pb-3 pl-3 pr-4 w-full max-w-screen-sm mx-auto bg-[#f2e8cf] rounded-full border-4 border-[386641]"
-          id="lumberjack"
-        >
-          <div class="flex flex-row gap-2 items-left items-center">
-            <img src="/images/logo-bronze.png" alt="Badge" class="w-12 h-12" />
-            <div class="flex flex-col items-left">
-              <h1 class="font-bold md:text-2xl">Lumberjack</h1>
-              <p class="text-[0.6rem]">Recycle <b>0/5</b> paper & cardboard.</p>
-            </div>
-          </div>
-        </div>
-
-        <div
-          class="badge-card pt-3 pb-3 pl-3 pr-8 w-full max-w-screen-sm mx-auto bg-[#f2e8cf] rounded-full border-4 border-[386641]"
-          id="polymer"
-        >
-          <div class="flex flex-row gap-2 items-left items-center">
-            <img src="/images/logo-bronze.png" alt="Badge" class="w-12 h-12" />
-            <div class="flex flex-col items-left">
-              <h1 class="font-bold md:text-2xl">Polymer</h1>
-              <p class="text-[0.6rem]">Recycle <b>0/5</b> flexible plastics.</p>
-            </div>
-          </div>
-        </div>
-
-        <div
-          class="badge-card pt-3 pb-3 pl-3 pr-8 w-full max-w-screen-sm mx-auto bg-[#f2e8cf] rounded-full border-4 border-[386641]"
-          id="fragile"
-        >
-          <div class="flex flex-row gap-2 items-left items-center">
-            <img src="/images/logo-bronze.png" alt="Badge" class="w-12 h-12" />
-            <div class="flex flex-col items-left">
-              <h1 class="font-bold md:text-2xl">Fragile</h1>
-              <p class="text-[0.6rem]">Recycle <b>0/5</b> glass.</p>
-            </div>
-          </div>
-        </div>
-
-        <div
-          class="badge-card pt-3 pb-3 pl-3 pr-8 w-full max-w-screen-sm mx-auto bg-[#f2e8cf] rounded-full border-4 border-[386641]"
-          id="scrappy"
-        >
-          <div class="flex flex-row gap-2 items-left items-center">
-            <img src="/images/logo-bronze.png" alt="Badge" class="w-12 h-12" />
-            <div class="flex flex-col items-left">
-              <h1 class="font-bold md:text-2xl">Scrappy</h1>
-              <p class="text-[0.6rem]">Recycle <b>0/5</b> scrap metal.</p>
-            </div>
-          </div>
-        </div>
-
-        <div
-          class="badge-card pt-3 pb-3 pl-3 pr-8 w-full max-w-screen-sm mx-auto bg-[#f2e8cf] rounded-full border-4 border-[386641]"
-          id="electric"
-        >
-          <div class="flex flex-row gap-2 items-left items-center">
-            <img src="/images/logo-bronze.png" alt="Badge" class="w-12 h-12" />
-            <div class="flex flex-col items-left">
-              <h1 class="font-bold md:text-2xl">Electric</h1>
-              <p class="text-[0.6rem]">Recycle <b>0/5</b> electronics.</p>
-            </div>
-          </div>
-        </div>
-
-        <div
-          class="badge-card pt-3 pb-3 pl-3 pr-8 w-full max-w-screen-sm mx-auto bg-[#f2e8cf] rounded-full border-4 border-[386641]"
-          id="cargo"
-        >
-          <div class="flex flex-row gap-2 items-left items-center">
-            <img src="/images/logo-bronze.png" alt="Badge" class="w-12 h-12" />
-            <div class="flex flex-col items-left">
-              <h1 class="font-bold md:text-2xl">Cargo</h1>
-              <p class="text-[0.6rem]">Recycle <b>0/5</b> containers.</p>
-            </div>
-          </div>
-        </div>
-
-        <div
-          class="badge-card pt-3 pb-3 pl-3 pr-8 w-full max-w-screen-sm mx-auto bg-[#f2e8cf] rounded-full border-4 border-[386641]"
-          id="esoteric"
-        >
-          <div class="flex flex-row gap-2 items-left items-center">
-            <img src="/images/logo-bronze.png" alt="Badge" class="w-12 h-12" />
-            <div class="flex flex-col items-left">
-              <h1 class="font-bold md:text-2xl">Esoteric</h1>
-              <p class="text-[0.6rem]">Recycle <b>0/5</b> other.</p>
-            </div>
+        class="badge-card pt-3 pb-3 pl-3 pr-8 w-full max-w-screen-sm mx-auto bg-[#f2e8cf] rounded-full border-4 border-[386641]"
+        id="green">
+        <div class="flex flex-row gap-2 items-left items-center">
+          <img src="/images/logo-bronze.png" alt="Badge" class="w-12 h-12" />
+          <div class="flex flex-col items-left">
+            <h1 class="font-bold md:text-2xl">Green</h1>
+            <p class="text-[0.6rem]">Recycle <b>0/5</b> items.</p>
           </div>
         </div>
       </div>
-    </main>
-    <site-footer></site-footer>
-    <!---------------------------------------------->
-    <!-- Your own JavaScript functions go here    -->
-    <!---------------------------------------------->
-    <script type="module" src="/src/badge.js"></script>
-    <!-- <script type="module" src="./src/main.js"></script> -->
-  </body>
+
+      <div
+        class="badge-card pt-3 pb-3 pl-3 pr-4 w-full max-w-screen-sm mx-auto bg-[#f2e8cf] rounded-full border-4 border-[386641]"
+        id="lumberjack">
+        <div class="flex flex-row gap-2 items-left items-center">
+          <img src="/images/logo-bronze.png" alt="Badge" class="w-12 h-12" />
+          <div class="flex flex-col items-left">
+            <h1 class="font-bold md:text-2xl">Lumberjack</h1>
+            <p class="text-[0.6rem]">Recycle <b>0/5</b> paper & cardboard.</p>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="badge-card pt-3 pb-3 pl-3 pr-8 w-full max-w-screen-sm mx-auto bg-[#f2e8cf] rounded-full border-4 border-[386641]"
+        id="polymer">
+        <div class="flex flex-row gap-2 items-left items-center">
+          <img src="/images/logo-bronze.png" alt="Badge" class="w-12 h-12" />
+          <div class="flex flex-col items-left">
+            <h1 class="font-bold md:text-2xl">Polymer</h1>
+            <p class="text-[0.6rem]">Recycle <b>0/5</b> flexible plastics.</p>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="badge-card pt-3 pb-3 pl-3 pr-8 w-full max-w-screen-sm mx-auto bg-[#f2e8cf] rounded-full border-4 border-[386641]"
+        id="fragile">
+        <div class="flex flex-row gap-2 items-left items-center">
+          <img src="/images/logo-bronze.png" alt="Badge" class="w-12 h-12" />
+          <div class="flex flex-col items-left">
+            <h1 class="font-bold md:text-2xl">Fragile</h1>
+            <p class="text-[0.6rem]">Recycle <b>0/5</b> glass.</p>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="badge-card pt-3 pb-3 pl-3 pr-8 w-full max-w-screen-sm mx-auto bg-[#f2e8cf] rounded-full border-4 border-[386641]"
+        id="scrappy">
+        <div class="flex flex-row gap-2 items-left items-center">
+          <img src="/images/logo-bronze.png" alt="Badge" class="w-12 h-12" />
+          <div class="flex flex-col items-left">
+            <h1 class="font-bold md:text-2xl">Scrappy</h1>
+            <p class="text-[0.6rem]">Recycle <b>0/5</b> scrap metal.</p>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="badge-card pt-3 pb-3 pl-3 pr-8 w-full max-w-screen-sm mx-auto bg-[#f2e8cf] rounded-full border-4 border-[386641]"
+        id="electric">
+        <div class="flex flex-row gap-2 items-left items-center">
+          <img src="/images/logo-bronze.png" alt="Badge" class="w-12 h-12" />
+          <div class="flex flex-col items-left">
+            <h1 class="font-bold md:text-2xl">Electric</h1>
+            <p class="text-[0.6rem]">Recycle <b>0/5</b> electronics.</p>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="badge-card pt-3 pb-3 pl-3 pr-8 w-full max-w-screen-sm mx-auto bg-[#f2e8cf] rounded-full border-4 border-[386641]"
+        id="cargo">
+        <div class="flex flex-row gap-2 items-left items-center">
+          <img src="/images/logo-bronze.png" alt="Badge" class="w-12 h-12" />
+          <div class="flex flex-col items-left">
+            <h1 class="font-bold md:text-2xl">Cargo</h1>
+            <p class="text-[0.6rem]">Recycle <b>0/5</b> containers.</p>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="badge-card pt-3 pb-3 pl-3 pr-8 w-full max-w-screen-sm mx-auto bg-[#f2e8cf] rounded-full border-4 border-[386641]"
+        id="esoteric">
+        <div class="flex flex-row gap-2 items-left items-center">
+          <img src="/images/logo-bronze.png" alt="Badge" class="w-12 h-12" />
+          <div class="flex flex-col items-left">
+            <h1 class="font-bold md:text-2xl">Esoteric</h1>
+            <p class="text-[0.6rem]">Recycle <b>0/5</b> other.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <site-footer></site-footer>
+  <!---------------------------------------------->
+  <!-- Your own JavaScript functions go here    -->
+  <!---------------------------------------------->
+  <script type="module" src="/src/badge.js"></script>
+  <!-- <script type="module" src="./src/main.js"></script> -->
+</body>
+
 </html>
